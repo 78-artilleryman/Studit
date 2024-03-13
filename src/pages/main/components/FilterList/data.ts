@@ -75,3 +75,74 @@ export const StudyCountData = {
     },
   ],
 };
+
+export const technologyData = {
+  title: '기술 스택',
+  subtitle: ['라이브러리 및 프레임 워크', '스타일'],
+  icon: '📚',
+  language: [
+    {
+      id: 1,
+      image: 'LogoImages/FilterStack/F-typescript.png',
+      value: 'TypeScript',
+      name: 'TypeScript',
+      color: '#c2e4fb',
+    },
+    {
+      id: 2,
+      image: 'LogoImages/FilterStack/F-javascript.png',
+      value: 'JavaScript',
+      name: 'JavaScript',
+      color: '#fff39a',
+    },
+    {
+      id: 3,
+      image: 'LogoImages/FilterStack/F-nextjs.png',
+      value: 'NextJs',
+      name: 'Next Js',
+      color: '#9b9b9b',
+    },
+    {
+      id: 4,
+      image: 'LogoImages/FilterStack/F-react.png',
+      value: 'ReactJs',
+      name: 'React Js',
+      color: '#c3f7ff',
+    },
+    {
+      id: 5,
+      image: 'LogoImages/FilterStack/F-css.png',
+      value: 'CSS',
+      name: 'CSS',
+      color: '#c2dbff',
+    },
+    {
+      id: 6,
+      image: 'LogoImages/FilterStack/F-styledcomponent.png',
+      value: 'StyledComponents',
+      name: 'Styled Components',
+      color: '#ffe0f5',
+    },
+    {
+      id: 7,
+      image: 'LogoImages/FilterStack/F-sass.png',
+      value: 'Scss',
+      name: 'Scss',
+      color: '#ffdced',
+    },
+    {
+      id: 8,
+      image: 'LogoImages/FilterStack/F-postcss.png',
+      value: 'Postcss',
+      name: 'Post css',
+      color: '#ffd8d2',
+    },
+    {
+      id: 9,
+      image: 'LogoImages/FilterStack/F-tailwind.png',
+      value: 'Tailwind',
+      name: 'Tailwind',
+      color: '#c7f1ff',
+    },
+  ],
+};
