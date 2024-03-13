@@ -1,5 +1,5 @@
 import React from 'react';
-import CommonFilter from '../Filter/CommonFilter';
+import CommonFilter from '../commonFilter/CommonFilter';
 import { ClassificationData, StudyCountData } from './data';
 
 function FilterList() {
