@@ -19,6 +19,8 @@ const myReset = css`
     font-weight: 400;
     min-height: 100vh;
     position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   ol,
