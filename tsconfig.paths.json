@@ -4,7 +4,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@Components/*": ["./components/*"],
-      "@HomePage/*": ["./pages/home/*"]
+      "@Pages/*": ["./pages/*"]
     }
   }
 }

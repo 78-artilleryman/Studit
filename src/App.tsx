@@ -1,7 +1,19 @@
-import React from 'react';
+import * as Page from '@Pages/index';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 function App() {
-  return <div>App</div>;
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Page.Root />,
+      children: [
+        { index: true, element: <Page.Home /> },
+        { path: 'register', element: <Page.Register /> },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
