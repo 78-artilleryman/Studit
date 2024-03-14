@@ -11,9 +11,7 @@ const myReset = css`
   html,
   body {
     overflow-x: hidden;
-    font-family: 'NotoSansKR', Helvetica, '맑은 고딕', 'malgun gothic',
-      'Apple SD Gothic Neo', 'Apple SD 산돌고딕 Neo', 'Microsoft NeoGothic',
-      'Droid sans', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
   }
 
   body {
