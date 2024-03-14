@@ -1,5 +1,5 @@
 import React from 'react';
-import FilterList from './components/FilterList/FilterList';
+import FilterList from './components/filterList/FilterList';
 
 function Main() {
   return (
