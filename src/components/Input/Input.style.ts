@@ -1,9 +1,14 @@
+import { colors } from '@styles/colors';
 import styled from 'styled-components';
 
 export const Layout = styled.div`
   text-align: start;
   display: flex;
   flex-direction: column;
+
+  & + & {
+    margin-top: 20px;
+  }
 `;
 
 export const Label = styled.label`
@@ -12,7 +17,7 @@ export const Label = styled.label`
 `;
 
 export const InputElement = styled.input`
-  border: 1px solid #000;
+  border: 1px solid ${colors.border};
   border-radius: 10px;
   height: 56px;
   padding: 0 10px;
