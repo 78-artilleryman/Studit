@@ -8,10 +8,10 @@ interface InputProps {
 
 function Input({ label, placeholder }: InputProps) {
   return (
-    <S.Layout>
+    <React.Fragment>
       <S.Label>{label}</S.Label>
       <S.InputElement placeholder={placeholder} />
-    </S.Layout>
+    </React.Fragment>
   );
 }
 

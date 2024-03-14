@@ -1,16 +1,6 @@
 import { colors } from '@styles/colors';
 import styled from 'styled-components';
 
-export const Layout = styled.div`
-  text-align: start;
-  display: flex;
-  flex-direction: column;
-
-  & + & {
-    margin-top: 20px;
-  }
-`;
-
 export const Label = styled.label`
   font-weight: 500;
   margin-bottom: 5px;
