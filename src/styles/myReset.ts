@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import { colors } from './colors';
 
 const myReset = css`
   * {
@@ -15,7 +16,7 @@ const myReset = css`
   }
 
   body {
-    color: var(--gray900);
+    color: ${colors.black};
     font-weight: 400;
     min-height: 100vh;
     position: relative;
