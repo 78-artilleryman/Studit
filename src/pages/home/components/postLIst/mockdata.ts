@@ -77,7 +77,7 @@ export const data = [
   },
   {
     id: 5,
-    studyType: 'project', // 스터디 종류
+    studyType: '프로젝트', // 스터디 종류
     studyMember: '4명', // 모집 인원
     studySystem: '위워크', // 진행 방식
     period: '주 3회', // 진행 기간
@@ -85,7 +85,7 @@ export const data = [
     projectEndDate: '2024-02-21',
     postDeadline: '2024-02-25', // 모집 마감일
     technologys: ['Tailwind', 'JavaScript', 'CSS'], // 기술 스택
-    closed: false,
+    closed: true,
     // 게시물 내용
     postTitle: 'test',
     postSubTitle: 'test 입니다.',

@@ -1,8 +1,9 @@
 import * as S from './PostItem.style';
 import { FaCircleUser } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
 
 interface PostItemProps {
-  data: {
+  Postdata: {
     id: number;
     studyType: string; // 스터디 종류
     studyMember: string; // 모집 인원
@@ -23,32 +24,40 @@ interface PostItemProps {
   };
 }
 
-function PostItem({ data }: PostItemProps) {
+function PostItem({ Postdata }: PostItemProps) {
   const getImageSrc = (stack: string) => `postLogoImages/${stack}.svg`;
 
   return (
-    <S.Post>
-      <S.Tags>
-        <S.TypeTag>📙 {data.studyType}</S.TypeTag>
-        <S.DeadTag>❗ 마감임박</S.DeadTag>
-      </S.Tags>
-      <S.PostContent>
-        <S.StudyPeriod>
-          {data.projectStartDate} - {data.projectEndDate}
-        </S.StudyPeriod>
-        <S.PostTitle>{data.postTitle}</S.PostTitle>
-        <S.PostSubTitle>{data.postSubTitle}</S.PostSubTitle>
-        <S.TechnologyImageList>
-          {data.technologys.slice(0, 6).map((tech, index) => (
-            <img key={index} src={getImageSrc(tech)} alt={tech} />
-          ))}
-        </S.TechnologyImageList>
-      </S.PostContent>
-      <S.PostUser>
-        <FaCircleUser style={{ width: '30px', height: '30px' }} />
-        <S.Name>{data.userName}</S.Name>
-      </S.PostUser>
-    </S.Post>
+    <Link to={``}>
+      <S.Post>
+        {Postdata.closed && (
+          <>
+            <S.Background></S.Background>
+            <S.PostClosed>공고 마감</S.PostClosed>
+          </>
+        )}
+        <S.Tags>
+          <S.TypeTag>📙 {Postdata.studyType}</S.TypeTag>
+          <S.DeadTag>❗ 마감임박</S.DeadTag>
+        </S.Tags>
+        <S.PostContent>
+          <S.StudyPeriod>
+            {Postdata.projectStartDate} - {Postdata.projectEndDate}
+          </S.StudyPeriod>
+          <S.PostTitle>{Postdata.postTitle}</S.PostTitle>
+          <S.PostSubTitle>{Postdata.postSubTitle}</S.PostSubTitle>
+          <S.TechnologyImageList>
+            {Postdata.technologys.slice(0, 6).map((tech, index) => (
+              <S.TechImage key={index} src={getImageSrc(tech)} alt={tech} />
+            ))}
+          </S.TechnologyImageList>
+        </S.PostContent>
+        <S.PostUser>
+          <FaCircleUser style={{ width: '30px', height: '30px' }} />
+          <S.Name>{Postdata.userName}</S.Name>
+        </S.PostUser>
+      </S.Post>
+    </Link>
   );
 }
 
