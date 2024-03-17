@@ -2,6 +2,8 @@ import React from 'react';
 import { data } from './mockdata';
 import PostItem from '../postItem/PostItem';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/configureStore';
 
 const PostLayout = styled.div`
   display: grid;
@@ -11,10 +13,12 @@ const PostLayout = styled.div`
   margin: 0 auto;
 `;
 function PostList() {
+  const postlist = useSelector((state: RootState) => state.post.postList);
+
   return (
     <PostLayout>
-      {data.map(data => (
-        <PostItem key={data.id} Postdata={data}></PostItem>
+      {postlist.map(post => (
+        <PostItem key={post.id} Postdata={post}></PostItem>
       ))}
     </PostLayout>
   );
