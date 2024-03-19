@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-export const Label = styled.label`
-  font-size: 16px;
-  color: #000;
-  font-weight: 700;
-  margin-bottom: 10px;
-  display: block;
-`;
-
 export const SelectBox = styled.div`
   width: 305px;
   height: 56px;
@@ -19,6 +11,7 @@ export const SelectBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 8px;
 `;
 
 export const Placeholder = styled.h2`
