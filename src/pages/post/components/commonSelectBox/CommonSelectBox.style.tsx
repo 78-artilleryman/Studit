@@ -23,7 +23,7 @@ export const Selectbox = styled.div`
 
 export const Placeholder = styled.h2`
   font-size: 16px;
-  color: #000;
+  color: #7f7f7f;
   font-weight: 500;
 `;
 

@@ -5,16 +5,11 @@ export const ClassificationData = {
   list: [
     {
       key: 1,
-      value: 'all',
-      name: '전체',
-    },
-    {
-      key: 2,
       value: 'study',
       name: '스터디',
     },
     {
-      key: 3,
+      key: 2,
       value: 'project',
       name: '프로젝트',
     },
@@ -28,46 +23,41 @@ export const studyCountData = {
   list: [
     {
       key: 1,
-      value: 'all',
-      name: '전체',
-    },
-    {
-      key: 2,
       value: 'w1',
       name: '주 1회',
     },
     {
-      key: 3,
+      key: 2,
       value: 'w2',
       name: '주 2회',
     },
     {
-      key: 4,
+      key: 3,
       value: 'w3',
       name: '주 3회',
     },
     {
-      key: 5,
+      key: 4,
       value: 'w4',
       name: '주 4회',
     },
     {
-      key: 6,
+      key: 5,
       value: 'w5',
       name: '주 5회',
     },
     {
-      key: 7,
+      key: 6,
       value: 'w6',
       name: '주 6회',
     },
     {
-      key: 8,
+      key: 7,
       value: 'w7',
       name: '주 7회',
     },
     {
-      key: 9,
+      key: 8,
       value: 'discussion',
       name: '횟수협의',
     },
