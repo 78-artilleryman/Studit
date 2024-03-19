@@ -10,14 +10,16 @@ function Header() {
           <Link to="/">Studit</Link>
         </S.Logo>
 
-        <S.Menu>
-          <S.MenuItem>
-            <Link to="/write">스터디 모집하기</Link>
-          </S.MenuItem>
-          <S.MenuItem>
-            <S.LoginButton to="/write">로그인</S.LoginButton>
-          </S.MenuItem>
-        </S.Menu>
+        <nav>
+          <S.Menu>
+            <S.MenuItem>
+              <Link to="/write">스터디 모집하기</Link>
+            </S.MenuItem>
+            <S.MenuItem>
+              <S.LoginButton to="/write">로그인</S.LoginButton>
+            </S.MenuItem>
+          </S.Menu>
+        </nav>
       </S.Wrapper>
     </header>
   );
