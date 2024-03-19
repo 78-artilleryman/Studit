@@ -1,27 +1,27 @@
-import useSelect from '../../../../hooks/useSelect';
-import * as S from './CommonFilter.style';
+import useSelect from '@hooks/useSelect';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
+import * as S from './CommonSelectBox.style';
 
-interface ClassificationItem {
+interface ListItem {
   key: number;
   value: string;
   name: string;
 }
 
-interface CommonFilterProps {
+interface SelectBoxProps {
   title: string;
   position?: 'bottom' | 'top';
   icon?: string;
-  list: ClassificationItem[];
+  list: ListItem[];
 }
 
-function CommonFilter({ title, position, icon, list }: CommonFilterProps) {
+function SelectBox({ title, position, icon, list }: SelectBoxProps) {
   const { isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
 
   return (
-    <S.Filter onClick={selectToggleHandler}>
-      <S.Title> {selected ? icon + selected : icon + title}</S.Title>
+    <S.Selectbox onClick={selectToggleHandler}>
+      <S.Placeholder> {selected ? icon + selected : icon + title}</S.Placeholder>
       {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
 
       {isSelectOpen && (
@@ -31,8 +31,8 @@ function CommonFilter({ title, position, icon, list }: CommonFilterProps) {
           ))}
         </S.Dropdown>
       )}
-    </S.Filter>
+    </S.Selectbox>
   );
 }
 
-export default CommonFilter;
+export default SelectBox;
