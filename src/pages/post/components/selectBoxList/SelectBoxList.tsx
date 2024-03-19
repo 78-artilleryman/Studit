@@ -2,6 +2,7 @@ import React from 'react';
 import { ClassificationData, membersData, systemData, studyCountData, technologyData } from './data';
 import SelectBox from '../commonSelectBox/CommonSelectBox';
 import styled from 'styled-components';
+import TechnologySelectBox from '../technologySelectBox/TechnologySelectBox';
 
 const SelectBoxLaout = styled.div`
   display: grid;
@@ -18,6 +19,7 @@ function SelectBoxList() {
       <SelectBox {...membersData} position="bottom"></SelectBox>
       <SelectBox {...systemData} position="bottom"></SelectBox>
       <SelectBox {...studyCountData} position="bottom"></SelectBox>
+      <TechnologySelectBox {...technologyData} position="bottom"></TechnologySelectBox>
     </SelectBoxLaout>
   );
 }
