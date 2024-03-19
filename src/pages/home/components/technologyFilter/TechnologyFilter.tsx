@@ -26,7 +26,7 @@ function TechnologyFilter({ title, subtitle, position, language }: TechnologyFil
     <>
       <S.Filter onClick={selectToggleHandler}>
         <S.Title> {'📚 ' + title}</S.Title>
-        <S.Icon>{isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}</S.Icon>
+        {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
 
         {isSelectOpen && (
           <S.Technology>

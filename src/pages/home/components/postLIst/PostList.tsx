@@ -1,7 +1,6 @@
-import React from 'react';
-import { data } from './mockdata';
 import PostItem from '../postItem/PostItem';
 import styled from 'styled-components';
+import { data } from './mockdata';
 
 const PostLayout = styled.div`
   display: grid;
@@ -13,8 +12,8 @@ const PostLayout = styled.div`
 function PostList() {
   return (
     <PostLayout>
-      {data.map(data => (
-        <PostItem key={data.id} Postdata={data}></PostItem>
+      {data.map(post => (
+        <PostItem key={post.id} Postdata={post}></PostItem>
       ))}
     </PostLayout>
   );

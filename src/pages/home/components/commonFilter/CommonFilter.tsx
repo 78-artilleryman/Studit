@@ -20,20 +20,18 @@ function CommonFilter({ title, position, icon, list }: CommonFilterProps) {
   const { isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
 
   return (
-    <>
-      <S.Filter onClick={selectToggleHandler}>
-        <S.Title> {selected ? icon + selected : icon + title}</S.Title>
-        <S.Icon>{isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}</S.Icon>
+    <S.Filter onClick={selectToggleHandler}>
+      <S.Title> {selected ? icon + selected : icon + title}</S.Title>
+      {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
 
-        {isSelectOpen && (
-          <S.Dropdown onClick={selectedHandler}>
-            {list.map(data => (
-              <S.DropdownItem key={data.key}>{data.name}</S.DropdownItem>
-            ))}
-          </S.Dropdown>
-        )}
-      </S.Filter>
-    </>
+      {isSelectOpen && (
+        <S.Dropdown onClick={selectedHandler}>
+          {list.map(data => (
+            <S.DropdownItem key={data.key}>{data.name}</S.DropdownItem>
+          ))}
+        </S.Dropdown>
+      )}
+    </S.Filter>
   );
 }
 
