@@ -1,4 +1,3 @@
-import React from 'react';
 import CommonFilter from '../commonFilter/CommonFilter';
 import { ClassificationData, StudyCountData, technologyData } from './data';
 import TechnologyFilter from '../technologyFilter/TechnologyFilter';
