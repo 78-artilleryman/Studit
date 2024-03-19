@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const Label = styled.label`
+  font-size: 16px;
+  color: #000;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: block;
+`;
+
 export const Selectbox = styled.div`
   width: 305px;
   height: 56px;

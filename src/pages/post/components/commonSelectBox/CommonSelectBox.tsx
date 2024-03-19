@@ -20,18 +20,21 @@ function SelectBox({ title, position, icon, list }: SelectBoxProps) {
   const { isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
 
   return (
-    <S.Selectbox onClick={selectToggleHandler}>
-      <S.Placeholder> {selected ? icon + selected : icon + title}</S.Placeholder>
-      {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+    <div>
+      <S.Label>{title}</S.Label>
+      <S.Selectbox onClick={selectToggleHandler}>
+        <S.Placeholder> {selected ? icon + selected : icon + title}</S.Placeholder>
+        {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
 
-      {isSelectOpen && (
-        <S.Dropdown onClick={selectedHandler}>
-          {list.map(data => (
-            <S.DropdownItem key={data.key}>{data.name}</S.DropdownItem>
-          ))}
-        </S.Dropdown>
-      )}
-    </S.Selectbox>
+        {isSelectOpen && (
+          <S.Dropdown onClick={selectedHandler}>
+            {list.map(data => (
+              <S.DropdownItem key={data.key}>{data.name}</S.DropdownItem>
+            ))}
+          </S.Dropdown>
+        )}
+      </S.Selectbox>
+    </div>
   );
 }
 

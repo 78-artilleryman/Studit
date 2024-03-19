@@ -22,7 +22,8 @@ function TechnologySelectBox({ title, position, language }: TechnologyFilterProp
   const { isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
 
   return (
-    <>
+    <div>
+      <S.Label htmlFor="">기술스택</S.Label>
       <S.SelectBox onClick={selectToggleHandler}>
         <S.Placeholder> {'📚 ' + title}</S.Placeholder>
         {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -38,7 +39,7 @@ function TechnologySelectBox({ title, position, language }: TechnologyFilterProp
           </S.Technology>
         )}
       </S.SelectBox>
-    </>
+    </div>
   );
 }
 
