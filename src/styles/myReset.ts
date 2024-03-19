@@ -7,6 +7,7 @@ const myReset = css`
     padding: 0;
     box-sizing: border-box;
     color: inherit;
+    letter-spacing: -0.025rem;
   }
 
   html,
