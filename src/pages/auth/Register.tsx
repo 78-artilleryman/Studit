@@ -2,8 +2,24 @@ import * as S from '@Pages/auth/Auth.style';
 import Input from '@Components/Input/Input';
 import Button from '@Components/UI/Button';
 import { InputLayout } from '@Layouts/InputLayout.style';
+import { isValidateEmail, isValidateName } from './utils/validation';
+import useInput from './hooks/useInput';
 
 function Register() {
+  const {
+    hasError: hasErrorName,
+    inputState: inputNameState,
+    handleChangeInput: handleChangeName,
+    handleBlurInput: handleBlurName,
+  } = useInput(isValidateName);
+
+  const {
+    hasError: hasErrorEmail,
+    inputState: inputEmailState,
+    handleChangeInput: handleChangeEmail,
+    handleBlurInput: handleBlurEmail,
+  } = useInput(isValidateEmail);
+
   return (
     <S.Form>
       <S.Wrapper>
@@ -11,11 +27,25 @@ function Register() {
         <S.Description>스터딧에서 팀원을 모집 해보세요 🙂</S.Description>
 
         <InputLayout>
-          <Input label="이름" placeholder="이름을 입력해주세요." />
+          <Input
+            label="이름"
+            placeholder="이름을 입력해주세요."
+            value={inputNameState.value}
+            onChange={handleChangeName}
+            onBlur={handleBlurName}
+          />
+          {hasErrorName && <S.ErrorMessage>이름의 형식이 올바르지 않아요.</S.ErrorMessage>}
         </InputLayout>
 
         <InputLayout>
-          <Input label="이메일" placeholder="your@email.com" />
+          <Input
+            label="이메일"
+            placeholder="your@email.com"
+            value={inputEmailState.value}
+            onChange={handleChangeEmail}
+            onBlur={handleBlurEmail}
+          />
+          {hasErrorEmail && <S.ErrorMessage>이메일 형식이 올바르지 않아요.</S.ErrorMessage>}
         </InputLayout>
 
         <InputLayout>

@@ -56,3 +56,9 @@ export const SocialItem = styled.button`
     height: 30px;
   }
 `;
+
+export const ErrorMessage = styled.p`
+  margin-top: 5px;
+  font-size: 14px;
+  color: ${colors.error};
+`;
