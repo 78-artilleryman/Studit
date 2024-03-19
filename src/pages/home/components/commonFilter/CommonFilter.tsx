@@ -1,4 +1,3 @@
-import React, { useEffect, useRef } from 'react';
 import useSelect from '../../hooks/useSelect';
 import * as S from './CommonFilter.style';
 import { IoIosArrowDown } from 'react-icons/io';
