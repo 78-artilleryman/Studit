@@ -7,11 +7,15 @@ export const SelectBox = styled.div`
   padding: 10px;
   cursor: pointer;
   position: relative;
-  border: 1px solid #000;
+  border: 1px solid #c0c0c0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 8px;
+
+  &:hover {
+    border: 1px solid #000;
+  }
 `;
 
 export const Placeholder = styled.h2`
