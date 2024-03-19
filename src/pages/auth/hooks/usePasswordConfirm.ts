@@ -16,6 +16,7 @@ function usePasswordConfirm(validate: Validate) {
 
   return {
     passwordConfirmState,
+    isValidPasswordConfirm,
     hasErrorPasswordConfirm,
     handleChangePasswordConfirm,
     handleBlurPasswordConfirm,

@@ -5,10 +5,15 @@ import { InputLayout } from '@Layouts/InputLayout.style';
 import { isValidateEmail, isValidateName, isValidatePassword, isValidatePasswordConfirm } from './utils/validation';
 import useInput from './hooks/useInput';
 import usePasswordConfirm from './hooks/usePasswordConfirm';
+import { FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
+  const navigate = useNavigate();
+
   const {
     hasError: hasErrorName,
+    isValid: isValidName,
     inputState: inputNameState,
     handleChangeInput: handleChangeName,
     handleBlurInput: handleBlurName,
@@ -16,6 +21,7 @@ function Register() {
 
   const {
     hasError: hasErrorEmail,
+    isValid: isValidEmail,
     inputState: inputEmailState,
     handleChangeInput: handleChangeEmail,
     handleBlurInput: handleBlurEmail,
@@ -23,16 +29,31 @@ function Register() {
 
   const {
     hasError: hasErrorPassword,
+    isValid: isValidPassword,
     inputState: inputPasswordState,
     handleChangeInput: handleChangePassword,
     handleBlurInput: handleBlurPassword,
   } = useInput(isValidatePassword);
 
-  const { passwordConfirmState, hasErrorPasswordConfirm, handleChangePasswordConfirm, handleBlurPasswordConfirm } =
-    usePasswordConfirm(isValidatePasswordConfirm.bind(null, inputPasswordState.value));
+  const {
+    passwordConfirmState,
+    hasErrorPasswordConfirm,
+    isValidPasswordConfirm,
+    handleChangePasswordConfirm,
+    handleBlurPasswordConfirm,
+  } = usePasswordConfirm(isValidatePasswordConfirm.bind(null, inputPasswordState.value));
+
+  const isDisabled = !isValidName || !isValidEmail || !isValidPassword || !isValidPasswordConfirm;
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (isDisabled) return;
+
+    navigate('/');
+  };
 
   return (
-    <S.Form>
+    <S.Form onSubmit={handleSubmit}>
       <S.Wrapper>
         <S.Title>회원가입</S.Title>
         <S.Description>스터딧에서 팀원을 모집 해보세요 🙂</S.Description>
@@ -80,14 +101,14 @@ function Register() {
             value={passwordConfirmState.value}
             onChange={handleChangePasswordConfirm}
             onBlur={handleBlurPasswordConfirm}
-            $validation={!hasErrorPassword && hasErrorPasswordConfirm}
+            $validation={hasErrorPasswordConfirm}
           />
-          {!hasErrorPassword && hasErrorPasswordConfirm && (
-            <S.ErrorMessage>비밀번호 형식이 올바르지 않아요.</S.ErrorMessage>
-          )}
+          {hasErrorPasswordConfirm && <S.ErrorMessage>비밀번호 형식이 올바르지 않아요.</S.ErrorMessage>}
         </InputLayout>
 
-        <Button $height={56}>회원가입</Button>
+        <Button type="submit" $height={56} disabled={isDisabled}>
+          회원가입
+        </Button>
 
         <S.FlexLayout>
           <S.AuthToLink to="/login">
