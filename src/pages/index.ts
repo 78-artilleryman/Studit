@@ -1,5 +1,6 @@
-import Home from '@Pages/home/Home';
-import Register from '@Pages/register/Register';
 import Root from '@Pages/Root';
+import Home from '@Pages/home/Home';
+import Register from '@Pages/auth/Register';
+import Login from '@Pages/auth/Login';
 
-export { Home, Register, Root };
+export { Root, Home, Register, Login };
