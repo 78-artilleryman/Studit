@@ -10,5 +10,6 @@ export const isValidateEmail = (emailValue: string) => validatePattern.email.tes
 
 export const isValidatePassword = (passwordValue: string) => validatePattern.password.test(passwordValue);
 
-export const isValidatePasswordConfirm = (existingPassword: string, passwordConfirm: string) =>
-  existingPassword === passwordConfirm;
+export const isValidatePasswordConfirm = (existingPassword: string, passwordConfirm: string) => {
+  return existingPassword === passwordConfirm;
+};

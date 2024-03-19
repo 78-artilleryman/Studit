@@ -1,7 +1,11 @@
 import React, { ChangeEvent } from 'react';
 import * as S from '@Components/Input/Input.style';
 
-interface InputProps {
+interface InputStyle {
+  $validation?: boolean;
+}
+
+interface InputProps extends InputStyle {
   label: string;
   placeholder: string;
   value?: string;
@@ -9,11 +13,19 @@ interface InputProps {
   onBlur?: () => void;
 }
 
-function Input({ label, placeholder, value, onChange, onBlur }: InputProps) {
+function Input({ label, placeholder, value, onChange, onBlur, $validation }: InputProps) {
+  const $isValidation = $validation ? true : false;
+
   return (
     <React.Fragment>
-      <S.Label>{label}</S.Label>
-      <S.InputElement placeholder={placeholder} value={value} onChange={onChange} onBlur={onBlur} />
+      <S.Label $validation={$isValidation}>{label}</S.Label>
+      <S.InputElement
+        $validation={$isValidation}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+      />
     </React.Fragment>
   );
 }

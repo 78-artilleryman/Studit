@@ -1,4 +1,3 @@
-import React from 'react';
 import * as S from '@Pages/auth/Auth.style';
 import Input from '@Components/Input/Input';
 import Button from '@Components/UI/Button';

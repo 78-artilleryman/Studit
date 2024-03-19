@@ -19,6 +19,7 @@ function useInput(validate: Validate) {
   return {
     inputState,
     hasError,
+    isValid,
     handleChangeInput,
     handleBlurInput,
   };

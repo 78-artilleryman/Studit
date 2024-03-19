@@ -2,8 +2,9 @@ import * as S from '@Pages/auth/Auth.style';
 import Input from '@Components/Input/Input';
 import Button from '@Components/UI/Button';
 import { InputLayout } from '@Layouts/InputLayout.style';
-import { isValidateEmail, isValidateName } from './utils/validation';
+import { isValidateEmail, isValidateName, isValidatePassword, isValidatePasswordConfirm } from './utils/validation';
 import useInput from './hooks/useInput';
+import usePasswordConfirm from './hooks/usePasswordConfirm';
 
 function Register() {
   const {
@@ -20,6 +21,16 @@ function Register() {
     handleBlurInput: handleBlurEmail,
   } = useInput(isValidateEmail);
 
+  const {
+    hasError: hasErrorPassword,
+    inputState: inputPasswordState,
+    handleChangeInput: handleChangePassword,
+    handleBlurInput: handleBlurPassword,
+  } = useInput(isValidatePassword);
+
+  const { passwordConfirmState, hasErrorPasswordConfirm, handleChangePasswordConfirm, handleBlurPasswordConfirm } =
+    usePasswordConfirm(isValidatePasswordConfirm.bind(null, inputPasswordState.value));
+
   return (
     <S.Form>
       <S.Wrapper>
@@ -33,6 +44,7 @@ function Register() {
             value={inputNameState.value}
             onChange={handleChangeName}
             onBlur={handleBlurName}
+            $validation={hasErrorName}
           />
           {hasErrorName && <S.ErrorMessage>이름의 형식이 올바르지 않아요.</S.ErrorMessage>}
         </InputLayout>
@@ -44,16 +56,35 @@ function Register() {
             value={inputEmailState.value}
             onChange={handleChangeEmail}
             onBlur={handleBlurEmail}
+            $validation={hasErrorEmail}
           />
           {hasErrorEmail && <S.ErrorMessage>이메일 형식이 올바르지 않아요.</S.ErrorMessage>}
         </InputLayout>
 
         <InputLayout>
-          <Input label="비밀번호" placeholder="특수문자를 포함한 비밀번호를 입력해주세요." />
+          <Input
+            label="비밀번호"
+            placeholder="특수문자를 포함한 비밀번호를 입력해주세요."
+            value={inputPasswordState.value}
+            onChange={handleChangePassword}
+            onBlur={handleBlurPassword}
+            $validation={hasErrorPassword}
+          />
+          {hasErrorPassword && <S.ErrorMessage>비밀번호 형식이 올바르지 않아요.</S.ErrorMessage>}
         </InputLayout>
 
         <InputLayout>
-          <Input label="비밀번호 확인" placeholder="비밀번호를 다시 입력해주세요." />
+          <Input
+            label="비밀번호 확인"
+            placeholder="비밀번호를 다시 입력해주세요."
+            value={passwordConfirmState.value}
+            onChange={handleChangePasswordConfirm}
+            onBlur={handleBlurPasswordConfirm}
+            $validation={!hasErrorPassword && hasErrorPasswordConfirm}
+          />
+          {!hasErrorPassword && hasErrorPasswordConfirm && (
+            <S.ErrorMessage>비밀번호 형식이 올바르지 않아요.</S.ErrorMessage>
+          )}
         </InputLayout>
 
         <Button $height={56}>회원가입</Button>
