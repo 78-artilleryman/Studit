@@ -1,10 +1,10 @@
-import useSelect from '../../../../hooks/useSelect';
-import * as S from './TechnologyFilter.style';
+import useSelect from '@hooks/useSelect';
+import * as S from './TechnologySelectBox.style';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
-import TechnologyItem from './TechnologyItem';
+import TechnologyBoxItem from './TechnologyBoxItem';
 
-interface FilterItem {
+interface LanguageItem {
   id: number;
   image: string;
   value: string;
@@ -14,18 +14,18 @@ interface FilterItem {
 
 interface TechnologyFilterProps {
   title: string;
-  subtitle: string[];
   position: string;
-  language: FilterItem[];
+  language: LanguageItem[];
 }
 
-function TechnologyFilter({ title, subtitle, position, language }: TechnologyFilterProps) {
+function TechnologySelectBox({ title, position, language }: TechnologyFilterProps) {
   const { isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
 
   return (
-    <>
-      <S.Filter onClick={selectToggleHandler}>
-        <S.Title> {'📚 ' + title}</S.Title>
+    <div>
+      <S.Label htmlFor="">기술스택</S.Label>
+      <S.SelectBox onClick={selectToggleHandler}>
+        <S.Placeholder> {'📚 ' + title}</S.Placeholder>
         {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
 
         {isSelectOpen && (
@@ -33,14 +33,14 @@ function TechnologyFilter({ title, subtitle, position, language }: TechnologyFil
             <S.SubTitle>스터디나 프로젝트에 적용할 기술을 선택해주세요!</S.SubTitle>
             <S.TechnologyList>
               {language.map(data => (
-                <TechnologyItem key={data.id} {...data}></TechnologyItem>
+                <TechnologyBoxItem {...data}></TechnologyBoxItem>
               ))}
             </S.TechnologyList>
           </S.Technology>
         )}
-      </S.Filter>
-    </>
+      </S.SelectBox>
+    </div>
   );
 }
 
-export default TechnologyFilter;
+export default TechnologySelectBox;
