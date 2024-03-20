@@ -2,6 +2,7 @@ import * as Page from '@Pages/index';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { PostDataContextProvider } from '@Pages/post/context/PostDataContext';
 
 function App() {
   const router = createBrowserRouter([
@@ -17,9 +18,11 @@ function App() {
   ]);
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <RouterProvider router={router} />
-    </LocalizationProvider>
+    <PostDataContextProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <RouterProvider router={router} />
+      </LocalizationProvider>
+    </PostDataContextProvider>
   );
 }
 

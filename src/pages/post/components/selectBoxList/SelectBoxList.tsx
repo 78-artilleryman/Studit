@@ -1,4 +1,3 @@
-import React from 'react';
 import { ClassificationData, membersData, systemData, studyCountData, technologyData } from './data';
 import SelectBox from '../commonSelectBox/CommonSelectBox';
 import styled from 'styled-components';
