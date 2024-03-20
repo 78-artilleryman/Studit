@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '@styles/colors';
 
 export const SelectBox = styled.div`
   width: 305px;
@@ -26,10 +27,10 @@ export const Placeholder = styled.h2`
 
 export const Technology = styled.div`
   border-radius: 10px;
-  border: 1px solid #000;
+  border: 1px solid ${colors.black};
   width: 665px;
   padding: 10px;
-  background-color: white;
+  background-color: ${colors.white};
   position: absolute;
   top: calc(100% + 10px);
   left: 0;
@@ -37,7 +38,7 @@ export const Technology = styled.div`
 `;
 
 export const SubTitle = styled.h3`
-  color: #000;
+  color: ${colors.black};
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 15px;
