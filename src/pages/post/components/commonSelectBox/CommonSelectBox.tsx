@@ -2,7 +2,7 @@ import useSelect from '@hooks/useSelect';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
 import * as S from './CommonSelectBox.style';
-import SelectBoxLabel from '../selectBoxLabel/SelectBoxLabel';
+import FormLabel from '../formLabel/FormLabel';
 
 interface ListItem {
   key: number;
@@ -22,7 +22,7 @@ function SelectBox({ title, position, icon, list }: SelectBoxProps) {
 
   return (
     <div>
-      <SelectBoxLabel componentName={title}></SelectBoxLabel>
+      <FormLabel componentName={title}></FormLabel>
       <S.Selectbox onClick={selectToggleHandler}>
         <S.Placeholder> {selected ? icon + selected : icon + title}</S.Placeholder>
         {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}

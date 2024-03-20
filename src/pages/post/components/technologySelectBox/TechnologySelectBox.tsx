@@ -3,7 +3,7 @@ import * as S from './TechnologySelectBox.style';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
 import TechnologyBoxItem from './TechnologyBoxItem';
-import SelectBoxLabel from '../selectBoxLabel/SelectBoxLabel';
+import SelectBoxLabel from '../formLabel/FormLabel';
 
 interface LanguageItem {
   id: number;
