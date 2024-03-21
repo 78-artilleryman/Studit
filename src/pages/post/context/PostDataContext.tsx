@@ -77,7 +77,17 @@ const usePostData = () => {
     [setPostData],
   );
 
-  return { postData, onChange, onChageTitle };
+  const onChageContent = useCallback(
+    (id: string, text: string | undefined) => {
+      setPostData(data => ({
+        ...data,
+        [id]: text,
+      }));
+    },
+    [setPostData],
+  );
+
+  return { postData, onChange, onChageTitle, onChageContent };
 };
 
 export { PostDataContextProvider, usePostData };
