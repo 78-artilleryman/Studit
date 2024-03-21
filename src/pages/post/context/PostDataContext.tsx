@@ -1,4 +1,13 @@
-import { Dispatch, ReactNode, SetStateAction, createContext, useCallback, useContext, useState } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
 import { PostType } from '../interface/PostType';
 import dayjs, { Dayjs } from 'dayjs';
 
@@ -12,6 +21,7 @@ interface PostDataContextValue {
 }
 
 type Parameter = Dayjs | null | string;
+type InputParameter = HTMLInputElement | HTMLTextAreaElement;
 
 const initialPostData: PostType = {
   studyType: '',
@@ -56,7 +66,18 @@ const usePostData = () => {
     [setPostData],
   );
 
-  return { postData, onChange };
+  const onChageTitle = useCallback(
+    (id: string, text: ChangeEvent<InputParameter>) => {
+      const value = text.target.value;
+      setPostData(data => ({
+        ...data,
+        [id]: value,
+      }));
+    },
+    [setPostData],
+  );
+
+  return { postData, onChange, onChageTitle };
 };
 
 export { PostDataContextProvider, usePostData };
