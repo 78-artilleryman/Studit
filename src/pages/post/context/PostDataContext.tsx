@@ -1,5 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useCallback, useContext, useState } from 'react';
 import { PostType } from '../interface/PostType';
+import dayjs, { Dayjs } from 'dayjs';
 
 interface Props {
   children: ReactNode;
@@ -10,14 +11,16 @@ interface PostDataContextValue {
   setPostData: Dispatch<SetStateAction<PostType>>;
 }
 
+type Parameter = Dayjs | null | string;
+
 const initialPostData: PostType = {
   studyType: '',
   studyMember: '',
   studySystem: '',
   period: '',
-  projectStartDate: '',
-  projectEndDate: '',
-  postDeadline: '',
+  projectStartDate: dayjs(new Date()),
+  projectEndDate: dayjs(new Date()),
+  postDeadline: dayjs(new Date()),
   technologys: [''],
   closed: false,
   postTitle: '',
@@ -44,7 +47,7 @@ const usePostData = () => {
   const { postData, setPostData } = context;
 
   const onChange = useCallback(
-    (id: string, selected: string) => {
+    (id: string, selected: Parameter) => {
       setPostData(data => ({
         ...data,
         [id]: selected,
