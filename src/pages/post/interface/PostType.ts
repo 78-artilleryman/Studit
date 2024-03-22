@@ -14,7 +14,4 @@ export interface PostType {
   postTitle: string;
   postSubTitle: string;
   postContent: string;
-  uid: string;
-  createdAt: string;
-  userName: string;
 }

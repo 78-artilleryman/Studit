@@ -1,5 +1,6 @@
 import { Button } from '@Components/UI/Button.style';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const ButtonList = styled.div`
   display: flex;
@@ -9,12 +10,20 @@ const ButtonList = styled.div`
 `;
 
 function ActionButtons() {
+  const navigator = useNavigate();
+
   return (
     <ButtonList>
-      <Button $width={305} $height={60}>
+      <Button
+        $width={305}
+        $height={60}
+        onClick={() => {
+          navigator(-1);
+        }}
+      >
         작성한거 취소할래요.
       </Button>
-      <Button $width={305} $height={60}>
+      <Button $width={305} $height={60} type="submit">
         발행 할래요.
       </Button>
     </ButtonList>

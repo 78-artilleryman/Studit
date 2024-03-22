@@ -3,6 +3,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { PostDataContextProvider } from '@Pages/post/context/PostDataContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const router = createBrowserRouter([
@@ -18,11 +20,14 @@ function App() {
   ]);
 
   return (
-    <PostDataContextProvider>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <RouterProvider router={router} />
-      </LocalizationProvider>
-    </PostDataContextProvider>
+    <>
+      <ToastContainer />
+      <PostDataContextProvider>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <RouterProvider router={router} />
+        </LocalizationProvider>
+      </PostDataContextProvider>
+    </>
   );
 }
 
