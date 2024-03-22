@@ -31,7 +31,7 @@ const initialPostData: PostType = {
   projectStartDate: dayjs(new Date()),
   projectEndDate: dayjs(new Date()),
   postDeadline: dayjs(new Date()),
-  technologys: [''],
+  technologys: [],
   closed: false,
   postTitle: '',
   postSubTitle: '',
@@ -45,7 +45,6 @@ const PostDataContext = createContext<PostDataContextValue>({
 
 const PostDataContextProvider = ({ children }: Props) => {
   const [postData, setPostData] = useState<PostType>(initialPostData);
-
   return <PostDataContext.Provider value={{ postData, setPostData }}>{children}</PostDataContext.Provider>;
 };
 
@@ -75,16 +74,39 @@ const usePostData = () => {
   );
 
   const onChageContent = useCallback(
-    (id: string, text: string | undefined) => {
+    (text: string | undefined) => {
       setPostData(data => ({
         ...data,
-        [id]: text,
+        postContent: text,
       }));
     },
     [setPostData],
   );
 
-  return { postData, onChange, onChageTitle, onChageContent };
+  const onChagTechnologys = useCallback(
+    (technology: string) => {
+      setPostData(data => {
+        const isAlreadyAdded = data.technologys.includes(technology);
+        if (isAlreadyAdded) {
+          // 기존 값이라면 제외하고 반환
+          const filteredTechnologys = data.technologys.filter(item => item !== technology);
+          return {
+            ...data,
+            technologys: filteredTechnologys,
+          };
+        } else {
+          // 기존 값이 아니라면 추가
+          return {
+            ...data,
+            technologys: [...data.technologys, technology],
+          };
+        }
+      });
+    },
+    [setPostData],
+  );
+
+  return { postData, onChange, onChageTitle, onChageContent, onChagTechnologys };
 };
 
 export { PostDataContextProvider, usePostData };

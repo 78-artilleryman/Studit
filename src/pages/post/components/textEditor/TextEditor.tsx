@@ -13,7 +13,7 @@ function TextEditor() {
         <MDEditor
           height={'370px'}
           value={postData.postContent}
-          onChange={text => onChageContent('postContent', text)}
+          onChange={text => onChageContent(text)}
           textareaProps={{
             placeholder: '상세 내용을 입력해 주세요.',
           }}

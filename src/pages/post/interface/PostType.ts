@@ -13,5 +13,5 @@ export interface PostType {
   // 게시물 내용
   postTitle: string;
   postSubTitle: string;
-  postContent: string;
+  postContent: string | undefined;
 }
