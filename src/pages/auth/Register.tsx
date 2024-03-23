@@ -2,31 +2,113 @@ import * as S from '@Pages/auth/Auth.style';
 import Input from '@Components/Input/Input';
 import Button from '@Components/UI/Button';
 import { InputLayout } from '@Layouts/InputLayout.style';
+import { isValidateEmail, isValidateName, isValidatePassword, isValidatePasswordConfirm } from './utils/validation';
+import useInput from './hooks/useInput';
+import usePasswordConfirm from './hooks/usePasswordConfirm';
+import { FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
+  const navigate = useNavigate();
+
+  const {
+    hasError: hasErrorName,
+    isValid: isValidName,
+    inputState: inputNameState,
+    handleChangeInput: handleChangeName,
+    handleBlurInput: handleBlurName,
+  } = useInput(isValidateName);
+
+  const {
+    hasError: hasErrorEmail,
+    isValid: isValidEmail,
+    inputState: inputEmailState,
+    handleChangeInput: handleChangeEmail,
+    handleBlurInput: handleBlurEmail,
+  } = useInput(isValidateEmail);
+
+  const {
+    hasError: hasErrorPassword,
+    isValid: isValidPassword,
+    inputState: inputPasswordState,
+    handleChangeInput: handleChangePassword,
+    handleBlurInput: handleBlurPassword,
+  } = useInput(isValidatePassword);
+
+  const {
+    passwordConfirmState,
+    hasErrorPasswordConfirm,
+    isValidPasswordConfirm,
+    handleChangePasswordConfirm,
+    handleBlurPasswordConfirm,
+  } = usePasswordConfirm(isValidatePasswordConfirm.bind(null, inputPasswordState.value));
+
+  const isDisabled = !isValidName || !isValidEmail || !isValidPassword || !isValidPasswordConfirm;
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (isDisabled) return;
+
+    navigate('/');
+  };
+
   return (
-    <S.Form>
+    <S.Form onSubmit={handleSubmit}>
       <S.Wrapper>
         <S.Title>회원가입</S.Title>
         <S.Description>스터딧에서 팀원을 모집 해보세요 🙂</S.Description>
 
         <InputLayout>
-          <Input label="이름" placeholder="이름을 입력해주세요." />
+          <Input
+            label="이름"
+            placeholder="이름을 입력해주세요."
+            value={inputNameState.value}
+            onChange={handleChangeName}
+            onBlur={handleBlurName}
+            $validation={hasErrorName}
+          />
+          {hasErrorName && <S.ErrorMessage>이름의 형식이 올바르지 않아요.</S.ErrorMessage>}
         </InputLayout>
 
         <InputLayout>
-          <Input label="이메일" placeholder="your@email.com" />
+          <Input
+            label="이메일"
+            placeholder="your@email.com"
+            value={inputEmailState.value}
+            onChange={handleChangeEmail}
+            onBlur={handleBlurEmail}
+            $validation={hasErrorEmail}
+          />
+          {hasErrorEmail && <S.ErrorMessage>이메일 형식이 올바르지 않아요.</S.ErrorMessage>}
         </InputLayout>
 
         <InputLayout>
-          <Input label="비밀번호" placeholder="특수문자를 포함한 비밀번호를 입력해주세요." />
+          <Input
+            label="비밀번호"
+            placeholder="특수문자를 포함한 비밀번호를 입력해주세요."
+            value={inputPasswordState.value}
+            onChange={handleChangePassword}
+            onBlur={handleBlurPassword}
+            $validation={hasErrorPassword}
+          />
+          {hasErrorPassword && <S.ErrorMessage>비밀번호 형식이 올바르지 않아요.</S.ErrorMessage>}
         </InputLayout>
 
         <InputLayout>
-          <Input label="비밀번호 확인" placeholder="비밀번호를 다시 입력해주세요." />
+          <Input
+            label="비밀번호 확인"
+            placeholder="비밀번호를 다시 입력해주세요."
+            value={passwordConfirmState.value}
+            onChange={handleChangePasswordConfirm}
+            onBlur={handleBlurPasswordConfirm}
+            $validation={hasErrorPasswordConfirm}
+          />
+          {hasErrorPasswordConfirm && <S.ErrorMessage>비밀번호 형식이 올바르지 않아요.</S.ErrorMessage>}
         </InputLayout>
 
-        <Button $height={56}>회원가입</Button>
+        <Button type="submit" $height={56} disabled={isDisabled}>
+          회원가입
+        </Button>
 
         <S.FlexLayout>
           <S.AuthToLink to="/login">

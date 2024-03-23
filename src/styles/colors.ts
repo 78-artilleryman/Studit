@@ -3,4 +3,5 @@ export const colors = {
   border: '#dedede',
   disabled: '#CCCCCC',
   white: '#fff',
+  error: '#FB4040',
 };
