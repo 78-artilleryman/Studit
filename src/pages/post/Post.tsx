@@ -1,12 +1,14 @@
 import SelectBoxList from './components/selectBoxList/SelectBoxList';
 import PostForm from './components/postForm/PostForm';
 import ActionButtons from './components/actionButtons/ActionButtons';
+
 import { useNavigate } from 'react-router-dom';
 import { collection, addDoc } from 'firebase/firestore';
 import { FormEvent } from 'react';
 import { db } from '@config/firebaseApp';
 import { usePostData } from '@Pages/post/context/PostDataContext';
 import { toast } from 'react-toastify';
+
 
 function Post() {
   const { postData } = usePostData();
@@ -39,11 +41,13 @@ function Post() {
   };
 
   return (
+
     <form onSubmit={onSubmit}>
       <SelectBoxList />
       <PostForm />
       <ActionButtons />
     </form>
+
   );
 }
 

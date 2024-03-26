@@ -31,5 +31,4 @@ function PostForm() {
     </S.PostFormLayout>
   );
 }
-
 export default PostForm;
