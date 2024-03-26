@@ -1,7 +1,6 @@
-import useSelect from '../../../../hooks/useSelect';
+import useSelect from '@hooks/useSelect';
 import * as S from './TechnologyFilter.style';
-import { IoIosArrowDown } from 'react-icons/io';
-import { IoIosArrowUp } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import TechnologyItem from './TechnologyItem';
 
 interface FilterItem {

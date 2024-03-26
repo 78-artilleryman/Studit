@@ -7,6 +7,7 @@ function useSelect() {
   const selectToggleHandler = () => setIsSelectOpen(prevSelect => !prevSelect);
 
   const selectedHandler = (event: MouseEvent) => {
+    event.preventDefault();
     const target = event.target as HTMLLIElement | HTMLUListElement;
     if (target.nodeName === 'UL') return;
 

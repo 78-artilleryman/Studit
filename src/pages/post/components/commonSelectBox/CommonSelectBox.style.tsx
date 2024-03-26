@@ -1,12 +1,5 @@
 import styled from 'styled-components';
-
-export const Label = styled.label`
-  font-size: 16px;
-  color: #000;
-  font-weight: 700;
-  margin-bottom: 10px;
-  display: block;
-`;
+import { colors } from '@styles/colors';
 
 export const Selectbox = styled.div`
   width: 305px;
@@ -15,38 +8,43 @@ export const Selectbox = styled.div`
   padding: 10px;
   cursor: pointer;
   position: relative;
-  border: 1px solid #000;
+  border: 1px solid ${colors.selectBoxBorder};
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 8px;
+
+  &:hover {
+    border: 1px solid ${colors.black};
+  }
 `;
 
 export const Placeholder = styled.h2`
   font-size: 16px;
-  color: #7f7f7f;
+  color: ${colors.placeholder};
   font-weight: 500;
 `;
 
 export const Dropdown = styled.ul`
   border-radius: 10px;
-  border: 1px solid #000;
+  border: 1px solid ${colors.black};
   position: absolute;
   top: calc(100% + 10px);
   width: 100%;
   padding: 10px 0;
   left: 0;
-  background-color: white;
+  background-color: ${colors.white};
   z-index: 999;
 `;
 
 export const DropdownItem = styled.li`
-  color: #ccc;
+  color: ${colors.disabled};
   text-align: center;
   width: 100%;
   font-weight: 500;
   padding: 5px;
 
   &:hover {
-    color: #000;
+    color: ${colors.black};
   }
 `;

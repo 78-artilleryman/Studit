@@ -3,6 +3,7 @@ import * as S from './TechnologySelectBox.style';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
 import TechnologyBoxItem from './TechnologyBoxItem';
+import SelectBoxLabel from '../formLabel/FormLabel';
 
 interface LanguageItem {
   id: number;
@@ -23,7 +24,7 @@ function TechnologySelectBox({ title, position, language }: TechnologyFilterProp
 
   return (
     <div>
-      <S.Label htmlFor="">기술스택</S.Label>
+      <SelectBoxLabel componentName={'기술스택'}></SelectBoxLabel>
       <S.SelectBox onClick={selectToggleHandler}>
         <S.Placeholder> {'📚 ' + title}</S.Placeholder>
         {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -33,7 +34,7 @@ function TechnologySelectBox({ title, position, language }: TechnologyFilterProp
             <S.SubTitle>스터디나 프로젝트에 적용할 기술을 선택해주세요!</S.SubTitle>
             <S.TechnologyList>
               {language.map(data => (
-                <TechnologyBoxItem {...data}></TechnologyBoxItem>
+                <TechnologyBoxItem key={data.id} {...data}></TechnologyBoxItem>
               ))}
             </S.TechnologyList>
           </S.Technology>

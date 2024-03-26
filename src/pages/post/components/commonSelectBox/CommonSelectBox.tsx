@@ -2,6 +2,9 @@ import useSelect from '@hooks/useSelect';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
 import * as S from './CommonSelectBox.style';
+import FormLabel from '../formLabel/FormLabel';
+import { usePostData } from '@Pages/post/context/PostDataContext';
+import { MouseEvent, useEffect } from 'react';
 
 interface ListItem {
   key: number;
@@ -11,17 +14,24 @@ interface ListItem {
 
 interface SelectBoxProps {
   title: string;
+  id: string;
   position?: 'bottom' | 'top';
   icon?: string;
   list: ListItem[];
+  // setPostData: Dispatch<SetStateAction<PostType>>;
 }
 
-function SelectBox({ title, position, icon, list }: SelectBoxProps) {
+function SelectBox({ title, id, position, icon, list }: SelectBoxProps) {
   const { isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
+  const { onChange } = usePostData();
+
+  useEffect(() => {
+    onChange(id, selected);
+  }, [id, onChange, selected]);
 
   return (
     <div>
-      <S.Label>{title}</S.Label>
+      <FormLabel componentName={title}></FormLabel>
       <S.Selectbox onClick={selectToggleHandler}>
         <S.Placeholder> {selected ? icon + selected : icon + title}</S.Placeholder>
         {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
