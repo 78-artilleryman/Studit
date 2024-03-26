@@ -8,9 +8,9 @@ function useInput(validate: Validate) {
     isTouched: false,
   });
 
-  const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) =>
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) =>
     setInputState(prevState => ({ ...prevState, value: event.target.value }));
-  const handleBlurInput = () => setInputState(prevState => ({ ...prevState, isTouched: true }));
+  const handleInputBlur = () => setInputState(prevState => ({ ...prevState, isTouched: true }));
 
   const validation = validate(inputState.value);
   const isValid = inputState.isTouched && validation;
@@ -20,8 +20,8 @@ function useInput(validate: Validate) {
     inputState,
     hasError,
     isValid,
-    handleChangeInput,
-    handleBlurInput,
+    handleInputChange,
+    handleInputBlur,
   };
 }
 

@@ -1,12 +1,11 @@
 import * as S from '@Pages/auth/Auth.style';
-import Input from '@Components/Input/Input';
 import Button from '@Components/UI/Button';
-import { InputLayout } from '@Layouts/InputLayout.style';
-import { isValidateEmail, isValidateName, isValidatePassword, isValidatePasswordConfirm } from './utils/validation';
-import useInput from './hooks/useInput';
-import usePasswordConfirm from './hooks/usePasswordConfirm';
 import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Form from '@Components/form-compound/Form';
+import useInput from './hooks/useInput';
+import { isValidateEmail, isValidateName, isValidatePassword, isValidatePasswordConfirm } from './utils/validation';
+import usePasswordConfirm from './hooks/usePasswordConfirm';
 
 function Register() {
   const navigate = useNavigate();
@@ -15,32 +14,32 @@ function Register() {
     hasError: hasErrorName,
     isValid: isValidName,
     inputState: inputNameState,
-    handleChangeInput: handleChangeName,
-    handleBlurInput: handleBlurName,
+    handleInputChange: handleNameChange,
+    handleInputBlur: handleNameBlur,
   } = useInput(isValidateName);
 
   const {
     hasError: hasErrorEmail,
     isValid: isValidEmail,
     inputState: inputEmailState,
-    handleChangeInput: handleChangeEmail,
-    handleBlurInput: handleBlurEmail,
+    handleInputChange: handleEmailChange,
+    handleInputBlur: handleEmailBlur,
   } = useInput(isValidateEmail);
 
   const {
     hasError: hasErrorPassword,
     isValid: isValidPassword,
     inputState: inputPasswordState,
-    handleChangeInput: handleChangePassword,
-    handleBlurInput: handleBlurPassword,
+    handleInputChange: handlePasswordChange,
+    handleInputBlur: handlePasswordBlur,
   } = useInput(isValidatePassword);
 
   const {
     passwordConfirmState,
     hasErrorPasswordConfirm,
     isValidPasswordConfirm,
-    handleChangePasswordConfirm,
-    handleBlurPasswordConfirm,
+    handlePasswordConfirmBlur,
+    handlePasswordConfirmChange,
   } = usePasswordConfirm(isValidatePasswordConfirm.bind(null, inputPasswordState.value));
 
   const isDisabled = !isValidName || !isValidEmail || !isValidPassword || !isValidPasswordConfirm;
@@ -53,58 +52,70 @@ function Register() {
   };
 
   return (
-    <S.Form onSubmit={handleSubmit}>
-      <S.Wrapper>
-        <S.Title>회원가입</S.Title>
-        <S.Description>스터딧에서 팀원을 모집 해보세요 🙂</S.Description>
+    <>
+      <Form onSubmit={handleSubmit}>
+        <Form.Title>회원가입</Form.Title>
+        <Form.Description>스터딧에서 팀원을 모집 해보세요 🙂</Form.Description>
 
-        <InputLayout>
-          <Input
-            label="이름"
-            placeholder="이름을 입력해주세요."
-            value={inputNameState.value}
-            onChange={handleChangeName}
-            onBlur={handleBlurName}
-            $validation={hasErrorName}
-          />
-          {hasErrorName && <S.ErrorMessage>이름의 형식이 올바르지 않아요.</S.ErrorMessage>}
-        </InputLayout>
+        <Form.Control
+          value={{
+            onChange: handleNameChange,
+            onBlur: handleNameBlur,
+            value: inputNameState.value,
+            hasError: hasErrorName,
+          }}
+        >
+          <Form.Layout>
+            <Form.Control.Label>이름</Form.Control.Label>
+            <Form.Control.Input placeholder="이름을 입력해주세요." />
+            <Form.Control.ErrorMessage>이름의 형식이 올바르지 않아요.</Form.Control.ErrorMessage>
+          </Form.Layout>
+        </Form.Control>
 
-        <InputLayout>
-          <Input
-            label="이메일"
-            placeholder="your@email.com"
-            value={inputEmailState.value}
-            onChange={handleChangeEmail}
-            onBlur={handleBlurEmail}
-            $validation={hasErrorEmail}
-          />
-          {hasErrorEmail && <S.ErrorMessage>이메일 형식이 올바르지 않아요.</S.ErrorMessage>}
-        </InputLayout>
+        <Form.Control
+          value={{
+            onChange: handleEmailChange,
+            onBlur: handleEmailBlur,
+            value: inputEmailState.value,
+            hasError: hasErrorEmail,
+          }}
+        >
+          <Form.Layout>
+            <Form.Control.Label>이메일</Form.Control.Label>
+            <Form.Control.Input placeholder="your@email.com" />
+            <Form.Control.ErrorMessage>이메일의 형식이 올바르지 않아요.</Form.Control.ErrorMessage>
+          </Form.Layout>
+        </Form.Control>
 
-        <InputLayout>
-          <Input
-            label="비밀번호"
-            placeholder="특수문자를 포함한 비밀번호를 입력해주세요."
-            value={inputPasswordState.value}
-            onChange={handleChangePassword}
-            onBlur={handleBlurPassword}
-            $validation={hasErrorPassword}
-          />
-          {hasErrorPassword && <S.ErrorMessage>비밀번호 형식이 올바르지 않아요.</S.ErrorMessage>}
-        </InputLayout>
+        <Form.Control
+          value={{
+            onChange: handlePasswordChange,
+            onBlur: handlePasswordBlur,
+            value: inputPasswordState.value,
+            hasError: hasErrorPassword,
+          }}
+        >
+          <Form.Layout>
+            <Form.Control.Label>비밀번호</Form.Control.Label>
+            <Form.Control.Input placeholder="특수문자를 포함한 비밀번호를 입력해주세요." />
+            <Form.Control.ErrorMessage>비밀번호 형식이 올바르지 않아요.</Form.Control.ErrorMessage>
+          </Form.Layout>
+        </Form.Control>
 
-        <InputLayout>
-          <Input
-            label="비밀번호 확인"
-            placeholder="비밀번호를 다시 입력해주세요."
-            value={passwordConfirmState.value}
-            onChange={handleChangePasswordConfirm}
-            onBlur={handleBlurPasswordConfirm}
-            $validation={hasErrorPasswordConfirm}
-          />
-          {hasErrorPasswordConfirm && <S.ErrorMessage>비밀번호 형식이 올바르지 않아요.</S.ErrorMessage>}
-        </InputLayout>
+        <Form.Control
+          value={{
+            onChange: handlePasswordConfirmChange,
+            onBlur: handlePasswordConfirmBlur,
+            value: passwordConfirmState.value,
+            hasError: hasErrorPasswordConfirm,
+          }}
+        >
+          <Form.Layout>
+            <Form.Control.Label>비밀번호 확인</Form.Control.Label>
+            <Form.Control.Input placeholder="비밀번호를 다시 입력해주세요." />
+            <Form.Control.ErrorMessage>비밀번호 형식이 올바르지 않아요.</Form.Control.ErrorMessage>
+          </Form.Layout>
+        </Form.Control>
 
         <Button type="submit" $height={56} disabled={isDisabled}>
           회원가입
@@ -123,8 +134,8 @@ function Register() {
             </S.SocialItem>
           </S.SocialLayout>
         </S.FlexLayout>
-      </S.Wrapper>
-    </S.Form>
+      </Form>
+    </>
   );
 }
 
