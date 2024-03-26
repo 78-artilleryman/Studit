@@ -8,7 +8,7 @@ export const Selectbox = styled.div`
   padding: 10px;
   cursor: pointer;
   position: relative;
-  border: 1px solid #c0c0c0;
+  border: 1px solid ${colors.selectBoxBorder};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,7 +21,7 @@ export const Selectbox = styled.div`
 
 export const Placeholder = styled.h2`
   font-size: 16px;
-  color: #7f7f7f;
+  color: ${colors.placeholder};
   font-weight: 500;
 `;
 

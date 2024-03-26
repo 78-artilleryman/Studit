@@ -1,3 +1,4 @@
+import { colors } from '@styles/colors';
 import styled from 'styled-components';
 
 export const Filter = styled.div`
@@ -7,7 +8,7 @@ export const Filter = styled.div`
   padding: 10px;
   cursor: pointer;
   position: relative;
-  border: 1px solid #000;
+  border: 1px solid ${colors.black};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -15,19 +16,19 @@ export const Filter = styled.div`
 
 export const Title = styled.h2`
   font-size: 14px;
-  color: #000;
+  color: ${colors.black};
   font-weight: 500;
 `;
 
 export const Dropdown = styled.ul`
   border-radius: 10px;
-  border: 1px solid #000;
+  border: 1px solid ${colors.black};
   position: absolute;
   top: calc(100% + 10px);
   width: 100%;
   padding: 10px 0;
   left: 0;
-  background-color: white;
+  background-color: ${colors.white};
   z-index: 999;
 `;
 
@@ -39,6 +40,6 @@ export const DropdownItem = styled.li`
   padding: 5px;
 
   &:hover {
-    color: #000;
+    color: ${colors.black};
   }
 `;

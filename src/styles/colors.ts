@@ -3,4 +3,7 @@ export const colors = {
   border: '#dedede',
   disabled: '#CCCCCC',
   white: '#fff',
+  selectBoxBorder: '#c0c0c0',
+  deadTag: '#ff4545',
+  placeholder: '#7f7f7f',
 };

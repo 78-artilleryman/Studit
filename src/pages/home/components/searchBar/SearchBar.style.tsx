@@ -1,3 +1,4 @@
+import { colors } from '@styles/colors';
 import styled from 'styled-components';
 
 export const SearchBar = styled.div`
@@ -16,7 +17,7 @@ export const Input = styled.input`
   width: 90%;
 
   &::placeholder {
-    color: #000;
+    color: ${colors.black};
     font-size: 14px;
     font-weight: 500;
   }

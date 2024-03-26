@@ -1,3 +1,4 @@
+import { colors } from '@styles/colors';
 import styled from 'styled-components';
 
 export const PostFormLayout = styled.div`
@@ -22,7 +23,7 @@ export const TitleInput = styled.input`
   width: 100%;
   height: 56px;
   padding: 10px;
-  border: 1px solid #c0c0c0;
+  border: 1px solid ${colors.selectBoxBorder};
   border-radius: 10px;
   margin-top: 10px;
 `;
@@ -30,7 +31,7 @@ export const TitleInput = styled.input`
 export const ContentTextArea = styled.textarea`
   width: 100%;
   padding: 10px;
-  border: 1px solid #c0c0c0;
+  border: 1px solid ${colors.selectBoxBorder};
   border-radius: 10px;
   margin-top: 10px;
   resize: none;

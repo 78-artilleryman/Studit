@@ -8,20 +8,20 @@ export const SelectBox = styled.div`
   padding: 10px;
   cursor: pointer;
   position: relative;
-  border: 1px solid #c0c0c0;
+  border: 1px solid ${colors.selectBoxBorder};
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 8px;
 
   &:hover {
-    border: 1px solid #000;
+    border: 1px solid ${colors.black};
   }
 `;
 
 export const Placeholder = styled.h2`
   font-size: 16px;
-  color: #7f7f7f;
+  color: ${colors.placeholder};
   font-weight: 500;
 `;
 
