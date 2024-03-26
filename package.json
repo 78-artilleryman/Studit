@@ -17,6 +17,7 @@
     "@types/node": "^16.18.88",
     "@types/react": "^18.2.65",
     "@types/react-dom": "^18.2.21",
+    "@uiw/react-md-editor": "^4.0.4",
     "dayjs": "^1.11.10",
     "firebase": "^10.8.1",
     "react": "^18.2.0",

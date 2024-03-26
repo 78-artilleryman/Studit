@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '@styles/colors';
 
 export const TechnologyItem = styled.li`
   display: flex;
@@ -18,7 +19,7 @@ export const Image = styled.img`
 `;
 
 export const Name = styled.p`
-  color: #000;
+  color: ${colors.black};
   font-size: 14px;
   font-weight: 500;
 `;

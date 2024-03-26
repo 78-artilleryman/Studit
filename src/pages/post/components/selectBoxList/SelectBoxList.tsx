@@ -5,23 +5,15 @@ import styled from 'styled-components';
 import TechnologySelectBox from '../technologySelectBox/TechnologySelectBox';
 import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import FormLabel from '../formLabel/FormLabel';
 
 const SelectBoxLaout = styled.div`
   display: grid;
-  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+  grid-template: repeat(3, 1fr) / repeat(4, 1fr);
   gap: 20px;
   width: 1280px;
   margin: 0 auto;
 `;
-
-function Label({ componentName }: { componentName: string }) {
-  const content = (
-    <span>
-      <strong>{componentName}</strong>
-    </span>
-  );
-  return content;
-}
 
 function SelectBoxList() {
   return (
@@ -31,13 +23,13 @@ function SelectBoxList() {
       <SelectBox {...systemData} position="bottom"></SelectBox>
       <SelectBox {...studyCountData} position="bottom"></SelectBox>
       <TechnologySelectBox {...technologyData} position="bottom"></TechnologySelectBox>
-      <DemoItem label={<Label componentName="모집 마감일" />}>
+      <DemoItem label={<FormLabel componentName="모집 마감일" />}>
         <DatePicker />
       </DemoItem>
-      <DemoItem label={<Label componentName="스터디 시작일" />}>
+      <DemoItem label={<FormLabel componentName="스터디 시작일" />}>
         <DatePicker />
       </DemoItem>
-      <DemoItem label={<Label componentName="스터디 마감일" />}>
+      <DemoItem label={<FormLabel componentName="스터디 마감일" />}>
         <DatePicker />
       </DemoItem>
     </SelectBoxLaout>
