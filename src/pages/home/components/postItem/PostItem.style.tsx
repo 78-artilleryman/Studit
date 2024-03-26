@@ -1,8 +1,9 @@
+import { colors } from '@styles/colors';
 import styled from 'styled-components';
 
 export const Post = styled.div`
   width: 305px;
-  border: 1px solid #dedede;
+  border: 1px solid ${colors.border};
   border-radius: 20px;
   padding: 20px;
   display: flex;
@@ -14,7 +15,7 @@ export const Post = styled.div`
 
   &:hover {
     transform: scale(1.05);
-    border: 1px solid #000000;
+    border: 1px solid ${colors.black};
   }
 `;
 
@@ -25,7 +26,7 @@ export const Background = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: ${colors.white};
   border-radius: 20px;
   opacity: 0.5;
   top: 0;
@@ -40,7 +41,7 @@ export const PostClosed = styled.div`
   align-items: center;
   position: absolute;
   background-color: #fb4e4e;
-  color: #fff;
+  color: ${colors.white};
   border-radius: 10px;
   top: 40%;
   left: 30%;
@@ -58,7 +59,7 @@ export const TypeTag = styled.div`
   border: none;
   font-size: 12px;
   border-radius: 50px;
-  color: black;
+  color: ${colors.black};
   font-weight: 500;
   background: #d9d9d9;
   text-align: center;
@@ -66,7 +67,7 @@ export const TypeTag = styled.div`
 `;
 
 export const DeadTag = styled(TypeTag)`
-  color: #ff4545;
+  color: ${colors.deadTag};
   background: #ffbdbd;
 `;
 
@@ -126,7 +127,7 @@ export const PostUser = styled.div`
 `;
 
 export const Name = styled.p`
-  color: #000;
+  color: ${colors.black};
   font-size: 14px;
   font-weight: 500;
 `;

@@ -34,7 +34,7 @@ function TechnologySelectBox({ title, position, language }: TechnologyFilterProp
             <S.SubTitle>스터디나 프로젝트에 적용할 기술을 선택해주세요!</S.SubTitle>
             <S.TechnologyList>
               {language.map(data => (
-                <TechnologyBoxItem {...data}></TechnologyBoxItem>
+                <TechnologyBoxItem key={data.id} {...data}></TechnologyBoxItem>
               ))}
             </S.TechnologyList>
           </S.Technology>

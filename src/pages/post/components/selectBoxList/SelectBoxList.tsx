@@ -1,4 +1,3 @@
-import React from 'react';
 import { ClassificationData, membersData, systemData, studyCountData, technologyData } from './data';
 import SelectBox from '../commonSelectBox/CommonSelectBox';
 import styled from 'styled-components';
@@ -6,6 +5,7 @@ import TechnologySelectBox from '../technologySelectBox/TechnologySelectBox';
 import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import FormLabel from '../formLabel/FormLabel';
+import { usePostData } from '@Pages/post/context/PostDataContext';
 
 const SelectBoxLaout = styled.div`
   display: grid;
@@ -16,6 +16,8 @@ const SelectBoxLaout = styled.div`
 `;
 
 function SelectBoxList() {
+  const { postData, onChange } = usePostData();
+
   return (
     <SelectBoxLaout>
       <SelectBox {...ClassificationData} position="bottom"></SelectBox>
@@ -24,13 +26,13 @@ function SelectBoxList() {
       <SelectBox {...studyCountData} position="bottom"></SelectBox>
       <TechnologySelectBox {...technologyData} position="bottom"></TechnologySelectBox>
       <DemoItem label={<FormLabel componentName="모집 마감일" />}>
-        <DatePicker />
+        <DatePicker value={postData.postDeadline} onChange={newValue => onChange('postDeadline', newValue)} />
       </DemoItem>
       <DemoItem label={<FormLabel componentName="스터디 시작일" />}>
-        <DatePicker />
+        <DatePicker value={postData.projectStartDate} onChange={newValue => onChange('projectStartDate', newValue)} />
       </DemoItem>
       <DemoItem label={<FormLabel componentName="스터디 마감일" />}>
-        <DatePicker />
+        <DatePicker value={postData.projectEndDate} onChange={newValue => onChange('projectEndDate', newValue)} />
       </DemoItem>
     </SelectBoxLaout>
   );

@@ -1,6 +1,7 @@
 // 스터디 종류
 export const ClassificationData = {
   title: '스터디 종류',
+  id: 'studyType',
   icon: '🗂 ',
   list: [
     {
@@ -19,6 +20,7 @@ export const ClassificationData = {
 //스터디 횟수
 export const studyCountData = {
   title: '스터디 횟수',
+  id: 'period',
   icon: '⏰ ',
   list: [
     {
@@ -67,6 +69,7 @@ export const studyCountData = {
 //모집인원
 export const membersData = {
   title: '모집 인원',
+  id: 'studyMember',
   icon: '👨‍👨‍👦‍👦 ',
   list: [
     { key: 1, value: '3', name: '3명' },
@@ -79,6 +82,7 @@ export const membersData = {
 //진행방식
 export const systemData = {
   title: '진행 방식',
+  id: 'studySystem',
   icon: '🏠 ',
   position: 'bottom',
 

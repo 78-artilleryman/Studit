@@ -1,3 +1,4 @@
+import { colors } from '@styles/colors';
 import styled from 'styled-components';
 
 export const TechnologyItem = styled.li`
@@ -18,7 +19,7 @@ export const Image = styled.img`
 `;
 
 export const Name = styled.p`
-  color: #000;
+  color: ${colors.black};
   font-size: 14px;
   font-weight: 500;
 `;
