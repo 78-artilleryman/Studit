@@ -15,6 +15,8 @@ function App() {
         { index: true, element: <Page.Home /> },
         { path: 'register', element: <Page.Register /> },
         { path: 'post', element: <Page.Post /> },
+        { path: 'login', element: <Page.Login /> },
+
       ],
     },
   ]);

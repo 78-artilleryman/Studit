@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import * as S from '@Components/Input/Input.style';
 
-interface InputProps {
-  label: string;
-  placeholder: string;
+interface InputStyle {
+  $validation?: boolean;
 }
 
-function Input({ label, placeholder }: InputProps) {
+interface InputProps extends InputStyle {
+  label: string;
+  placeholder: string;
+  value?: string;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: () => void;
+}
+
+function Input({ label, placeholder, value, onChange, onBlur, $validation }: InputProps) {
+  const $isValidation = $validation ? true : false;
+
   return (
     <React.Fragment>
-      <S.Label>{label}</S.Label>
-      <S.InputElement placeholder={placeholder} />
+      <S.Label $validation={$isValidation}>{label}</S.Label>
+      <S.InputElement
+        $validation={$isValidation}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+      />
     </React.Fragment>
   );
 }
