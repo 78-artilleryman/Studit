@@ -5,6 +5,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { PostDataContextProvider } from '@Pages/post/context/PostDataContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FilterProvider } from '@Pages/home/context/FilterContext';
 
 function App() {
   const router = createBrowserRouter([
@@ -16,7 +17,6 @@ function App() {
         { path: 'register', element: <Page.Register /> },
         { path: 'post', element: <Page.Post /> },
         { path: 'login', element: <Page.Login /> },
-
       ],
     },
   ]);
@@ -25,9 +25,11 @@ function App() {
     <>
       <ToastContainer />
       <PostDataContextProvider>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <RouterProvider router={router} />
-        </LocalizationProvider>
+        <FilterProvider>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <RouterProvider router={router} />
+          </LocalizationProvider>
+        </FilterProvider>
       </PostDataContextProvider>
     </>
   );
