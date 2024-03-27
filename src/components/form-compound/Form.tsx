@@ -13,7 +13,7 @@ interface Children {
 
 export default function Form({ children, onSubmit }: FormProps) {
   return (
-    <S.Form>
+    <S.Form onSubmit={onSubmit}>
       <S.Wrapper>{children}</S.Wrapper>
     </S.Form>
   );

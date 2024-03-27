@@ -6,6 +6,7 @@ import { isValidateEmail, isValidatePassword } from './utils/validation';
 import { FormEvent } from 'react';
 import FormControl from '../../components/form-compound/FormControl';
 import Form from '@Components/form-compound/Form';
+import { login } from './utils/firebase-auth';
 
 function Login() {
   const navigate = useNavigate();
@@ -28,11 +29,12 @@ function Login() {
 
   const isDisabled = !isValidEmail || !isValidPassword;
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isDisabled) return;
 
-    navigate('/');
+    const isAuth = await login({ emailValue: inputEmailState.value, passwordValue: inputPasswordState.value });
+    if (isAuth.result) navigate('/');
   };
 
   return (
