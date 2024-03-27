@@ -15,11 +15,11 @@ function usePasswordConfirm(validate: Validate) {
   const hasErrorPasswordConfirm = passwordConfirmState.isTouched && !isValidPasswordConfirm;
 
   return {
-    passwordConfirmState,
-    isValidPasswordConfirm,
-    hasErrorPasswordConfirm,
-    handlePasswordConfirmChange,
-    handlePasswordConfirmBlur,
+    inputState: passwordConfirmState,
+    hasError: hasErrorPasswordConfirm,
+    isValid: isValidPasswordConfirm,
+    handleInputChange: handlePasswordConfirmChange,
+    handleInputBlur: handlePasswordConfirmBlur,
   };
 }
 

@@ -1,6 +1,6 @@
 import * as S from '@Pages/auth/Auth.style';
 import Button from '@Components/UI/Button';
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Form from '@Components/form-compound/Form';
 import useInput from './hooks/useInput';
@@ -11,49 +11,27 @@ import { register } from './utils/firebase-auth';
 function Register() {
   const navigate = useNavigate();
 
-  const {
-    hasError: hasErrorName,
-    isValid: isValidName,
-    inputState: inputNameState,
-    handleInputChange: handleNameChange,
-    handleInputBlur: handleNameBlur,
-  } = useInput(isValidateName);
-
-  const {
-    hasError: hasErrorEmail,
-    isValid: isValidEmail,
-    inputState: inputEmailState,
-    handleInputChange: handleEmailChange,
-    handleInputBlur: handleEmailBlur,
-  } = useInput(isValidateEmail);
-
-  const {
-    hasError: hasErrorPassword,
-    isValid: isValidPassword,
-    inputState: inputPasswordState,
-    handleInputChange: handlePasswordChange,
-    handleInputBlur: handlePasswordBlur,
-  } = useInput(isValidatePassword);
-
-  const {
-    passwordConfirmState,
-    hasErrorPasswordConfirm,
-    isValidPasswordConfirm,
-    handlePasswordConfirmBlur,
-    handlePasswordConfirmChange,
-  } = usePasswordConfirm(isValidatePasswordConfirm.bind(null, inputPasswordState.value));
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isValid: isValidName, ...name } = useInput(isValidateName);
+  const { isValid: isValidEmail, ...email } = useInput(isValidateEmail);
+  const { isValid: isValidPassword, ...password } = useInput(isValidatePassword);
+  const { isValid: isValidPasswordConfirm, ...passwordConfirm } = usePasswordConfirm(
+    isValidatePasswordConfirm.bind(null, password.inputState.value),
+  );
 
   const isDisabled = !isValidName || !isValidEmail || !isValidPassword || !isValidPasswordConfirm;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (isDisabled) return;
+    if (isDisabled || isSubmitting) return;
+
+    setIsSubmitting(true);
     const isAuth = await register({
-      emailValue: inputEmailState.value,
-      passwordValue: inputPasswordState.value,
-      namveValue: inputNameState.value,
+      emailValue: name.inputState.value,
+      passwordValue: password.inputState.value,
+      namveValue: name.inputState.value,
     });
-    if (isAuth.result) navigate('/');
+    isAuth.result ? navigate('/') : setIsSubmitting(false);
   };
 
   return (
@@ -63,10 +41,10 @@ function Register() {
 
       <Form.Control
         value={{
-          onChange: handleNameChange,
-          onBlur: handleNameBlur,
-          value: inputNameState.value,
-          hasError: hasErrorName,
+          onChange: name.handleInputChange,
+          onBlur: name.handleInputBlur,
+          value: name.inputState.value,
+          hasError: name.hasError,
         }}
       >
         <Form.Layout>
@@ -78,10 +56,10 @@ function Register() {
 
       <Form.Control
         value={{
-          onChange: handleEmailChange,
-          onBlur: handleEmailBlur,
-          value: inputEmailState.value,
-          hasError: hasErrorEmail,
+          onChange: email.handleInputChange,
+          onBlur: email.handleInputBlur,
+          value: email.inputState.value,
+          hasError: email.hasError,
         }}
       >
         <Form.Layout>
@@ -93,10 +71,10 @@ function Register() {
 
       <Form.Control
         value={{
-          onChange: handlePasswordChange,
-          onBlur: handlePasswordBlur,
-          value: inputPasswordState.value,
-          hasError: hasErrorPassword,
+          onChange: password.handleInputChange,
+          onBlur: password.handleInputBlur,
+          value: password.inputState.value,
+          hasError: password.hasError,
         }}
       >
         <Form.Layout>
@@ -108,10 +86,10 @@ function Register() {
 
       <Form.Control
         value={{
-          onChange: handlePasswordConfirmChange,
-          onBlur: handlePasswordConfirmBlur,
-          value: passwordConfirmState.value,
-          hasError: hasErrorPasswordConfirm,
+          onChange: passwordConfirm.handleInputChange,
+          onBlur: passwordConfirm.handleInputBlur,
+          value: passwordConfirm.inputState.value,
+          hasError: passwordConfirm.hasError,
         }}
       >
         <Form.Layout>

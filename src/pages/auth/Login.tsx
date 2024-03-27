@@ -3,38 +3,26 @@ import Button from '@Components/UI/Button';
 import { useNavigate } from 'react-router-dom';
 import useInput from './hooks/useInput';
 import { isValidateEmail, isValidatePassword } from './utils/validation';
-import { FormEvent } from 'react';
-import FormControl from '../../components/form-compound/FormControl';
+import { FormEvent, useState } from 'react';
 import Form from '@Components/form-compound/Form';
 import { login } from './utils/firebase-auth';
 
 function Login() {
   const navigate = useNavigate();
 
-  const {
-    hasError: hasErrorEmail,
-    isValid: isValidEmail,
-    inputState: inputEmailState,
-    handleInputChange: handleEmailChange,
-    handleInputBlur: handleEmailBlur,
-  } = useInput(isValidateEmail);
-
-  const {
-    hasError: hasErrorPassword,
-    isValid: isValidPassword,
-    inputState: inputPasswordState,
-    handleInputChange: handlePasswordChange,
-    handleInputBlur: handlePasswordBlur,
-  } = useInput(isValidatePassword);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isValid: isValidEmail, ...email } = useInput(isValidateEmail);
+  const { isValid: isValidPassword, ...password } = useInput(isValidatePassword);
 
   const isDisabled = !isValidEmail || !isValidPassword;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (isDisabled) return;
+    if (isDisabled || isSubmitting) return;
 
-    const isAuth = await login({ emailValue: inputEmailState.value, passwordValue: inputPasswordState.value });
-    if (isAuth.result) navigate('/');
+    setIsSubmitting(true);
+    const isAuth = await login({ emailValue: email.inputState.value, passwordValue: password.inputState.value });
+    isAuth.result ? navigate('/') : setIsSubmitting(false);
   };
 
   return (
@@ -44,35 +32,35 @@ function Login() {
 
       <Form.Control
         value={{
-          onChange: handleEmailChange,
-          onBlur: handleEmailBlur,
-          value: inputEmailState.value,
-          hasError: hasErrorEmail,
+          onChange: email.handleInputChange,
+          onBlur: email.handleInputBlur,
+          value: email.inputState.value,
+          hasError: email.hasError,
         }}
       >
         <Form.Layout>
           <Form.Control.Label>이메일</Form.Control.Label>
           <Form.Control.Input placeholder="your@email.com" />
-          <Form.Control.ErrorMessage>이메일 형식이 올바르지 않아요.</Form.Control.ErrorMessage>
+          <Form.Control.ErrorMessage>이메일의 형식이 올바르지 않아요.</Form.Control.ErrorMessage>
         </Form.Layout>
       </Form.Control>
 
-      <FormControl
+      <Form.Control
         value={{
-          onChange: handlePasswordChange,
-          onBlur: handlePasswordBlur,
-          value: inputPasswordState.value,
-          hasError: hasErrorPassword,
+          onChange: password.handleInputChange,
+          onBlur: password.handleInputBlur,
+          value: password.inputState.value,
+          hasError: password.hasError,
         }}
       >
         <Form.Layout>
-          <FormControl.Label>비밀번호</FormControl.Label>
-          <FormControl.Input placeholder="특수문자를 포함한 비밀번호를 입력해주세요." />
-          <FormControl.ErrorMessage>비밀번호 형식이 올바르지 않아요.</FormControl.ErrorMessage>
+          <Form.Control.Label>비밀번호</Form.Control.Label>
+          <Form.Control.Input placeholder="특수문자를 포함한 비밀번호를 입력해주세요." />
+          <Form.Control.ErrorMessage>비밀번호 형식이 올바르지 않아요.</Form.Control.ErrorMessage>
         </Form.Layout>
-      </FormControl>
+      </Form.Control>
 
-      <Button type="submit" $height={56} disabled={isDisabled}>
+      <Button type="submit" $height={56} disabled={isDisabled || isSubmitting}>
         로그인
       </Button>
 
