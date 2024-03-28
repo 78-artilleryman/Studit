@@ -3,18 +3,18 @@ import * as S from './TechnologyItem.style';
 
 interface TechnologyItemProps {
   image: string;
-  name: string;
+  value: string;
   color: string;
 }
 
-function TechnologyItem({ name, image, color }: TechnologyItemProps) {
+function TechnologyItem({ value, image, color }: TechnologyItemProps) {
   const { filterState, onChagTechnologysFilter } = useFilter();
-  const checked = filterState.technologys.includes(name);
+  const checked = filterState.technologys.includes(value);
 
   return (
-    <S.TechnologyItem color={color} $checked={checked} onClick={() => onChagTechnologysFilter(name)}>
+    <S.TechnologyItem color={color} $checked={checked} onClick={() => onChagTechnologysFilter(value)}>
       <S.Image src={image} alt="TechnologyItem" />
-      <S.Name>{name}</S.Name>
+      <S.Name>{value}</S.Name>
     </S.TechnologyItem>
   );
 }
