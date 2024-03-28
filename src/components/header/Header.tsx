@@ -13,10 +13,10 @@ function Header() {
         <nav>
           <S.Menu>
             <S.MenuItem>
-              <Link to="/write">스터디 모집하기</Link>
+              <Link to="/post">스터디 모집하기</Link>
             </S.MenuItem>
             <S.MenuItem>
-              <S.LoginButton to="/write">로그인</S.LoginButton>
+              <S.LoginButton to="/login">로그인</S.LoginButton>
             </S.MenuItem>
           </S.Menu>
         </nav>
