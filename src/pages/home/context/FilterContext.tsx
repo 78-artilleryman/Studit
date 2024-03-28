@@ -16,8 +16,8 @@ interface FilterContextType {
 }
 
 const initialFiterState: FilterStateType = {
-  studyType: '',
-  period: '',
+  studyType: '전체',
+  period: '전체',
   technologys: [],
 };
 
@@ -28,7 +28,6 @@ const FilterContext = createContext<FilterContextType>({
 
 const FilterProvider = ({ children }: Props) => {
   const [filterState, setFilterState] = useState<FilterStateType>(initialFiterState);
-  console.log(filterState);
 
   return <FilterContext.Provider value={{ filterState, setFilterState }}>{children}</FilterContext.Provider>;
 };
