@@ -1,14 +1,12 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, InputHTMLAttributes } from 'react';
 import * as S from '@Components/Input/Input.style';
 
 interface InputStyle {
   $validation?: boolean;
 }
 
-interface InputProps extends InputStyle {
+interface InputProps extends InputStyle, InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  placeholder: string;
-  value?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: () => void;
 }

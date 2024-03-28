@@ -16,7 +16,6 @@ function App() {
         { path: 'register', element: <Page.Register /> },
         { path: 'post', element: <Page.Post /> },
         { path: 'login', element: <Page.Login /> },
-
       ],
     },
   ]);
