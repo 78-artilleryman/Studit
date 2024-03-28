@@ -18,9 +18,11 @@ function Post() {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { projectStartDate, projectEndDate, postDeadline, technologys, ...data } = postData;
+
     try {
       await addDoc(collection(db, 'posts'), {
         ...data,
+        technologys: technologys,
         projectStartDate: projectStartDate.toDate(),
         projectEndDate: projectEndDate.toDate(),
         postDeadline: postDeadline.toDate(),
