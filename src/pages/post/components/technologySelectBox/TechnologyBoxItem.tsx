@@ -3,19 +3,19 @@ import { usePostData } from '@Pages/post/context/PostDataContext';
 
 interface TechnologyItemProps {
   image: string;
-  name: string;
+  value: string;
   color: string;
 }
 
-function TechnologyBoxItem({ name, image, color }: TechnologyItemProps) {
+function TechnologyBoxItem({ value, image, color }: TechnologyItemProps) {
   const { postData, onChagTechnologys } = usePostData();
 
-  const checked = postData.technologys.includes(name);
+  const checked = postData.technologys.includes(value);
 
   return (
-    <S.TechnologyItem color={color} onClick={() => onChagTechnologys(name)} $checked={checked}>
+    <S.TechnologyItem color={color} onClick={() => onChagTechnologys(value)} $checked={checked}>
       <S.Image src={image} alt="TechnologyItem" />
-      <S.Name>{name}</S.Name>
+      <S.Name>{value}</S.Name>
     </S.TechnologyItem>
   );
 }

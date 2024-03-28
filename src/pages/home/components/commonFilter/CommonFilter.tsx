@@ -1,7 +1,7 @@
 import useSelect from '@hooks/useSelect';
 import * as S from './CommonFilter.style';
-import { IoIosArrowDown } from 'react-icons/io';
-import { IoIosArrowUp } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { useFilter } from '@Pages/home/context/FilterContext';
 
 interface ClassificationItem {
   key: number;
@@ -11,13 +11,15 @@ interface ClassificationItem {
 
 interface CommonFilterProps {
   title: string;
+  name: string;
   position?: 'bottom' | 'top';
   icon?: string;
   list: ClassificationItem[];
 }
 
-function CommonFilter({ title, position, icon, list }: CommonFilterProps) {
+function CommonFilter({ title, name, position, icon, list }: CommonFilterProps) {
   const { isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
+  const { onChangeFilter } = useFilter();
 
   return (
     <S.Filter onClick={selectToggleHandler}>
@@ -27,7 +29,9 @@ function CommonFilter({ title, position, icon, list }: CommonFilterProps) {
       {isSelectOpen && (
         <S.Dropdown onClick={selectedHandler}>
           {list.map(data => (
-            <S.DropdownItem key={data.key}>{data.name}</S.DropdownItem>
+            <S.DropdownItem key={data.key} onClick={() => onChangeFilter(name, data.name)}>
+              {data.name}
+            </S.DropdownItem>
           ))}
         </S.Dropdown>
       )}

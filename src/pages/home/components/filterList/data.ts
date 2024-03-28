@@ -3,6 +3,7 @@
 //모집구분
 export const ClassificationData = {
   title: '스터디 종류',
+  name: 'studyType',
   icon: '🗂 ',
   list: [
     {
@@ -26,6 +27,7 @@ export const ClassificationData = {
 //스터디 횟수
 export const StudyCountData = {
   title: '스터디 횟수',
+  name: 'period',
   icon: '⏰ ',
   list: [
     {

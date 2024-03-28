@@ -1,3 +1,4 @@
+import { app } from '@config/firebaseApp';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 interface EmailWithPassword {
@@ -11,7 +12,7 @@ interface Register extends EmailWithPassword {
 
 export async function register({ emailValue, passwordValue, namveValue }: Register) {
   try {
-    const authService = getAuth();
+    const authService = getAuth(app);
     const { user } = await createUserWithEmailAndPassword(authService, emailValue, passwordValue);
     await updateProfile(user, { displayName: namveValue });
     return {
@@ -28,7 +29,7 @@ export async function register({ emailValue, passwordValue, namveValue }: Regist
 
 export async function login({ emailValue, passwordValue }: EmailWithPassword) {
   try {
-    const authService = getAuth();
+    const authService = getAuth(app);
     await signInWithEmailAndPassword(authService, emailValue, passwordValue);
     return {
       result: true,

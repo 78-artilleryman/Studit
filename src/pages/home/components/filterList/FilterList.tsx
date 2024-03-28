@@ -14,7 +14,7 @@ function FilterList() {
     <FilterLayout>
       <CommonFilter {...ClassificationData} position={'bottom'} />
       <CommonFilter {...StudyCountData} position={'bottom'} />
-      <TechnologyFilter {...technologyData} position={'bottom'}></TechnologyFilter>
+      <TechnologyFilter {...technologyData} position={'bottom'} />
     </FilterLayout>
   );
 }

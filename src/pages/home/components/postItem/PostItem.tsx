@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 interface PostItemProps {
   Postdata: {
-    id: number;
+    id: string;
     studyType: string; // 스터디 종류
     studyMember: string; // 모집 인원
     studySystem: string; // 진행 방식
@@ -41,9 +41,9 @@ function PostItem({ Postdata }: PostItemProps) {
           <S.DeadTag>❗ 마감임박</S.DeadTag>
         </S.Tags>
         <S.PostContent>
-          <S.StudyPeriod>
+          {/* <S.StudyPeriod>
             {Postdata.projectStartDate} - {Postdata.projectEndDate}
-          </S.StudyPeriod>
+          </S.StudyPeriod> */}
           <S.PostTitle>{Postdata.postTitle}</S.PostTitle>
           <S.PostSubTitle>{Postdata.postSubTitle}</S.PostSubTitle>
           <S.TechnologyImageList>
