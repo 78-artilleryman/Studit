@@ -1,7 +1,7 @@
-import dayjs, { Dayjs } from 'dayjs';
 import * as S from './PostItem.style';
 import { FaCircleUser } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
+import { formatDate, isWithin7Days } from '@Pages/home/service/FormatDate';
 
 interface Timestamp {
   seconds: number;
@@ -33,20 +33,9 @@ interface PostItemProps {
 function PostItem({ Postdata }: PostItemProps) {
   const getImageSrc = (stack: string) => `postLogoImages/${stack}.svg`;
 
-  // Timestamp를 Dayjs로 변환하는 함수
-  const timestampToDayjs = (timestamp: Timestamp): Dayjs => {
-    const milliseconds: number = timestamp.seconds * 1000 + Math.floor(timestamp.nanoseconds / 1000000);
-    return dayjs(milliseconds);
-  };
-
-  // Dayjs 객체를 원하는 형식의 날짜로 변환하는 함수
-  const formatDate = (date: Dayjs): string => {
-    return date.format('YYYY-MM-DD');
-  };
-
-  const projectStartDate: string = formatDate(timestampToDayjs(Postdata.projectStartDate));
-  const projectEndDate: string = formatDate(timestampToDayjs(Postdata.projectEndDate));
-  const postDeadline: string = formatDate(timestampToDayjs(Postdata.postDeadline));
+  const projectStartDate: string = formatDate(Postdata.projectStartDate);
+  const projectEndDate: string = formatDate(Postdata.projectEndDate);
+  const isTodayPostDeadline: boolean = isWithin7Days(Postdata.postDeadline);
 
   return (
     <Link to={``}>
@@ -59,7 +48,7 @@ function PostItem({ Postdata }: PostItemProps) {
         )}
         <S.Tags>
           <S.TypeTag>📙 {Postdata.studyType}</S.TypeTag>
-          <S.DeadTag>❗ 마감임박</S.DeadTag>
+          {isTodayPostDeadline && <S.DeadTag>❗ 마감임박</S.DeadTag>}
         </S.Tags>
         <S.PostContent>
           <S.StudyPeriod>

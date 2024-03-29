@@ -1,12 +1,10 @@
 import PostItem from '../postItem/PostItem';
 import styled from 'styled-components';
-import { data } from './mockdata';
 import { useEffect, useState } from 'react';
 import { db } from '@config/firebaseApp';
 import { useFilter } from '@Pages/home/context/FilterContext';
 import { buildFirestoreQuery } from '@Pages/home/service/Filter';
 import { onSnapshot } from 'firebase/firestore';
-import { Dayjs } from 'dayjs';
 
 const PostLayout = styled.div`
   display: grid;
