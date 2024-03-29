@@ -1,7 +1,11 @@
 import { colors } from '@styles/colors';
 import styled from 'styled-components';
 
-export const TechnologyItem = styled.li`
+interface TechnologyItemTOption {
+  $checked: boolean;
+}
+
+export const TechnologyItem = styled.li<TechnologyItemTOption>`
   display: flex;
   padding: 5px;
   padding-right: 15px;
@@ -9,7 +13,7 @@ export const TechnologyItem = styled.li`
   gap: 10px;
   border-radius: 10px;
   background: ${({ color }) => color};
-  opacity: 50%;
+  opacity: ${({ $checked }) => ($checked ? `100%` : '50%')};
 `;
 
 export const Image = styled.img`
