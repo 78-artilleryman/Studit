@@ -6,6 +6,7 @@ import { db } from '@config/firebaseApp';
 import { useFilter } from '@Pages/home/context/FilterContext';
 import { buildFirestoreQuery } from '@Pages/home/service/Filter';
 import { onSnapshot } from 'firebase/firestore';
+import { Dayjs } from 'dayjs';
 
 const PostLayout = styled.div`
   display: grid;
@@ -15,15 +16,20 @@ const PostLayout = styled.div`
   margin: 0 auto;
 `;
 
+interface Timestamp {
+  seconds: number;
+  nanoseconds: number;
+}
+
 interface Postdata {
   id: string;
   studyType: string; // 스터디 종류
   studyMember: string; // 모집 인원
   studySystem: string; // 진행 방식
   period: string; // 진행 기간
-  projectStartDate: string; //프로젝트 시작일
-  projectEndDate: string;
-  postDeadline: string; // 모집 마감일
+  projectStartDate: Timestamp; //프로젝트 시작일
+  projectEndDate: Timestamp;
+  postDeadline: Timestamp; // 모집 마감일
   technologys: string[]; // 기술 스택
   closed: boolean;
   // 게시물 내용
