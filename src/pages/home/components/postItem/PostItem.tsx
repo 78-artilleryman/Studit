@@ -1,17 +1,23 @@
 import * as S from './PostItem.style';
 import { FaCircleUser } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
+import { formatDate, isWithin7Days } from '@Pages/home/service/FormatDate';
+
+interface Timestamp {
+  seconds: number;
+  nanoseconds: number;
+}
 
 interface PostItemProps {
   Postdata: {
-    id: number;
+    id: string;
     studyType: string; // 스터디 종류
     studyMember: string; // 모집 인원
     studySystem: string; // 진행 방식
     period: string; // 진행 기간
-    projectStartDate: string; //프로젝트 시작일
-    projectEndDate: string;
-    postDeadline: string; // 모집 마감일
+    projectStartDate: Timestamp; //프로젝트 시작일
+    projectEndDate: Timestamp;
+    postDeadline: Timestamp; // 모집 마감일
     technologys: string[]; // 기술 스택
     closed: boolean;
     // 게시물 내용
@@ -27,6 +33,10 @@ interface PostItemProps {
 function PostItem({ Postdata }: PostItemProps) {
   const getImageSrc = (stack: string) => `postLogoImages/${stack}.svg`;
 
+  const projectStartDate: string = formatDate(Postdata.projectStartDate);
+  const projectEndDate: string = formatDate(Postdata.projectEndDate);
+  const isTodayPostDeadline: boolean = isWithin7Days(Postdata.postDeadline);
+
   return (
     <Link to={``}>
       <S.Post>
@@ -38,11 +48,11 @@ function PostItem({ Postdata }: PostItemProps) {
         )}
         <S.Tags>
           <S.TypeTag>📙 {Postdata.studyType}</S.TypeTag>
-          <S.DeadTag>❗ 마감임박</S.DeadTag>
+          {isTodayPostDeadline && <S.DeadTag>❗ 마감임박</S.DeadTag>}
         </S.Tags>
         <S.PostContent>
           <S.StudyPeriod>
-            {Postdata.projectStartDate} - {Postdata.projectEndDate}
+            {projectStartDate} ~ {projectEndDate}
           </S.StudyPeriod>
           <S.PostTitle>{Postdata.postTitle}</S.PostTitle>
           <S.PostSubTitle>{Postdata.postSubTitle}</S.PostSubTitle>

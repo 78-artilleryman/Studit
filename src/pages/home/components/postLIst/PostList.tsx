@@ -1,6 +1,6 @@
+import { Postdata } from '@Pages/home/interface/Types';
 import PostItem from '../postItem/PostItem';
 import styled from 'styled-components';
-import { data } from './mockdata';
 
 const PostLayout = styled.div`
   display: grid;
@@ -9,10 +9,11 @@ const PostLayout = styled.div`
   width: 1280px;
   margin: 0 auto;
 `;
-function PostList() {
+
+function PostList({ postData }: { postData: Postdata[] }) {
   return (
     <PostLayout>
-      {data.map(post => (
+      {postData.map(post => (
         <PostItem key={post.id} Postdata={post}></PostItem>
       ))}
     </PostLayout>

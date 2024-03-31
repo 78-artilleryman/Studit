@@ -2,49 +2,49 @@ import { collection, query, where, orderBy, Query, DocumentData } from 'firebase
 
 export function buildFirestoreQuery(
   db: any,
-  filterClassification: string,
-  filterStudyCount: string,
-  filterStacks: string[],
+  studyType: string,
+  period: string,
+  technologys: string[],
 ): Query<DocumentData, DocumentData> {
   let postsRef = collection(db, 'posts');
   let postsQuery: Query;
 
-  if (filterClassification === '전체' && filterStudyCount === '전체' && filterStacks.length === 0) {
+  if (studyType === '전체' && period === '전체' && technologys.length === 0) {
     postsQuery = query(postsRef, orderBy('createdAt', 'desc'));
     // postsQuery = collection(db, "posts");
-  } else if (filterClassification === '전체' && filterStacks.length === 0) {
-    postsQuery = query(postsRef, where('studyCount', '==', filterStudyCount), orderBy('createdAt', 'desc'));
-  } else if (filterStudyCount === '전체' && filterStacks.length === 0) {
-    postsQuery = query(postsRef, where('studyType', '==', filterClassification), orderBy('createdAt', 'desc'));
-  } else if (filterClassification === '전체' && filterStudyCount === '전체') {
-    postsQuery = query(postsRef, where('stacks', 'array-contains-any', filterStacks), orderBy('createdAt', 'desc'));
-  } else if (filterStudyCount === '전체') {
+  } else if (studyType === '전체' && technologys.length === 0) {
+    postsQuery = query(postsRef, where('period', '==', period), orderBy('createdAt', 'desc'));
+  } else if (period === '전체' && technologys.length === 0) {
+    postsQuery = query(postsRef, where('studyType', '==', studyType), orderBy('createdAt', 'desc'));
+  } else if (studyType === '전체' && period === '전체') {
+    postsQuery = query(postsRef, where('technologys', 'array-contains-any', technologys), orderBy('createdAt', 'desc'));
+  } else if (period === '전체') {
     postsQuery = query(
       postsRef,
-      where('studyType', '==', filterClassification),
-      where('stacks', 'array-contains-any', filterStacks),
+      where('studyType', '==', studyType),
+      where('technologys', 'array-contains-any', technologys),
       orderBy('createdAt', 'desc'),
     );
-  } else if (filterClassification === '전체') {
+  } else if (studyType === '전체') {
     postsQuery = query(
       postsRef,
-      where('studyCount', '==', filterStudyCount),
-      where('stacks', 'array-contains-any', filterStacks),
+      where('period', '==', period),
+      where('technologys', 'array-contains-any', technologys),
       orderBy('createdAt', 'desc'),
     );
-  } else if (filterStacks.length === 0) {
+  } else if (technologys.length === 0) {
     postsQuery = query(
       postsRef,
-      where('studyCount', '==', filterStudyCount),
-      where('studyType', '==', filterClassification),
+      where('period', '==', period),
+      where('studyType', '==', studyType),
       orderBy('createdAt', 'desc'),
     );
   } else {
     postsQuery = query(
       postsRef,
-      where('studyType', '==', filterClassification),
-      where('studyCount', '==', filterStudyCount),
-      where('stacks', 'array-contains-any', filterStacks),
+      where('studyType', '==', studyType),
+      where('period', '==', period),
+      where('technologys', 'array-contains-any', technologys),
       orderBy('createdAt', 'desc'),
     );
   }
