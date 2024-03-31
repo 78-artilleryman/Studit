@@ -23,6 +23,6 @@ export const Input = styled.input`
   }
 `;
 
-export const Icon = styled.div`
+export const Icon = styled.button`
   cursor: pointer;
 `;
