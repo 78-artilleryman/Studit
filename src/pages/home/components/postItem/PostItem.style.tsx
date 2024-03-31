@@ -9,12 +9,12 @@ export const Post = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  transition-duration: 0.2s;
+  transition-duration: 0.4s;
   transition-property: transform;
   position: relative;
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
     border: 1px solid ${colors.black};
   }
 `;
@@ -93,6 +93,7 @@ export const PostTitle = styled.h2`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+  min-height: 52px;
 `;
 
 export const PostSubTitle = styled.h3`
