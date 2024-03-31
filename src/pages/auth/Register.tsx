@@ -7,6 +7,7 @@ import useInput from './hooks/useInput';
 import { isValidateEmail, isValidateName, isValidatePassword, isValidatePasswordConfirm } from './utils/validation';
 import usePasswordConfirm from './hooks/usePasswordConfirm';
 import { register } from './service/auth';
+import useSocialLoginAndRegister from './hooks/useSocialLoginAndRegister';
 
 function Register() {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ function Register() {
   const { isValid: isValidPasswordConfirm, ...passwordConfirm } = usePasswordConfirm(
     isValidatePasswordConfirm.bind(null, password.inputState.value),
   );
+
+  const socialLoginAndRegister = useSocialLoginAndRegister();
 
   const isDisabled = !isValidName || !isValidEmail || !isValidPassword || !isValidPasswordConfirm;
 
@@ -80,10 +83,10 @@ function Register() {
           이미 회원이신가요? <strong>로그인 하기</strong>
         </S.AuthToLink>
         <S.SocialLayout>
-          <S.SocialItem name="google">
+          <S.SocialItem name="google" onClick={socialLoginAndRegister}>
             <img src="/images/auth/google-login.svg" alt="구글 로그인하기" />
           </S.SocialItem>
-          <S.SocialItem name="github">
+          <S.SocialItem name="github" onClick={socialLoginAndRegister}>
             <img src="/images/auth/github-login.svg" alt="깃허브 로그인하기" />
           </S.SocialItem>
         </S.SocialLayout>
