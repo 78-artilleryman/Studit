@@ -5,14 +5,18 @@ import useInput from './hooks/useInput';
 import { isValidateEmail, isValidatePassword } from './utils/validation';
 import { FormEvent, useState } from 'react';
 import Form from '@Components/form-compound/Form';
-import { login } from './utils/firebase-auth';
+import useSocialLoginAndRegister from './hooks/useSocialLoginAndRegister';
+import { login } from './service/auth';
 
 function Login() {
   const navigate = useNavigate();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const { isValid: isValidEmail, ...email } = useInput(isValidateEmail);
   const { isValid: isValidPassword, ...password } = useInput(isValidatePassword);
+
+  const socialLoginAndRegister = useSocialLoginAndRegister();
 
   const isDisabled = !isValidEmail || !isValidPassword;
 
@@ -30,14 +34,7 @@ function Login() {
       <Form.Title>로그인</Form.Title>
       <Form.Description>다양한 스터디가 당신을 기다리고 있어요 🙂</Form.Description>
 
-      <Form.Control
-        value={{
-          onChange: email.handleInputChange,
-          onBlur: email.handleInputBlur,
-          value: email.inputState.value,
-          hasError: email.hasError,
-        }}
-      >
+      <Form.Control value={{ value: email.inputState.value, ...email }}>
         <Form.Layout>
           <Form.Control.Label>이메일</Form.Control.Label>
           <Form.Control.Input placeholder="your@email.com" />
@@ -45,14 +42,7 @@ function Login() {
         </Form.Layout>
       </Form.Control>
 
-      <Form.Control
-        value={{
-          onChange: password.handleInputChange,
-          onBlur: password.handleInputBlur,
-          value: password.inputState.value,
-          hasError: password.hasError,
-        }}
-      >
+      <Form.Control value={{ value: password.inputState.value, ...password }}>
         <Form.Layout>
           <Form.Control.Label>비밀번호</Form.Control.Label>
           <Form.Control.Input placeholder="특수문자를 포함한 비밀번호를 입력해주세요." />
@@ -69,10 +59,10 @@ function Login() {
           회원이 아니신가요? <strong>회원가입 하기</strong>
         </S.AuthToLink>
         <S.SocialLayout>
-          <S.SocialItem>
+          <S.SocialItem onClick={socialLoginAndRegister} name="google">
             <img src="/images/auth/google-login.svg" alt="구글 로그인하기" />
           </S.SocialItem>
-          <S.SocialItem>
+          <S.SocialItem onClick={socialLoginAndRegister} name="github">
             <img src="/images/auth/github-login.svg" alt="깃허브 로그인하기" />
           </S.SocialItem>
         </S.SocialLayout>
