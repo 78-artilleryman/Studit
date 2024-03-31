@@ -16,7 +16,13 @@ function App() {
       children: [
         { index: true, element: <Page.Home /> },
         { path: 'register', element: <Page.Register /> },
-        { path: 'post', element: <Page.Post /> },
+        {
+          path: 'post',
+          children: [
+            { index: true, element: <Page.Post /> },
+            { path: ':postId', element: <Page.PostDetail /> },
+          ],
+        },
         { path: 'login', element: <Page.Login /> },
       ],
     },

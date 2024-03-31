@@ -31,6 +31,7 @@ function Home() {
         ...doc?.data(),
         id: doc?.id,
       }));
+
       setPostData(data as Postdata[]);
     });
 
