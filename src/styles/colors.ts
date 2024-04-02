@@ -7,4 +7,5 @@ export const colors = {
   deadTag: '#ff4545',
   placeholder: '#7f7f7f',
   error: '#FB4040',
+  hashtag: '#D8D8D8',
 };
