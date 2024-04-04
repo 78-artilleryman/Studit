@@ -2,15 +2,15 @@ import React from 'react';
 import * as S from './FormControl.style';
 
 interface FormControlContextProps {
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: () => void;
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleInputBlur: () => void;
   hasError: boolean;
   value: string;
 }
 
 export const FormControlContext = React.createContext<FormControlContextProps>({
-  onChange: () => {},
-  onBlur: () => {},
+  handleInputChange: () => {},
+  handleInputBlur: () => {},
   hasError: false,
   value: '',
 });
@@ -35,10 +35,10 @@ function ErrorMessage({ children }: Children) {
 }
 
 function Input({ placeholder }: React.InputHTMLAttributes<HTMLInputElement>) {
-  const { onChange, onBlur, hasError } = React.useContext(FormControlContext);
+  const { handleInputChange, handleInputBlur, hasError } = React.useContext(FormControlContext);
   return (
     <React.Fragment>
-      <S.Input $validation={hasError} onChange={onChange} onBlur={onBlur} placeholder={placeholder} />
+      <S.Input $validation={hasError} onChange={handleInputChange} onBlur={handleInputBlur} placeholder={placeholder} />
     </React.Fragment>
   );
 }

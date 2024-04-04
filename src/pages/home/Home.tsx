@@ -25,7 +25,9 @@ function Home() {
   const { filterState } = useFilter();
   const { studyType, period, technologys } = filterState;
 
+
   const { postData: feeds } = usePagination(ref, {});
+
 
   return (
     <>
