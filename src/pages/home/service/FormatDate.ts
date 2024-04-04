@@ -7,7 +7,7 @@ interface Timestamp {
 
 // Timestamp를 Dayjs로 변환하는 함수
 const timestampToDayjs = (timestamp: Timestamp): Dayjs => {
-  const milliseconds: number = timestamp.seconds * 1000 + Math.floor(timestamp.nanoseconds / 1000000);
+  const milliseconds: number = timestamp?.seconds * 1000 + Math.floor(timestamp?.nanoseconds / 1000000);
   return dayjs(milliseconds);
 };
 
@@ -17,7 +17,7 @@ const getToday = (): Dayjs => {
 };
 
 export const formatDate = (timestamp: Timestamp): string => {
-  const milliseconds: number = timestamp.seconds * 1000 + Math.floor(timestamp.nanoseconds / 1000000);
+  const milliseconds: number = timestamp?.seconds * 1000 + Math.floor(timestamp?.nanoseconds / 1000000);
   const date = dayjs(milliseconds);
 
   return date.format('YYYY-MM-DD');

@@ -11,7 +11,6 @@ export function buildFirestoreQuery(
 
   if (studyType === '전체' && period === '전체' && technologys.length === 0) {
     postsQuery = query(postsRef, orderBy('createdAt', 'desc'));
-    // postsQuery = collection(db, "posts");
   } else if (studyType === '전체' && technologys.length === 0) {
     postsQuery = query(postsRef, where('period', '==', period), orderBy('createdAt', 'desc'));
   } else if (period === '전체' && technologys.length === 0) {
