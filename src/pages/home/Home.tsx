@@ -8,7 +8,7 @@ import { useFilter } from '@pages/home/context/FilterContext';
 import { buildFirestoreQuery } from '@pages/home/service/Filter';
 import { onSnapshot } from 'firebase/firestore';
 import { Postdata } from '@pages/home/interface/Types';
-
+import usePagination from './hooks/usePagination';
 
 const Layout = styled.section`
   width: 1280px;
