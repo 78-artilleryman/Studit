@@ -1,7 +1,7 @@
 import useSelect from '@hooks/useSelect';
 import * as S from './CommonFilter.style';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { useFilter } from '@pages/home/context/FilterContext';
+import { useFilter } from '../../context/FilterContext';
 
 interface ClassificationItem {
   key: number;
