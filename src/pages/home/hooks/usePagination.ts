@@ -1,10 +1,17 @@
 import { collection, query, orderBy, limit, startAfter, getDocs } from 'firebase/firestore';
 import { db } from '@config/firebaseApp';
-import { useEffect, useState, useCallback, RefObject } from 'react';
+import { useEffect, useState, useCallback, RefObject, SetStateAction } from 'react';
 import { Postdata } from '../interface/Types';
 
-const usePagination = (elementRef: RefObject<Element> | null, { threshold = 0.1, root = null, rootMargin = '0%' }) => {
-  const [postData, setPostData] = useState<Postdata[]>([]); // 불러온 문서들 상태
+interface setPostDataType {
+  (value: SetStateAction<Postdata[]>): void;
+}
+
+const usePagination = (
+  setPostData: setPostDataType,
+  elementRef: RefObject<Element> | null,
+  { threshold = 0.1, root = null, rootMargin = '0%' },
+) => {
   const [loading, setLoading] = useState(false); // 로딩 상태
   const [loadingMore, setLoadingMore] = useState(false); // 추가 요청시 로딩 상태
   const [key, setKey] = useState<any>(); // 마지막으로 불러온 스냅샷 상태
@@ -30,6 +37,8 @@ const usePagination = (elementRef: RefObject<Element> | null, { threshold = 0.1,
       console.log(err);
     }
     setLoading(false);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 추가 요청 함수
@@ -53,7 +62,7 @@ const usePagination = (elementRef: RefObject<Element> | null, { threshold = 0.1,
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [postData, key],
+    [key],
   );
 
   const onIntersect = useCallback(
@@ -97,7 +106,7 @@ const usePagination = (elementRef: RefObject<Element> | null, { threshold = 0.1,
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [elementRef?.current, key]);
 
-  return { postData, loading, loadingMore, noMore };
+  return { loading, loadingMore, noMore };
 };
 
 export default usePagination;
