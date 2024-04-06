@@ -3,8 +3,8 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
 import * as S from './CommonSelectBox.style';
 import FormLabel from '../formLabel/FormLabel';
-import { usePostData } from '@pages/post/context/PostDataContext';
-import { MouseEvent, useEffect } from 'react';
+import { usePostData } from '../../context/PostDataContext';
+import { useEffect } from 'react';
 
 interface ListItem {
   key: number;

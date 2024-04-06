@@ -2,7 +2,7 @@ import * as Page from '@pages/index';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { PostDataContextProvider } from '@pages/post/context/PostDataContext';
+import { PostDataContextProvider } from './pages/post/context/PostDataContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FilterProvider } from '@pages/home/context/FilterContext';

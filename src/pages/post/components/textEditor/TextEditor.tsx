@@ -1,7 +1,7 @@
 import MDEditor from '@uiw/react-md-editor';
 import * as S from './TextEditor.style';
 import SelectBoxLabel from '../formLabel/FormLabel';
-import { usePostData } from '@pages/post/context/PostDataContext';
+import { usePostData } from '../../context/PostDataContext';
 
 function TextEditor() {
   const { postData, onChageContent } = usePostData();

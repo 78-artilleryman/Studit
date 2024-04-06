@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { collection, addDoc } from 'firebase/firestore';
 import { FormEvent, useContext } from 'react';
 import { db } from '@config/firebaseApp';
-import { usePostData } from '@pages/post/context/PostDataContext';
+import { usePostData } from '../post/context/PostDataContext';
 import { toast } from 'react-toastify';
 import AuthContext from '@pages/auth/context/AuthContext';
 
