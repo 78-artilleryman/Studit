@@ -6,7 +6,7 @@ import { PostDataContextProvider } from './pages/post/context/PostDataContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FilterProvider } from './pages/home/context/FilterContext';
-import { AuthContextProvider } from '@pages/auth/context/AuthContext';
+import { AuthContextProvider } from './pages/auth/context/AuthContext';
 
 function App() {
   const router = createBrowserRouter([
