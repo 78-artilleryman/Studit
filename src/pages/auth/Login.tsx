@@ -1,10 +1,10 @@
-import * as S from '@Pages/auth/Auth.style';
-import Button from '@Components/UI/Button';
+import * as S from '@pages/auth/Auth.style';
+import Button from '@components/UI/Button';
 import { useNavigate } from 'react-router-dom';
 import useInput from './hooks/useInput';
 import { isValidateEmail, isValidatePassword } from './utils/validation';
 import { FormEvent, useState } from 'react';
-import Form from '@Components/form-compound/Form';
+import Form from '@components/form-compound/Form';
 import useSocialLoginAndRegister from './hooks/useSocialLoginAndRegister';
 import { login } from './service/auth';
 

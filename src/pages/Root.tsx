@@ -1,4 +1,4 @@
-import Header from '@Components/header/Header';
+import Header from '@components/header/Header';
 import { GlobalStyle } from '@styles/global';
 import React from 'react';
 import { Outlet } from 'react-router-dom';

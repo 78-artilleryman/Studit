@@ -1,4 +1,4 @@
-import { Button } from '@Components/UI/Button.style';
+import { Button } from '@components/UI/Button.style';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,6 @@ const ButtonList = styled.div`
 `;
 
 function ActionButtons() {
-
   const navigator = useNavigate();
 
   return (

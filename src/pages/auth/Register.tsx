@@ -1,8 +1,8 @@
-import * as S from '@Pages/auth/Auth.style';
-import Button from '@Components/UI/Button';
+import * as S from '@pages/auth/Auth.style';
+import Button from '@components/UI/Button';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Form from '@Components/form-compound/Form';
+import Form from '@components/form-compound/Form';
 import useInput from './hooks/useInput';
 import { isValidateEmail, isValidateName, isValidatePassword, isValidatePasswordConfirm } from './utils/validation';
 import usePasswordConfirm from './hooks/usePasswordConfirm';

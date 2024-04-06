@@ -1,9 +1,9 @@
 import { RiSearchEyeLine } from 'react-icons/ri';
 import * as S from './SearchBar.style';
 import { ChangeEvent, KeyboardEvent, MouseEvent, SetStateAction, useState } from 'react';
-import { Postdata } from '@Pages/home/interface/Types';
+import { Postdata } from '@pages/home/interface/Types';
 import { onSnapshot } from 'firebase/firestore';
-import { performSearch } from '@Pages/home/service/Search';
+import { performSearch } from '@pages/home/service/Search';
 
 interface SearchBarProps {
   setPostData: any;
