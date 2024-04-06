@@ -14,9 +14,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "rootDir": "src"
+    "jsx": "react-jsx"
   },
-  "include": ["./src"],
+  "include": ["src"],
   "extends": "./tsconfig.paths.json"
 }
