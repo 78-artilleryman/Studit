@@ -1,5 +1,5 @@
 import * as S from './TechnologyBoxItem.style';
-import { usePostData } from '@Pages/post/context/PostDataContext';
+import { usePostData } from '@pages/post/context/PostDataContext';
 
 interface TechnologyItemProps {
   image: string;

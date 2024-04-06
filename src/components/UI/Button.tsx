@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import * as S from '@Components/UI/Button.style';
+import * as S from '@components/UI/Button.style';
 
 interface ButtonStyle {
   $width?: number;

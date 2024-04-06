@@ -1,8 +1,8 @@
-import Root from '@Pages/Root';
-import Post from '@Pages/post/Post';
-import Home from '@Pages/home/Home';
-import Register from '@Pages/auth/Register';
-import Login from '@Pages/auth/Login';
-import PostDetail from '@Pages/detail/PostDetail';
+import Root from '@pages/Root';
+import Post from '@pages/post/Post';
+import Home from '@pages/home/Home';
+import Register from '@pages/auth/Register';
+import Login from '@pages/auth/Login';
+import PostDetail from '@pages/detail/PostDetail';
 
 export { Root, Home, Register, Login, Post, PostDetail };

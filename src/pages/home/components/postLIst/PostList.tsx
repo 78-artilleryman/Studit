@@ -1,4 +1,4 @@
-import { Postdata } from '@Pages/home/interface/Types';
+import { Postdata } from '@pages/home/interface/Types';
 import PostItem from '../postItem/PostItem';
 import styled from 'styled-components';
 

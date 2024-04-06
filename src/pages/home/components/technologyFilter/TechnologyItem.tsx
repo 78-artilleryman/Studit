@@ -1,4 +1,4 @@
-import { useFilter } from '@Pages/home/context/FilterContext';
+import { useFilter } from '@pages/home/context/FilterContext';
 import * as S from './TechnologyItem.style';
 
 interface TechnologyItemProps {

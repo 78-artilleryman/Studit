@@ -1,14 +1,14 @@
-import FilterList from '@Pages/home/components/filterList/FilterList';
-import SearchBar from '@Pages/home/components/searchBar/SearchBar';
-import PostList from '@Pages/home/components/postLIst/PostList';
+import FilterList from '@pages/home/components/filterList/FilterList';
+import SearchBar from '@pages/home/components/searchBar/SearchBar';
+import PostList from '@pages/home/components/postLIst/PostList';
 import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
 import { db } from '@config/firebaseApp';
-import { useFilter } from '@Pages/home/context/FilterContext';
-import { buildFirestoreQuery } from '@Pages/home/service/Filter';
-import usePagination from './hooks/usePagination';
-import { Postdata } from './interface/Types';
+import { useFilter } from '@pages/home/context/FilterContext';
+import { buildFirestoreQuery } from '@pages/home/service/Filter';
 import { onSnapshot } from 'firebase/firestore';
+import { Postdata } from '@pages/home/interface/Types';
+
 
 const Layout = styled.section`
   width: 1280px;

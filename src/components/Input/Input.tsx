@@ -1,5 +1,5 @@
 import React, { ChangeEvent, InputHTMLAttributes } from 'react';
-import * as S from '@Components/Input/Input.style';
+import * as S from '@components/Input/Input.style';
 
 interface InputStyle {
   $validation?: boolean;

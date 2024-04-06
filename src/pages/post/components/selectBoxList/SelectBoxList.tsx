@@ -5,7 +5,7 @@ import TechnologySelectBox from '../technologySelectBox/TechnologySelectBox';
 import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import FormLabel from '../formLabel/FormLabel';
-import { usePostData } from '@Pages/post/context/PostDataContext';
+import { usePostData } from '@pages/post/context/PostDataContext';
 
 const SelectBoxLaout = styled.div`
   display: grid;

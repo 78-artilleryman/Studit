@@ -1,7 +1,7 @@
 import TextEditor from '../textEditor/TextEditor';
 import * as S from './PostForm.style';
 import FormLabel from '../formLabel/FormLabel';
-import { usePostData } from '@Pages/post/context/PostDataContext';
+import { usePostData } from '@pages/post/context/PostDataContext';
 
 function PostForm() {
   const { postData, onChageTitle } = usePostData();
