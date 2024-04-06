@@ -35,11 +35,10 @@ function Home() {
   const { filterState } = useFilter();
   const { studyType, period, technologys } = filterState;
 
-  const { noMore } = usePagination(setPostData, ref, {});
+  const { noMore } = usePagination(postData, setPostData, ref, {});
 
   useEffect(() => {
     const postsQuery = buildFirestoreQuery(db, studyType, period, technologys);
-
     const unsubscribe = onSnapshot(postsQuery, snapshot => {
       const data = snapshot.docs.map(doc => ({
         ...doc?.data(),

@@ -8,6 +8,7 @@ interface setPostDataType {
 }
 
 const usePagination = (
+  postData: Postdata[],
   setPostData: setPostDataType,
   elementRef: RefObject<Element> | null,
   { threshold = 0.1, root = null, rootMargin = '0%' },
@@ -52,7 +53,7 @@ const usePagination = (
           id: doc.id,
           ...doc.data(),
         }));
-
+        console.log(docsArray);
         setPostData(prev => [...prev, ...docsArray] as Postdata[]);
         docsArray.length === 0 ? setNoMore(true) : setKey(docSnap.docs[docSnap.docs.length - 1]);
       } catch (err) {
