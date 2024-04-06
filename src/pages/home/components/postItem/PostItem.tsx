@@ -57,7 +57,7 @@ function PostItem({ Postdata }: PostItemProps) {
           <S.PostTitle>{Postdata.postTitle}</S.PostTitle>
           <S.PostSubTitle>{Postdata.postSubTitle}</S.PostSubTitle>
           <S.TechnologyImageList>
-            {Postdata.technologys.slice(0, 6).map((tech, index) => (
+            {Postdata.technologys?.slice(0, 6).map((tech, index) => (
               <S.TechImage key={index} src={getImageSrc(tech)} alt={tech} />
             ))}
           </S.TechnologyImageList>

@@ -1,4 +1,4 @@
-import { collection, query, where, orderBy, Query, DocumentData } from 'firebase/firestore';
+import { collection, query, where, orderBy, Query, DocumentData, limit } from 'firebase/firestore';
 
 export function buildFirestoreQuery(
   db: any,
@@ -10,8 +10,7 @@ export function buildFirestoreQuery(
   let postsQuery: Query;
 
   if (studyType === '전체' && period === '전체' && technologys.length === 0) {
-    postsQuery = query(postsRef, orderBy('createdAt', 'desc'));
-    // postsQuery = collection(db, "posts");
+    postsQuery = query(postsRef, orderBy('createdAt', 'desc'), limit(12));
   } else if (studyType === '전체' && technologys.length === 0) {
     postsQuery = query(postsRef, where('period', '==', period), orderBy('createdAt', 'desc'));
   } else if (period === '전체' && technologys.length === 0) {

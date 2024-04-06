@@ -6,7 +6,7 @@ export const performSearch = (searchValue: string): Query<DocumentData, Document
   let postsQuery;
 
   if (searchValue === '') {
-    postsQuery = collection(db, 'posts');
+    postsQuery = query(postsRef, orderBy('createdAt', 'desc'), limit(12));
   } else {
     postsQuery = query(
       postsRef,

@@ -10,13 +10,19 @@ const PostLayout = styled.div`
   margin: 0 auto;
 `;
 
-function PostList({ postData }: { postData: Postdata[] }) {
+interface PostListProps {
+  postData: Postdata[];
+}
+
+function PostList({ postData }: PostListProps) {
   return (
-    <PostLayout>
-      {postData.map(post => (
-        <PostItem key={post.id} Postdata={post}></PostItem>
-      ))}
-    </PostLayout>
+    <>
+      <PostLayout>
+        {postData.map(post => (
+          <PostItem key={post.id} Postdata={post}></PostItem>
+        ))}
+      </PostLayout>
+    </>
   );
 }
 
