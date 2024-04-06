@@ -56,6 +56,7 @@ function Home() {
     <>
       <Layout>
         <FilterList />
+        <SearchBar setPostData={setPostData}></SearchBar>
       </Layout>
       {postData.length > 0 ? <PostList postData={postData} /> : <Block></Block>}
       {noMore && <InlineMessage>더이상 불러올 피드가 없어요</InlineMessage>}
