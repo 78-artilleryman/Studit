@@ -20,12 +20,12 @@ interface TechnologyFilterProps {
 }
 
 function TechnologySelectBox({ title, position, language }: TechnologyFilterProps) {
-  const { isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
+  const { ref, isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
 
   return (
     <div>
       <SelectBoxLabel componentName={'기술스택'}></SelectBoxLabel>
-      <S.SelectBox onClick={selectToggleHandler}>
+      <S.SelectBox onClick={selectToggleHandler} ref={ref}>
         <S.Placeholder> {'📚 ' + title}</S.Placeholder>
         {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
 
