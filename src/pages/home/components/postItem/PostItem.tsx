@@ -1,7 +1,7 @@
 import * as S from './PostItem.style';
 import { FaCircleUser } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
-import { formatDate, isWithin7Days } from '@pages/home/service/FormatDate';
+import { formatDate, isWithin3Days } from '@pages/home/service/FormatDate';
 
 interface Timestamp {
   seconds: number;
@@ -35,7 +35,9 @@ function PostItem({ Postdata }: PostItemProps) {
 
   const projectStartDate: string = formatDate(Postdata.projectStartDate);
   const projectEndDate: string = formatDate(Postdata.projectEndDate);
-  const isTodayPostDeadline: boolean = isWithin7Days(Postdata.postDeadline);
+  const isTodayPostDeadline: boolean = isWithin3Days(Postdata.postDeadline);
+
+  console.log(isTodayPostDeadline);
 
   return (
     <Link to={``}>
