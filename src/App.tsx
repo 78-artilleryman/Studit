@@ -13,6 +13,7 @@ function App() {
     {
       path: '/',
       element: <Page.Root />,
+      errorElement: <Page.PageNotFound />,
       children: [
         { index: true, element: <Page.Home /> },
         { path: 'register', element: <Page.Register /> },
