@@ -31,3 +31,10 @@ export const isWithin3Days = (postDeadlineTimestamp: Timestamp): boolean => {
   // postDeadline이 오늘보다 이후이고, 오늘로부터 3일 이내인 경우 true 반환
   return postDeadline.isAfter(today) && postDeadline.diff(today, 'day') <= 3;
 };
+
+export const deadLine = (postDeadlineTimestamp: Timestamp): boolean => {
+  const checkDate: Dayjs = timestampToDayjs(postDeadlineTimestamp);
+  const today: Dayjs = getToday();
+
+  return checkDate.isBefore(today);
+};
