@@ -8,4 +8,5 @@ export const colors = {
   placeholder: '#7f7f7f',
   error: '#FB4040',
   hashtag: '#D8D8D8',
+  skeleton: '#c0c0c0',
 };

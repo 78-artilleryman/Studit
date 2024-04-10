@@ -9,6 +9,8 @@ import { buildFirestoreQuery } from '@pages/home/service/Filter';
 import { onSnapshot } from 'firebase/firestore';
 import { Postdata } from '@pages/home/interface/Types';
 import usePagination from './hooks/usePagination';
+import UndefinedButton from './components/undefinedButton/UndefinedButton';
+import Skeleton from './components/skeleton/Skeleton';
 
 const Layout = styled.section`
   width: 1280px;
@@ -24,8 +26,12 @@ const InlineMessage = styled.p`
   margin: 30px auto;
 `;
 
-const Block = styled.div`
-  min-height: 100vh;
+const PostLayout = styled.div`
+  display: grid;
+  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+  gap: 20px;
+  width: 1280px;
+  margin: 0 auto;
 `;
 
 function Home() {
@@ -57,9 +63,15 @@ function Home() {
         <FilterList />
         <SearchBar setPostData={setPostData}></SearchBar>
       </Layout>
-      {postData.length > 0 ? <PostList postData={postData} /> : <Block></Block>}
-      {noMore && <InlineMessage>더이상 불러올 피드가 없어요</InlineMessage>}
+      <PostLayout>
+        {postData.length > 0 ? (
+          <PostList postData={postData} />
+        ) : (
+          Array.from({ length: 8 }, (_, index) => <Skeleton key={index} />)
+        )}
+      </PostLayout>
 
+      {noMore && <InlineMessage>더이상 불러올 피드가 없어요</InlineMessage>}
       <div ref={ref}></div>
     </>
   );
