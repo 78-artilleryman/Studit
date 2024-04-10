@@ -37,8 +37,6 @@ function PostItem({ Postdata }: PostItemProps) {
   const projectEndDate: string = formatDate(Postdata.projectEndDate);
   const isTodayPostDeadline: boolean = isWithin3Days(Postdata.postDeadline);
 
-  console.log(isTodayPostDeadline);
-
   return (
     <Link to={``}>
       <S.Post>

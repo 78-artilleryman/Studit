@@ -13,7 +13,7 @@ function PostList({ postData }: PostListProps) {
   return (
     <>
       {postData.map(post => (
-        <Suspense fallback={<Skeleton />}>
+        <Suspense fallback={<Skeleton />} key={post.id}>
           <PostItem key={post.id} Postdata={post}></PostItem>
         </Suspense>
       ))}

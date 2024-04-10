@@ -1,7 +1,7 @@
 import FilterList from '@pages/home/components/filterList/FilterList';
 import SearchBar from '@pages/home/components/searchBar/SearchBar';
 import styled from 'styled-components';
-import { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { db } from '@config/firebaseApp';
 import { useFilter } from '@pages/home/context/FilterContext';
 import { buildFirestoreQuery } from '@pages/home/service/Filter';
@@ -9,7 +9,6 @@ import { onSnapshot } from 'firebase/firestore';
 import { Postdata } from '@pages/home/interface/Types';
 import usePagination from './hooks/usePagination';
 import UndefinedButton from './components/undefinedButton/UndefinedButton';
-import Skeleton from './components/skeleton/Skeleton';
 import PostList from '@pages/home/components/postLIst/PostList';
 
 const Layout = styled.section`
@@ -36,6 +35,7 @@ const PostLayout = styled.div`
 
 function Home() {
   const [postData, setPostData] = useState<Postdata[]>([]);
+
   const ref = useRef<HTMLDivElement | null>(null);
 
   const { filterState } = useFilter();
@@ -68,7 +68,6 @@ function Home() {
       <PostLayout>
         <PostList postData={postData} />
       </PostLayout>
-
       {noMore && <InlineMessage>더이상 불러올 피드가 없어요</InlineMessage>}
       <div ref={ref}></div>
     </>
