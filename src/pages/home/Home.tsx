@@ -1,8 +1,7 @@
 import FilterList from '@pages/home/components/filterList/FilterList';
 import SearchBar from '@pages/home/components/searchBar/SearchBar';
-import PostList from '@pages/home/components/postLIst/PostList';
 import styled from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { db } from '@config/firebaseApp';
 import { useFilter } from '@pages/home/context/FilterContext';
 import { buildFirestoreQuery } from '@pages/home/service/Filter';
@@ -11,6 +10,7 @@ import { Postdata } from '@pages/home/interface/Types';
 import usePagination from './hooks/usePagination';
 import UndefinedButton from './components/undefinedButton/UndefinedButton';
 import Skeleton from './components/skeleton/Skeleton';
+import PostList from '@pages/home/components/postLIst/PostList';
 
 const Layout = styled.section`
   width: 1280px;
@@ -54,7 +54,9 @@ function Home() {
       setPostData(data as Postdata[]);
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+    };
   }, [studyType, period, technologys]);
 
   return (
@@ -64,11 +66,7 @@ function Home() {
         <SearchBar setPostData={setPostData}></SearchBar>
       </Layout>
       <PostLayout>
-        {postData.length > 0 ? (
-          <PostList postData={postData} />
-        ) : (
-          Array.from({ length: 8 }, (_, index) => <Skeleton key={index} />)
-        )}
+        <PostList postData={postData} />
       </PostLayout>
 
       {noMore && <InlineMessage>더이상 불러올 피드가 없어요</InlineMessage>}

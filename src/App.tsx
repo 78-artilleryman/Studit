@@ -7,8 +7,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FilterProvider } from './pages/home/context/FilterContext';
 import { AuthContextProvider } from './pages/auth/context/AuthContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
+  const queryClient = new QueryClient();
   const router = createBrowserRouter([
     {
       path: '/',
@@ -30,16 +32,18 @@ function App() {
 
   return (
     <>
-      <AuthContextProvider>
-        <ToastContainer />
-        <PostDataContextProvider>
-          <FilterProvider>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <RouterProvider router={router} />
-            </LocalizationProvider>
-          </FilterProvider>
-        </PostDataContextProvider>
-      </AuthContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthContextProvider>
+          <ToastContainer />
+          <PostDataContextProvider>
+            <FilterProvider>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <RouterProvider router={router} />
+              </LocalizationProvider>
+            </FilterProvider>
+          </PostDataContextProvider>
+        </AuthContextProvider>
+      </QueryClientProvider>
     </>
   );
 }
