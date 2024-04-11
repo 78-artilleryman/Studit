@@ -12,7 +12,7 @@ function TextEditor() {
       <S.Content>
         <SelectBoxLabel componentName="스터디 상세내용"></SelectBoxLabel>
         <MDEditor
-          height={'370px'}
+          height={'500px'}
           value={postData.postContent}
           onChange={text => onChageContent(text)}
           textareaProps={{

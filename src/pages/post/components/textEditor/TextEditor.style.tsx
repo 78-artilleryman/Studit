@@ -12,7 +12,7 @@ export const View = styled.div`
 
 export const EditorView = {
   whiteSpace: 'pre-wrap',
-  height: '760px',
+  height: '790px',
   borderRadius: '10px',
   padding: '15px',
   overflow: 'scroll',

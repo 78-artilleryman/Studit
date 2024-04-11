@@ -23,7 +23,7 @@ function PostForm() {
         <S.ContentTextArea
           required
           cols={30}
-          rows={10}
+          rows={4}
           placeholder="요약 내용을 입력해주세요"
           value={postData.postSubTitle}
           onChange={event => onChageTitle('postSubTitle', event)}
