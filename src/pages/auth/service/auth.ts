@@ -1,6 +1,6 @@
 import { app, db } from '@config/firebaseApp';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 
 interface EmailWithPassword {
   emailValue: string;
@@ -15,7 +15,7 @@ export async function register({ emailValue, passwordValue, namveValue }: Regist
   try {
     const authService = getAuth(app);
     const { user } = await createUserWithEmailAndPassword(authService, emailValue, passwordValue);
-    await emailRegistered(emailValue);
+    await saveFirebaseEmail(emailValue);
 
     await updateProfile(user, { displayName: namveValue });
     return {
@@ -46,8 +46,11 @@ export async function login({ emailValue, passwordValue }: EmailWithPassword) {
   }
 }
 
-export async function emailRegistered(emailValue: string) {
+export async function saveFirebaseEmail(emailValue: string) {
   try {
+    const emailChecking = await emailCheck(emailValue);
+    if (emailChecking) return;
+
     const saveEmail = await addDoc(collection(db, 'auth-email'), { email: emailValue });
     return saveEmail;
   } catch (error) {
@@ -56,12 +59,10 @@ export async function emailRegistered(emailValue: string) {
 }
 
 export async function emailCheck(emailValue: string) {
-  const allEmails = await getDocs(collection(db, 'auth-email'));
-  let isExistingEmail: boolean = false;
+  let isExistingEmail = false;
 
-  allEmails.forEach(doc => {
-    isExistingEmail = doc.data().email === emailValue;
-  });
+  const allEmails = await getDocs(collection(db, 'auth-email'));
+  allEmails.forEach(doc => (isExistingEmail = doc.data().email === emailValue));
 
   return isExistingEmail;
 }

@@ -9,6 +9,12 @@ import usePasswordConfirm from './hooks/usePasswordConfirm';
 import { register } from './service/auth';
 import useSocialLoginAndRegister from './hooks/useSocialLoginAndRegister';
 import { isValidateName, isValidateCheckEmail, isValidatePassword, isValidatePasswordConfirm } from './utils/validate';
+import {
+  EmailFormControl,
+  NameFormControl,
+  PasswordConfirmFormControl,
+  PasswordFormControl,
+} from './components/form-control';
 
 function Register() {
   const navigate = useNavigate();
@@ -46,39 +52,12 @@ function Register() {
       <Form.Title>회원가입</Form.Title>
       <Form.Description>스터딧에서 팀원을 모집 해보세요 🙂</Form.Description>
 
-      <Form.Control value={{ ...nameInputState, ...name }}>
-        <Form.Layout>
-          <Form.Control.Label>이름</Form.Control.Label>
-          <Form.Control.Input placeholder="이름을 입력해주세요." />
-          <Form.Control.ErrorMessage />
-        </Form.Layout>
-      </Form.Control>
+      <NameFormControl {...nameInputState} {...name} />
+      <EmailFormControl {...emailInputState} {...email} />
+      <PasswordFormControl {...passwordInputState} {...password} />
+      <PasswordConfirmFormControl {...passwordConfirmInputState} {...passwordConfirm} />
 
-      <Form.Control value={{ ...emailInputState, ...email }}>
-        <Form.Layout>
-          <Form.Control.Label>이메일</Form.Control.Label>
-          <Form.Control.Input placeholder="your@email.com" />
-          <Form.Control.ErrorMessage />
-        </Form.Layout>
-      </Form.Control>
-
-      <Form.Control value={{ ...passwordInputState, ...password }}>
-        <Form.Layout>
-          <Form.Control.Label>비밀번호</Form.Control.Label>
-          <Form.Control.Input placeholder="특수문자를 포함한 비밀번호를 입력해주세요." />
-          <Form.Control.ErrorMessage />
-        </Form.Layout>
-      </Form.Control>
-
-      <Form.Control value={{ ...passwordConfirmInputState, ...passwordConfirm }}>
-        <Form.Layout>
-          <Form.Control.Label>비밀번호 확인</Form.Control.Label>
-          <Form.Control.Input placeholder="비밀번호를 다시 입력해주세요." />
-          <Form.Control.ErrorMessage />
-        </Form.Layout>
-      </Form.Control>
-
-      <Button type="submit" $height={56} disabled={isDisabled}>
+      <Button type="submit" $height={56} disabled={isSubmitting || isDisabled}>
         회원가입
       </Button>
 

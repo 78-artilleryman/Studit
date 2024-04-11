@@ -8,6 +8,7 @@ import Form from '@components/form-compound/Form';
 import useSocialLoginAndRegister from './hooks/useSocialLoginAndRegister';
 import { login } from './service/auth';
 import { isValidateEmail, isValidatePassword } from './utils/validate';
+import { EmailFormControl, PasswordFormControl } from './components/form-control';
 
 function Login() {
   const navigate = useNavigate();
@@ -35,21 +36,8 @@ function Login() {
       <Form.Title>로그인</Form.Title>
       <Form.Description>다양한 스터디가 당신을 기다리고 있어요 🙂</Form.Description>
 
-      <Form.Control value={{ ...emailInputState, ...email }}>
-        <Form.Layout>
-          <Form.Control.Label>이메일</Form.Control.Label>
-          <Form.Control.Input placeholder="your@email.com" />
-          <Form.Control.ErrorMessage />
-        </Form.Layout>
-      </Form.Control>
-
-      <Form.Control value={{ ...passwordInputState, ...password }}>
-        <Form.Layout>
-          <Form.Control.Label>비밀번호</Form.Control.Label>
-          <Form.Control.Input placeholder="특수문자를 포함한 비밀번호를 입력해주세요." />
-          <Form.Control.ErrorMessage />
-        </Form.Layout>
-      </Form.Control>
+      <EmailFormControl {...emailInputState} {...email} />
+      <PasswordFormControl {...passwordInputState} {...password} />
 
       <Button type="submit" $height={56} disabled={isDisabled || isSubmitting}>
         로그인

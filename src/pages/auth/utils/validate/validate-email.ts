@@ -3,11 +3,19 @@ import { emailCheck } from '@pages/auth/service/auth';
 import { validate, validateResult } from './validate-utils';
 
 export const isValidateCheckEmail = async (emailValue: string): Promise<{ result: boolean; message: string }> => {
-  const isValid = isValidateEmail(emailValue);
-  if (!isValid.result) return isValid;
-  const isExistingEmail = await emailCheck(emailValue);
-  const validateResultType = !isExistingEmail ? 'success' : 'failed';
-  return validateResult[validateResultType]({ message: '이미 사용중인 이메일이에요.' });
+  try {
+    const isValid = isValidateEmail(emailValue);
+    if (!isValid.result) return isValid;
+    const isExistingEmail = await emailCheck(emailValue);
+    const validateResultType = !isExistingEmail ? 'success' : 'failed';
+    return validateResult[validateResultType]({ message: '이미 사용중인 이메일이에요.' });
+  } catch (error) {
+    console.log(error);
+    return {
+      result: false,
+      message: '알 수 없는 에러가 발생했어요. 잠시 후 다시 시도해주세요',
+    };
+  }
 };
 
 export const isValidateEmail = (emailValue: string) => {

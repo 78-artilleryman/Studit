@@ -22,7 +22,7 @@ function useInput(validate: Validate) {
     setInputState(prevState => ({ ...prevState, hasError, errorMessage, isTouched: true }));
   };
 
-  const isValid = inputState.isTouched && inputState.hasError;
+  const isValid = inputState.isTouched && !inputState.hasError;
 
   return {
     inputState,
