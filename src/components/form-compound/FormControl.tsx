@@ -3,9 +3,10 @@ import * as S from './FormControl.style';
 
 interface FormControlContextProps {
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleInputBlur: () => void;
+  handleInputBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
   hasError: boolean;
   value: string;
+  errorMessage: string;
 }
 
 export const FormControlContext = React.createContext<FormControlContextProps>({
@@ -13,6 +14,7 @@ export const FormControlContext = React.createContext<FormControlContextProps>({
   handleInputBlur: () => {},
   hasError: false,
   value: '',
+  errorMessage: '',
 });
 
 interface FormProps {
@@ -28,10 +30,10 @@ interface Children {
   children: React.ReactNode;
 }
 
-function ErrorMessage({ children }: Children) {
-  const { hasError } = React.useContext(FormControlContext);
+function ErrorMessage() {
+  const { hasError, errorMessage } = React.useContext(FormControlContext);
   if (!hasError) return null;
-  return <S.ErrorMessage>{children}</S.ErrorMessage>;
+  return <S.ErrorMessage>{errorMessage}</S.ErrorMessage>;
 }
 
 function Input({ placeholder }: React.InputHTMLAttributes<HTMLInputElement>) {
