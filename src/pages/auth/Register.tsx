@@ -4,21 +4,31 @@ import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Form from '@components/form-compound/Form';
 import useInput from './hooks/useInput';
-import { isValidateEmail, isValidateName, isValidatePassword, isValidatePasswordConfirm } from './utils/validation';
+
 import usePasswordConfirm from './hooks/usePasswordConfirm';
 import { register } from './service/auth';
 import useSocialLoginAndRegister from './hooks/useSocialLoginAndRegister';
+import { isValidateName, isValidateCheckEmail, isValidatePassword, isValidatePasswordConfirm } from './utils/validate';
+
+import {
+  FormControlName,
+  FormControlEmail,
+  FormControlPassword,
+  FormControlPasswordConfirm,
+} from './components/form-control';
 
 function Register() {
   const navigate = useNavigate();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { isValid: isValidName, ...name } = useInput(isValidateName);
-  const { isValid: isValidEmail, ...email } = useInput(isValidateEmail);
-  const { isValid: isValidPassword, ...password } = useInput(isValidatePassword);
-  const { isValid: isValidPasswordConfirm, ...passwordConfirm } = usePasswordConfirm(
-    isValidatePasswordConfirm.bind(null, password.inputState.value),
-  );
+  const { inputState: nameInputState, isValid: isValidName, ...name } = useInput(isValidateName);
+  const { inputState: emailInputState, isValid: isValidEmail, ...email } = useInput(isValidateCheckEmail);
+  const { inputState: passwordInputState, isValid: isValidPassword, ...password } = useInput(isValidatePassword);
+  const {
+    inputState: passwordConfirmInputState,
+    isValid: isValidPasswordConfirm,
+    ...passwordConfirm
+  } = usePasswordConfirm(isValidatePasswordConfirm.bind(null, passwordInputState.value));
 
   const socialLoginAndRegister = useSocialLoginAndRegister();
 
@@ -30,10 +40,11 @@ function Register() {
 
     setIsSubmitting(true);
     const isAuth = await register({
-      emailValue: name.inputState.value,
-      passwordValue: password.inputState.value,
-      namveValue: name.inputState.value,
+      emailValue: emailInputState.value,
+      passwordValue: passwordInputState.value,
+      namveValue: nameInputState.value,
     });
+
     isAuth.result ? navigate('/') : setIsSubmitting(false);
   };
 
@@ -42,39 +53,12 @@ function Register() {
       <Form.Title>회원가입</Form.Title>
       <Form.Description>스터딧에서 팀원을 모집 해보세요 🙂</Form.Description>
 
-      <Form.Control value={{ value: name.inputState.value, ...name }}>
-        <Form.Layout>
-          <Form.Control.Label>이름</Form.Control.Label>
-          <Form.Control.Input placeholder="이름을 입력해주세요." />
-          <Form.Control.ErrorMessage>이름의 형식이 올바르지 않아요.</Form.Control.ErrorMessage>
-        </Form.Layout>
-      </Form.Control>
+      <FormControlName {...nameInputState} {...name} />
+      <FormControlEmail {...emailInputState} {...email} />
+      <FormControlPassword {...passwordInputState} {...password} />
+      <FormControlPasswordConfirm {...passwordConfirmInputState} {...passwordConfirm} />
 
-      <Form.Control value={{ value: email.inputState.value, ...email }}>
-        <Form.Layout>
-          <Form.Control.Label>이메일</Form.Control.Label>
-          <Form.Control.Input placeholder="your@email.com" />
-          <Form.Control.ErrorMessage>이메일의 형식이 올바르지 않아요.</Form.Control.ErrorMessage>
-        </Form.Layout>
-      </Form.Control>
-
-      <Form.Control value={{ value: password.inputState.value, ...password }}>
-        <Form.Layout>
-          <Form.Control.Label>비밀번호</Form.Control.Label>
-          <Form.Control.Input placeholder="특수문자를 포함한 비밀번호를 입력해주세요." />
-          <Form.Control.ErrorMessage>비밀번호 형식이 올바르지 않아요.</Form.Control.ErrorMessage>
-        </Form.Layout>
-      </Form.Control>
-
-      <Form.Control value={{ value: passwordConfirm.inputState.value, ...passwordConfirm }}>
-        <Form.Layout>
-          <Form.Control.Label>비밀번호 확인</Form.Control.Label>
-          <Form.Control.Input placeholder="비밀번호를 다시 입력해주세요." />
-          <Form.Control.ErrorMessage>비밀번호 형식이 올바르지 않아요.</Form.Control.ErrorMessage>
-        </Form.Layout>
-      </Form.Control>
-
-      <Button type="submit" $height={56} disabled={isDisabled}>
+      <Button type="submit" $height={56} disabled={isSubmitting || isDisabled}>
         회원가입
       </Button>
 
