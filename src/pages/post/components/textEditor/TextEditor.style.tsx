@@ -14,5 +14,6 @@ export const EditorView = {
   whiteSpace: 'pre-wrap',
   height: '760px',
   borderRadius: '10px',
-  padding: '10px',
+  padding: '15px',
+  overflow: 'scroll',
 };
