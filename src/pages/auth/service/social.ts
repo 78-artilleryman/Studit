@@ -1,3 +1,4 @@
+import { app } from '@config/firebaseApp';
 import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 enum Social {
@@ -15,7 +16,7 @@ const social = {
 export async function socialLogin(socialType: Socialkey) {
   try {
     const authProvider = social[socialType];
-    const authService = getAuth();
+    const authService = getAuth(app);
     await signInWithPopup(authService, authProvider);
 
     return {
