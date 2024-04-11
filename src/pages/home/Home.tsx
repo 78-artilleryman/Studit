@@ -1,6 +1,5 @@
 import FilterList from '@pages/home/components/filterList/FilterList';
 import SearchBar from '@pages/home/components/searchBar/SearchBar';
-import PostList from '@pages/home/components/postLIst/PostList';
 import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
 import { db } from '@config/firebaseApp';
@@ -9,6 +8,8 @@ import { buildFirestoreQuery } from '@pages/home/service/Filter';
 import { onSnapshot } from 'firebase/firestore';
 import { Postdata } from '@pages/home/interface/Types';
 import usePagination from './hooks/usePagination';
+import UndefinedButton from './components/undefinedButton/UndefinedButton';
+import PostList from '@pages/home/components/postLIst/PostList';
 
 const Layout = styled.section`
   width: 1280px;
@@ -24,12 +25,17 @@ const InlineMessage = styled.p`
   margin: 30px auto;
 `;
 
-const Block = styled.div`
-  min-height: 100vh;
+const PostLayout = styled.div`
+  display: grid;
+  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+  gap: 20px;
+  width: 1280px;
+  margin: 0 auto;
 `;
 
 function Home() {
   const [postData, setPostData] = useState<Postdata[]>([]);
+
   const ref = useRef<HTMLDivElement | null>(null);
 
   const { filterState } = useFilter();
@@ -48,7 +54,9 @@ function Home() {
       setPostData(data as Postdata[]);
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+    };
   }, [studyType, period, technologys]);
 
   return (
@@ -57,9 +65,10 @@ function Home() {
         <FilterList />
         <SearchBar setPostData={setPostData}></SearchBar>
       </Layout>
-      {postData.length > 0 ? <PostList postData={postData} /> : <Block></Block>}
+      <PostLayout>
+        <PostList postData={postData} />
+      </PostLayout>
       {noMore && <InlineMessage>더이상 불러올 피드가 없어요</InlineMessage>}
-
       <div ref={ref}></div>
     </>
   );

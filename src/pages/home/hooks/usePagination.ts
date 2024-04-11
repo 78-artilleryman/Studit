@@ -72,7 +72,7 @@ const usePagination = (
       // 기존 요소의 주시를 해체하고 추가로 3개의 문서를 더 불러오도록 설정
       if (entry.isIntersecting && !loadingMore && key) {
         setLoadingMore(true);
-        loadMore(4);
+        loadMore(8);
         setLoadingMore(false);
       }
     },

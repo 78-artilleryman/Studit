@@ -22,7 +22,7 @@ interface SelectBoxProps {
 }
 
 function SelectBox({ title, id, position, icon, list }: SelectBoxProps) {
-  const { isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
+  const { ref, isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
   const { onChange } = usePostData();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function SelectBox({ title, id, position, icon, list }: SelectBoxProps) {
   return (
     <div>
       <FormLabel componentName={title}></FormLabel>
-      <S.Selectbox onClick={selectToggleHandler}>
+      <S.Selectbox onClick={selectToggleHandler} ref={ref}>
         <S.Placeholder> {selected ? icon + selected : icon + title}</S.Placeholder>
         {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
 
