@@ -1,6 +1,6 @@
 import Form from '@components/form-compound/Form';
 
-export default function NameFormControl(props: any) {
+export default function FormControlName(props: any) {
   return (
     <Form.Control value={{ ...props }}>
       <Form.Layout>

@@ -9,11 +9,12 @@ import usePasswordConfirm from './hooks/usePasswordConfirm';
 import { register } from './service/auth';
 import useSocialLoginAndRegister from './hooks/useSocialLoginAndRegister';
 import { isValidateName, isValidateCheckEmail, isValidatePassword, isValidatePasswordConfirm } from './utils/validate';
+
 import {
-  EmailFormControl,
-  NameFormControl,
-  PasswordConfirmFormControl,
-  PasswordFormControl,
+  FormControlName,
+  FormControlEmail,
+  FormControlPassword,
+  FormControlPasswordConfirm,
 } from './components/form-control';
 
 function Register() {
@@ -52,10 +53,10 @@ function Register() {
       <Form.Title>회원가입</Form.Title>
       <Form.Description>스터딧에서 팀원을 모집 해보세요 🙂</Form.Description>
 
-      <NameFormControl {...nameInputState} {...name} />
-      <EmailFormControl {...emailInputState} {...email} />
-      <PasswordFormControl {...passwordInputState} {...password} />
-      <PasswordConfirmFormControl {...passwordConfirmInputState} {...passwordConfirm} />
+      <FormControlName {...nameInputState} {...name} />
+      <FormControlEmail {...emailInputState} {...email} />
+      <FormControlPassword {...passwordInputState} {...password} />
+      <FormControlPasswordConfirm {...passwordConfirmInputState} {...passwordConfirm} />
 
       <Button type="submit" $height={56} disabled={isSubmitting || isDisabled}>
         회원가입

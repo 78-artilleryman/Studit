@@ -1,6 +1,6 @@
 import Form from '@components/form-compound/Form';
 
-export default function EmailFormControl(props: any) {
+export default function FormControlEmail(props: any) {
   return (
     <Form.Control value={{ ...props }}>
       <Form.Layout>
