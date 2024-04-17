@@ -5,7 +5,8 @@ export const PostFormLayout = styled.div`
   width: 1280px;
   margin: 0 auto;
   display: grid;
-  grid-template: repeat(3, 0.5fr) / repeat(2, 1fr);
+  grid-template-rows: 0.3fr 0.3fr 0.5fr; /* 각 행의 높이 */
+  grid-template-columns: 1fr 1fr; /* 각 열의 너비 */
   gap: 20px;
 `;
 
