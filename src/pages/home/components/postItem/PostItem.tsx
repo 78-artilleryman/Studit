@@ -39,7 +39,7 @@ function PostItem({ Postdata }: PostItemProps) {
   const postClosed: boolean = deadLine(Postdata.postDeadline);
 
   return (
-    <Link to={``}>
+    <Link to={`/post/${Postdata.id}`}>
       <S.Post>
         {(Postdata.closed || postClosed) && (
           <>

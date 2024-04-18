@@ -9,7 +9,7 @@ function PageNotFound() {
             <br />
             정확한 주소를 입력하셨는지 확인하고, 다른 곳을 찾아보세요! 🙂
           </S.Description>
-          <S.LinkTo to="/posts/write">스터디 보러가기</S.LinkTo>
+          <S.LinkTo to="/">스터디 보러가기</S.LinkTo>
         </S.DescriptionWrapper>
         <S.ImageContent>404</S.ImageContent>
       </S.Wrapper>

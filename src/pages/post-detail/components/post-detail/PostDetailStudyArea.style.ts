@@ -1,7 +1,7 @@
 import { colors } from '@styles/colors';
 import styled from 'styled-components';
 
-export const StudyInfoList = styled.ul`
+export const StudyList = styled.ul`
   padding: 30px 0;
   border-bottom: 1px dashed ${colors.border};
 `;
@@ -26,8 +26,12 @@ export const StudyDescription = styled.span`
   font-weight: 400;
 `;
 
-export const Skills = styled.ul`
+export const StudySkills = styled.ul`
   display: flex;
 `;
 
-export const SkillItem = styled.li``;
+export const StudeySkillItem = styled.li`
+  & + & {
+    margin-left: 10px;
+  }
+`;
