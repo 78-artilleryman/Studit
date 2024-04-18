@@ -1,6 +1,7 @@
 import { Button } from '@components/UI/Button.style';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { initialPostData, usePostData } from '@pages/post/context/PostDataContext';
 
 const ButtonList = styled.div`
   display: flex;
@@ -10,6 +11,7 @@ const ButtonList = styled.div`
 `;
 
 function ActionButtons() {
+  const { setPostData } = usePostData();
   const navigator = useNavigate();
 
   return (
@@ -18,6 +20,7 @@ function ActionButtons() {
         $width={305}
         $height={60}
         onClick={() => {
+          setPostData(initialPostData);
           navigator(-1);
         }}
       >
