@@ -20,6 +20,7 @@ function TextEditor() {
           }}
           preview="edit"
           style={{ marginTop: '10px' }}
+          data-color-mode="light"
         />
       </S.Content>
       <S.View>
