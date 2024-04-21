@@ -1,6 +1,10 @@
 import { colors } from '@styles/colors';
 import styled from 'styled-components';
 
+export const InputWrapper = styled.div`
+  position: relative;
+`;
+
 export const ErrorMessage = styled.p`
   margin-top: 5px;
   font-size: 14px;
@@ -19,6 +23,7 @@ export const Label = styled.label<{ $validation: boolean }>`
 `;
 
 export const Input = styled.input<{ $validation: boolean }>`
+  width: 100%;
   border: 1px solid ${colors.border};
   border-radius: 10px;
   height: 56px;
@@ -34,4 +39,13 @@ export const Input = styled.input<{ $validation: boolean }>`
   }
 
   ${({ $validation }) => $validation && ` border: 1px solid ${colors.error};`}
+`;
+
+export const ShowPasswordButton = styled.button`
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
 `;

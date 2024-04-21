@@ -1,5 +1,6 @@
-import { app } from '@config/firebaseApp';
+import { app, db } from '@config/firebaseApp';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 
 interface EmailWithPassword {
   emailValue: string;
@@ -14,6 +15,8 @@ export async function register({ emailValue, passwordValue, namveValue }: Regist
   try {
     const authService = getAuth(app);
     const { user } = await createUserWithEmailAndPassword(authService, emailValue, passwordValue);
+    await saveFirebaseEmail(emailValue);
+
     await updateProfile(user, { displayName: namveValue });
     return {
       result: true,
@@ -41,4 +44,25 @@ export async function login({ emailValue, passwordValue }: EmailWithPassword) {
       messgae: '이메일과 비밀번호를 다시 확인해주세요.',
     };
   }
+}
+
+export async function saveFirebaseEmail(emailValue: string) {
+  try {
+    const emailChecking = await emailCheck(emailValue);
+    if (emailChecking) return;
+
+    const saveEmail = await addDoc(collection(db, 'auth-email'), { email: emailValue });
+    return saveEmail;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function emailCheck(emailValue: string) {
+  let isExistingEmail = false;
+
+  const allEmails = await getDocs(collection(db, 'auth-email'));
+  allEmails.forEach(doc => (isExistingEmail = doc.data().email === emailValue));
+
+  return isExistingEmail;
 }

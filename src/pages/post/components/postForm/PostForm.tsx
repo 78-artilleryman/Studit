@@ -11,6 +11,7 @@ function PostForm() {
       <S.PostFormTitle>
         <FormLabel componentName="스터디 제목" />
         <S.TitleInput
+          required
           type="test"
           placeholder="프로젝트 제목을 입력해주세요."
           value={postData.postTitle}
@@ -20,8 +21,9 @@ function PostForm() {
       <S.PostFormSubTitle>
         <FormLabel componentName="요약 내용" />
         <S.ContentTextArea
+          required
           cols={30}
-          rows={10}
+          rows={4}
           placeholder="요약 내용을 입력해주세요"
           value={postData.postSubTitle}
           onChange={event => onChageTitle('postSubTitle', event)}

@@ -18,11 +18,11 @@ interface CommonFilterProps {
 }
 
 function CommonFilter({ title, name, position, icon, list }: CommonFilterProps) {
-  const { isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
+  const { ref, isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
   const { onChangeFilter } = useFilter();
 
   return (
-    <S.Filter onClick={selectToggleHandler}>
+    <S.Filter onClick={selectToggleHandler} ref={ref}>
       <S.Title> {selected ? icon + selected : icon + title}</S.Title>
       {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
 

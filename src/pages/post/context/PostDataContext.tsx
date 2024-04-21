@@ -23,7 +23,7 @@ interface PostDataContextValue {
 type Parameter = Dayjs | null | string;
 type InputParameter = HTMLInputElement | HTMLTextAreaElement;
 
-const initialPostData: PostType = {
+export const initialPostData: PostType = {
   studyType: '',
   studyMember: '',
   studySystem: '',
@@ -106,7 +106,7 @@ const usePostData = () => {
     [setPostData],
   );
 
-  return { postData, onChange, onChageTitle, onChageContent, onChagTechnologys };
+  return { postData, onChange, onChageTitle, onChageContent, onChagTechnologys, setPostData };
 };
 
 export { PostDataContextProvider, usePostData };

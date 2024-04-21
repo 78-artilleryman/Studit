@@ -88,8 +88,8 @@ export const systemData = {
 
   list: [
     { key: 1, value: 'offline', name: '위워크' },
-    { key: 2, value: 'online', name: '프로젝트' },
-    { key: 3, value: 'both', name: '스터디' },
+    { key: 2, value: 'online', name: '온라인' },
+    { key: 3, value: 'both', name: '온라인 / 위워크' },
   ],
 };
 

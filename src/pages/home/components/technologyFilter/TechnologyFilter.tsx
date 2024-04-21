@@ -19,11 +19,11 @@ interface TechnologyFilterProps {
 }
 
 function TechnologyFilter({ title, subtitle, position, language }: TechnologyFilterProps) {
-  const { isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
+  const { ref, isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
 
   return (
     <>
-      <S.Filter onClick={selectToggleHandler}>
+      <S.Filter onClick={selectToggleHandler} ref={ref}>
         <S.Title> {'📚 ' + title}</S.Title>
         {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
 

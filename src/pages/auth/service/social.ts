@@ -1,4 +1,6 @@
+import { app } from '@config/firebaseApp';
 import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { saveFirebaseEmail } from './auth';
 
 enum Social {
   GITHUB = 'GITHUB',
@@ -15,8 +17,9 @@ const social = {
 export async function socialLogin(socialType: Socialkey) {
   try {
     const authProvider = social[socialType];
-    const authService = getAuth();
-    await signInWithPopup(authService, authProvider);
+    const authService = getAuth(app);
+    const loggedIn = await signInWithPopup(authService, authProvider);
+    await saveFirebaseEmail(loggedIn.user.email!);
 
     return {
       result: true,

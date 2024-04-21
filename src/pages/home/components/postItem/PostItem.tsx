@@ -1,7 +1,7 @@
 import * as S from './PostItem.style';
 import { FaCircleUser } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
-import { formatDate, isWithin7Days } from '@pages/home/service/FormatDate';
+import { formatDate, isWithin3Days, deadLine } from '@pages/home/service/FormatDate';
 
 interface Timestamp {
   seconds: number;
@@ -35,12 +35,13 @@ function PostItem({ Postdata }: PostItemProps) {
 
   const projectStartDate: string = formatDate(Postdata.projectStartDate);
   const projectEndDate: string = formatDate(Postdata.projectEndDate);
-  const isTodayPostDeadline: boolean = isWithin7Days(Postdata.postDeadline);
+  const isTodayPostDeadline: boolean = isWithin3Days(Postdata.postDeadline);
+  const postClosed: boolean = deadLine(Postdata.postDeadline);
 
   return (
-    <Link to={``}>
+    <Link to={`/post/${Postdata.id}`}>
       <S.Post>
-        {Postdata.closed && (
+        {(Postdata.closed || postClosed) && (
           <>
             <S.Background></S.Background>
             <S.PostClosed>공고 마감</S.PostClosed>

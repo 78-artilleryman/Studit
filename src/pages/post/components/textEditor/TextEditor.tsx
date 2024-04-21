@@ -1,4 +1,5 @@
 import MDEditor from '@uiw/react-md-editor';
+
 import * as S from './TextEditor.style';
 import SelectBoxLabel from '../formLabel/FormLabel';
 import { usePostData } from '../../context/PostDataContext';
@@ -11,7 +12,7 @@ function TextEditor() {
       <S.Content>
         <SelectBoxLabel componentName="스터디 상세내용"></SelectBoxLabel>
         <MDEditor
-          height={'370px'}
+          height={'500px'}
           value={postData.postContent}
           onChange={text => onChageContent(text)}
           textareaProps={{
@@ -19,6 +20,7 @@ function TextEditor() {
           }}
           preview="edit"
           style={{ marginTop: '10px' }}
+          data-color-mode="light"
         />
       </S.Content>
       <S.View>

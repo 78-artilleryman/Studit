@@ -11,7 +11,6 @@ function Root() {
       <main>
         <Outlet />
       </main>
-      <footer>Footer</footer>
     </React.Fragment>
   );
 }
