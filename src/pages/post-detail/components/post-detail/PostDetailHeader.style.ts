@@ -1,4 +1,5 @@
 import { colors } from '@styles/colors';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const PostDetailTitle = styled.h2`
@@ -24,6 +25,7 @@ export const PostDetailUserWrapper = styled.div`
   ${Date} {
     margin-left: 10px;
   }
+  position: relative;
 `;
 
 export const PoseDetailUserImage = styled.div`
@@ -32,4 +34,15 @@ export const PoseDetailUserImage = styled.div`
   height: 30px;
   border-radius: 50%;
   background-color: gray;
+`;
+
+export const EditButton = styled(Link)`
+  width: 80px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  background-color: black;
+  position: absolute;
+  right: 20px;
 `;
