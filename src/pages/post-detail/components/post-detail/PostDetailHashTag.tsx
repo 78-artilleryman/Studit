@@ -8,8 +8,8 @@ export default function PostDetailHashTag() {
   return (
     <S.PostDetailHashtag>
       <S.PostDetailStudyType>🧑🏽‍💻 {data.studyType}</S.PostDetailStudyType>
-      <S.PostDetailHashtagItem>React</S.PostDetailHashtagItem>
-      <S.PostDetailHashtagItem>Umm..</S.PostDetailHashtagItem>
+      {/* <S.PostDetailHashtagItem>React</S.PostDetailHashtagItem>
+      <S.PostDetailHashtagItem>Umm..</S.PostDetailHashtagItem> */}
     </S.PostDetailHashtag>
   );
 }

@@ -20,7 +20,7 @@ export default function PostDetailStudyArea() {
       </S.StudyListItem>
       <S.StudyListItem>
         <S.StudyType>🏠 진행방식</S.StudyType>
-        <S.StudyDescription>수정필요</S.StudyDescription>
+        <S.StudyDescription>{data.studySystem}</S.StudyDescription>
       </S.StudyListItem>
       <S.StudyListItem>
         <S.StudyType>📆 모집 마감일</S.StudyType>
