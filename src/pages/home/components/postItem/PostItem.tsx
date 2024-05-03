@@ -31,7 +31,7 @@ interface PostItemProps {
 }
 
 function PostItem({ Postdata }: PostItemProps) {
-  const getImageSrc = (stack: string) => `/postLogoImages/${stack}.svg`;
+  const getImageSrc = (stack: string) => `postLogoImages/${stack}.svg`;
 
   const projectStartDate: string = formatDate(Postdata.projectStartDate);
   const projectEndDate: string = formatDate(Postdata.projectEndDate);

@@ -150,7 +150,7 @@ export const technologyData = {
     {
       id: 8,
       image: 'LogoImages/FilterStack/F-postcss.png',
-      value: 'Postcss',
+      value: 'PostCss',
       name: 'Post css',
       color: '#ffd8d2',
     },
