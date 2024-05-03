@@ -8,7 +8,6 @@ import { buildFirestoreQuery } from '@pages/home/service/Filter';
 import { onSnapshot } from 'firebase/firestore';
 import { Postdata } from '@pages/home/interface/Types';
 import usePagination from './hooks/usePagination';
-import UndefinedButton from './components/undefinedButton/UndefinedButton';
 import PostList from '@pages/home/components/postLIst/PostList';
 
 const Layout = styled.section`
