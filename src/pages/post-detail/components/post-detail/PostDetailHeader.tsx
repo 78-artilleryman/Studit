@@ -2,9 +2,12 @@ import React, { useContext } from 'react';
 import PostDetailHashTag from './PostDetailHashTag';
 import * as S from './PostDetailHeader.style';
 import { PostDetailFetcherContext } from '@pages/post-detail/context/PostDetailFetcher';
+import AuthContext from '@pages/auth/context/AuthContext';
+import { Link } from 'react-router-dom';
 
 export default function PostDetailHeader() {
   const { data } = useContext(PostDetailFetcherContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <React.Fragment>
@@ -18,6 +21,7 @@ export default function PostDetailHeader() {
         <S.PostDetailDate>
           <span>{data.createdAt}</span>
         </S.PostDetailDate>
+        {user?.uid === data?.uid && <S.EditButton to="/">수정</S.EditButton>}
       </S.PostDetailUserWrapper>
     </React.Fragment>
   );

@@ -36,3 +36,7 @@ export const LoginButton = styled(Link)`
   color: ${colors.white};
   border-radius: 50px;
 `;
+
+export const Logout = styled.div`
+  cursor: pointer;
+`;
