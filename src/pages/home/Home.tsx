@@ -51,6 +51,8 @@ function Home() {
         id: doc?.id,
       }));
 
+      console.log(data);
+
       setPostData(data as Postdata[]);
     });
 

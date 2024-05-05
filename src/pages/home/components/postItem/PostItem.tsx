@@ -1,7 +1,9 @@
 import * as S from './PostItem.style';
-import { FaCircleUser } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { formatDate, isWithin3Days, deadLine } from '@pages/home/service/FormatDate';
+import DeadLineBadge from '../badge/DeadLineBadge';
+import PostTag from './PostTag';
+import Profile from '../profile/Profile';
 
 interface Timestamp {
   seconds: number;
@@ -41,32 +43,24 @@ function PostItem({ Postdata }: PostItemProps) {
   return (
     <Link to={`/post/${Postdata.id}`}>
       <S.Post>
-        {(Postdata.closed || postClosed) && (
-          <>
-            <S.Background></S.Background>
-            <S.PostClosed>공고 마감</S.PostClosed>
-          </>
-        )}
-        <S.Tags>
-          <S.TypeTag>📙 {Postdata.studyType}</S.TypeTag>
-          {isTodayPostDeadline && <S.DeadTag>❗ 마감임박</S.DeadTag>}
-        </S.Tags>
+        <S.Bookmark>
+          <img src="/images/icons/star.svg" alt="북마크 설정하기" />
+        </S.Bookmark>
+        {postClosed && <DeadLineBadge />}
+        <PostTag studyType={Postdata.studyType} isDeadLine={isTodayPostDeadline} />
         <S.PostContent>
           <S.StudyPeriod>
             {projectStartDate} ~ {projectEndDate}
           </S.StudyPeriod>
           <S.PostTitle>{Postdata.postTitle}</S.PostTitle>
-          <S.PostSubTitle>{Postdata.postSubTitle}</S.PostSubTitle>
+          <S.PostDescription>{Postdata.postSubTitle}</S.PostDescription>
           <S.TechnologyImageList>
             {Postdata.technologys?.slice(0, 6).map((tech, index) => (
               <S.TechImage key={index} src={getImageSrc(tech)} alt={tech} />
             ))}
           </S.TechnologyImageList>
         </S.PostContent>
-        <S.PostUser>
-          <FaCircleUser style={{ width: '30px', height: '30px' }} />
-          <S.Name>{Postdata.userName}</S.Name>
-        </S.PostUser>
+        <Profile username={Postdata.userName!} />
       </S.Post>
     </Link>
   );
