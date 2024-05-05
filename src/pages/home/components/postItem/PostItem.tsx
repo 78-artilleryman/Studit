@@ -3,7 +3,7 @@ import { FaCircleUser, FaStar } from 'react-icons/fa6';
 import { FaRegStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { formatDate, isWithin3Days, deadLine } from '@pages/home/service/FormatDate';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { db } from '@config/firebaseApp';
 import AuthContext from '@pages/auth/context/AuthContext';
