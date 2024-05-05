@@ -39,6 +39,8 @@ function Post() {
           uid: user?.uid,
           userName: user?.displayName,
           postViews: [],
+          likeCount: 0,
+          likes: [],
         });
 
         toast.success('게시물을 생성했습니다.');
