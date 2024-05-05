@@ -1,7 +1,9 @@
 import * as S from './PostItem.style';
-import { FaCircleUser } from 'react-icons/fa6';
+import { FaCircleUser, FaStar } from 'react-icons/fa6';
+import { FaRegStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { formatDate, isWithin3Days, deadLine } from '@pages/home/service/FormatDate';
+import { useState } from 'react';
 
 interface Timestamp {
   seconds: number;
@@ -38,19 +40,24 @@ function PostItem({ Postdata }: PostItemProps) {
   const isTodayPostDeadline: boolean = isWithin3Days(Postdata.postDeadline);
   const postClosed: boolean = deadLine(Postdata.postDeadline);
 
+  const [likeState, setLikeState] = useState(false);
+
   return (
-    <Link to={`/post/${Postdata.id}`}>
-      <S.Post>
-        {(Postdata.closed || postClosed) && (
-          <>
-            <S.Background></S.Background>
-            <S.PostClosed>공고 마감</S.PostClosed>
-          </>
-        )}
-        <S.Tags>
-          <S.TypeTag>📙 {Postdata.studyType}</S.TypeTag>
-          {isTodayPostDeadline && <S.DeadTag>❗ 마감임박</S.DeadTag>}
-        </S.Tags>
+    <S.Post>
+      {(Postdata.closed || postClosed) && (
+        <>
+          <S.Background></S.Background>
+          <S.PostClosed>공고 마감</S.PostClosed>
+        </>
+      )}
+      <S.Tags>
+        <S.TypeTag>📙 {Postdata.studyType}</S.TypeTag>
+        {isTodayPostDeadline && <S.DeadTag>❗ 마감임박</S.DeadTag>}
+        <S.LikeButton onClick={() => setLikeState(prev => !prev)}>
+          {likeState ? <FaStar size={20} color="#fddb00" /> : <FaRegStar size={20} color="#6d6d6d" />}
+        </S.LikeButton>
+      </S.Tags>
+      <Link to={`/post/${Postdata.id}`}>
         <S.PostContent>
           <S.StudyPeriod>
             {projectStartDate} ~ {projectEndDate}
@@ -67,8 +74,8 @@ function PostItem({ Postdata }: PostItemProps) {
           <FaCircleUser style={{ width: '30px', height: '30px' }} />
           <S.Name>{Postdata.userName}</S.Name>
         </S.PostUser>
-      </S.Post>
-    </Link>
+      </Link>
+    </S.Post>
   );
 }
 
