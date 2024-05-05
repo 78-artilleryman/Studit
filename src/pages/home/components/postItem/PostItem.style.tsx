@@ -51,7 +51,9 @@ export const PostClosed = styled.div`
 
 export const Tags = styled.div`
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  gap: 10px;
 `;
 
 export const TypeTag = styled.div`
@@ -69,6 +71,15 @@ export const TypeTag = styled.div`
 export const DeadTag = styled(TypeTag)`
   color: ${colors.deadTag};
   background: #ffbdbd;
+`;
+
+export const LikeButton = styled.button`
+  display: block;
+  position: absolute;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  z-index: 99;
 `;
 
 export const PostContent = styled.div`
