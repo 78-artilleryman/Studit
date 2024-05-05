@@ -10,8 +10,8 @@ export default function PostDetailContent() {
       value={data.postContent}
       preview="preview"
       hideToolbar={true}
-      height={'1000px'}
-      style={{ marginTop: '30px', padding: '30px' }}
+      className="md-editor"
+      style={{ marginTop: '30px', border: '0' }}
     />
   );
 }

@@ -9,6 +9,7 @@ export const colors = {
   error: '#FB4040',
   hashtag: '#D8D8D8',
   skeleton: '#c0c0c0',
+  'red-10': '#ffeeee',
 };
 
 export const technologiesColor = {
