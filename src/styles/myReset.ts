@@ -12,7 +12,7 @@ const myReset = css`
 
   html,
   body {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     font-family: 'Noto Sans KR', sans-serif;
   }
 
@@ -67,6 +67,15 @@ const myReset = css`
     height: 0;
     line-height: 0;
     text-indent: -9999px;
+  }
+
+  .md-editor {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .w-md-editor-preview {
+    padding: 0;
   }
 `;
 
