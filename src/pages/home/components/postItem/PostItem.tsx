@@ -1,4 +1,7 @@
 import * as S from './PostItem.style';
+import DeadLineBadge from '../badge/DeadLineBadge';
+import PostTag from './PostTag';
+import Profile from '../profile/Profile';
 import { FaCircleUser, FaStar } from 'react-icons/fa6';
 import { FaRegStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -65,43 +68,28 @@ function PostItem({ postdata }: PostItemProps) {
   };
 
   return (
-    <S.Post>
-      {(postdata.closed || postClosed) && (
-        <>
-          <S.Background></S.Background>
-          <S.PostClosed>공고 마감</S.PostClosed>
-        </>
-      )}
-      <S.Tags>
-        <S.TypeTag>📙 {postdata.studyType}</S.TypeTag>
-        {isTodayPostDeadline && <S.DeadTag>❗ 마감임박</S.DeadTag>}
-        <S.LikeButton onClick={toggleLike}>
-          {user?.uid && postdata?.likes.includes(user?.uid) ? (
-            <FaStar size={20} color="#fddb00" />
-          ) : (
-            <FaRegStar size={20} color="#6d6d6d" />
-          )}
-        </S.LikeButton>
-      </S.Tags>
-      <Link to={`/post/${postdata.id}`}>
+    <Link to={`/post/${postdata.id}`}>
+      <S.Post>
+        <S.Bookmark>
+          <img src="/images/icons/star.svg" alt="북마크 설정하기" />
+        </S.Bookmark>
+        {postClosed && <DeadLineBadge />}
+        <PostTag studyType={postdata.studyType} isDeadLine={isTodayPostDeadline} />
         <S.PostContent>
           <S.StudyPeriod>
             {projectStartDate} ~ {projectEndDate}
           </S.StudyPeriod>
           <S.PostTitle>{postdata.postTitle}</S.PostTitle>
-          <S.PostSubTitle>{postdata.postSubTitle}</S.PostSubTitle>
+          <S.PostDescription>{postdata.postSubTitle}</S.PostDescription>
           <S.TechnologyImageList>
             {postdata.technologys?.slice(0, 6).map((tech, index) => (
               <S.TechImage key={index} src={getImageSrc(tech)} alt={tech} />
             ))}
           </S.TechnologyImageList>
         </S.PostContent>
-        <S.PostUser>
-          <FaCircleUser style={{ width: '30px', height: '30px' }} />
-          <S.Name>{postdata.userName}</S.Name>
-        </S.PostUser>
-      </Link>
-    </S.Post>
+        <Profile username={postdata.userName!} />
+      </S.Post>
+    </Link>
   );
 }
 
