@@ -21,6 +21,7 @@ export interface Postdata {
   uid: string;
   createdAt: string;
   userName?: string;
+  postViews: string[];
   likeCount: number;
   likes: string[];
 }

@@ -3,7 +3,6 @@ import PostDetailHashTag from './PostDetailHashTag';
 import * as S from './PostDetailHeader.style';
 import { PostDetailFetcherContext } from '@pages/post-detail/context/PostDetailFetcher';
 import AuthContext from '@pages/auth/context/AuthContext';
-import { Link } from 'react-router-dom';
 
 export default function PostDetailHeader() {
   const { data } = useContext(PostDetailFetcherContext);
