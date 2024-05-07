@@ -38,6 +38,7 @@ function Post() {
           }),
           uid: user?.uid,
           userName: user?.displayName,
+          postViews: [],
           likeCount: 0,
           likes: [],
         });
