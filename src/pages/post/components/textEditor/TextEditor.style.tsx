@@ -11,6 +11,7 @@ export const View = styled.div`
 `;
 
 export const EditorView = {
+  width: '630px',
   whiteSpace: 'pre-wrap',
   height: '790px',
   borderRadius: '10px',
