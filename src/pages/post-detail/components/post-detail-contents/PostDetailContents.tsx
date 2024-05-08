@@ -6,7 +6,8 @@ import * as S from './PostDetailContents.style';
 import { PostDetailFetcherContext } from '@pages/post-detail/context/PostDetailFetcher';
 import { updatePostItemViews } from '@pages/post-detail/service/post-detail-service';
 import AuthContext from '@pages/auth/context/AuthContext';
-import PostDetailComment from '../post-detail/PostDetailComment';
+import PostDetailCommentInput from '../post-detail/PostDetailCommentInput';
+import PostDetailCommentList from '../post-detail/PostDetailCommentList';
 
 export default function PostDetailContents() {
   const { data } = useContext(PostDetailFetcherContext);
@@ -24,7 +25,8 @@ export default function PostDetailContents() {
         <S.ContentWrapper>
           <PostDetailHeader />
           <PostDetailContent />
-          <PostDetailComment />
+          <PostDetailCommentInput />
+          <PostDetailCommentList />
         </S.ContentWrapper>
         <PopularPosts />
       </S.Wrapper>

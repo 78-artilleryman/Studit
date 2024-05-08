@@ -6,12 +6,14 @@ export default function useFetcher(postId: string) {
   const [state, dispatch] = useReducer(fetcherReducer, initialFetcherState);
 
   useEffect(() => {
+    console.log(postId);
     if (!postId) return;
 
     const fetchData = async () => {
       dispatch({ type: fetcherActionType.PENDING });
       try {
         const data = await fetchPostDetail(postId);
+
         dispatch({ type: fetcherActionType.SUCCESS, data });
       } catch (error) {
         dispatch({ type: fetcherActionType.ERROR });

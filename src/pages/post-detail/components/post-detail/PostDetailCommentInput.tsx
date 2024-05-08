@@ -7,7 +7,7 @@ import { db } from '@config/firebaseApp';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-function PostDetailComment() {
+function PostDetailCommentInput() {
   const { data } = useContext(PostDetailFetcherContext);
   const { user } = useContext(AuthContext);
   const [inputValue, setInputValue] = useState('');
@@ -31,6 +31,8 @@ function PostDetailComment() {
         comment: inputValue,
         uid: user?.uid,
         email: user?.email,
+        name: user?.displayName,
+        profileImg: user?.photoURL,
         createdAt: new Date()?.toLocaleDateString('ko', {
           hour: '2-digit',
           minute: '2-digit',
@@ -60,11 +62,18 @@ function PostDetailComment() {
             <S.ProfileText>{user?.displayName?.[0]}</S.ProfileText>
           )}
         </S.Profile>
-        <S.Input type="text" name="comment" placeholder="댓글을 입력하세요." onChange={onChange} value={inputValue} />
+        <S.Input
+          type="text"
+          name="comment"
+          placeholder="댓글을 입력하세요."
+          onChange={onChange}
+          value={inputValue}
+          autoComplete="off"
+        />
         <S.SubmitButton type="submit">댓글 입력</S.SubmitButton>
       </S.Form>
     </S.CommentInput>
   );
 }
 
-export default PostDetailComment;
+export default PostDetailCommentInput;

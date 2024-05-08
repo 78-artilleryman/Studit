@@ -26,7 +26,6 @@ export const updatePostItemViews = async (postViews: string[], userId: string | 
         postViews: arrayUnion(userId),
       });
     }
-    console.log('Test');
   } catch (e) {
     console.log(e);
   }

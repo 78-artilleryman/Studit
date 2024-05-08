@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { formatDate } from '@pages/home/service/FormatDate';
 import { technologiesColor } from '@styles/colors';
 
-
 export default function PostDetailHeader() {
   const { data } = useContext(PostDetailFetcherContext);
   const { user } = useContext(AuthContext);
