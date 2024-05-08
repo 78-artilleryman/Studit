@@ -11,7 +11,7 @@ export default function useFetcher(postId: string) {
     const fetchData = async () => {
       dispatch({ type: fetcherActionType.PENDING });
       try {
-        const unsubscribe = fetchPostDetail(
+        fetchPostDetail(
           postId,
           data => {
             // 데이터 처리
