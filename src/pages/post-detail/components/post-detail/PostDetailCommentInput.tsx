@@ -43,7 +43,7 @@ function PostDetailCommentInput() {
       await updateDoc(postRef, {
         comments: arrayUnion(commentObj),
       });
-
+      setInputValue('');
       toast.success('댓글이 생성되었습니다.');
     } else {
       toast.error('로그인 해주세요.');

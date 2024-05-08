@@ -12,7 +12,6 @@ export default function PostDetailHeader() {
   const navigate = useNavigate();
   const handleGoBack = () => navigate(-1);
 
-  console.log(data);
   return (
     <React.Fragment>
       <S.Back onClick={handleGoBack}>

@@ -1,26 +1,31 @@
 import { db } from '@config/firebaseApp';
-import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 
-export const fetchPostDetail = async (postId: string) => {
-  try {
-    const document = await getDoc(doc(db, 'posts', postId));
-    const documentData = document.data();
-    const id = document.id;
-    const documentWithId = { id, ...documentData };
+export const fetchPostDetail = (postId: string, onData: (data: any) => void, onError: (error: any) => void) => {
+  const docRef = doc(db, 'posts', postId);
+  const unsubscribe = onSnapshot(
+    docRef,
+    doc => {
+      if (doc.exists()) {
+        const postData = { ...doc.data(), id: doc.id };
+        onData(postData);
+      } else {
+        onError(new Error('해당 포스트를 찾을 수 없습니다.'));
+      }
+    },
+    error => {
+      onError(error);
+    },
+  );
 
-    return documentWithId;
-  } catch (error) {
-    return {
-      success: false,
-      message: '알 수 없는 에러가 발생했어요',
-    };
-  }
+  // unsubscribe 함수 반환
+  return unsubscribe;
 };
 
 export const updatePostItemViews = async (postViews: string[], userId: string | undefined, postId: string) => {
   try {
     const postRef = doc(db, 'posts', postId);
-    console.log(postRef);
+
     if (userId && !postViews.includes(userId)) {
       await updateDoc(postRef, {
         postViews: arrayUnion(userId),
