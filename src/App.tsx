@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FilterProvider } from './pages/home/context/FilterContext';
 import { AuthContextProvider } from './pages/auth/context/AuthContext';
+import { checkAuthToken, protectLoggedInPage } from '@pages/auth/utils/token';
 
 function App() {
   const router = createBrowserRouter([
@@ -16,15 +17,15 @@ function App() {
       errorElement: <Page.PageNotFound />,
       children: [
         { index: true, element: <Page.Home /> },
-        { path: 'register', element: <Page.Register /> },
+        { path: 'register', element: <Page.Register />, loader: protectLoggedInPage },
         {
           path: 'post',
           children: [
-            { index: true, element: <Page.Post /> },
+            { index: true, element: <Page.Post />, loader: checkAuthToken.bind(null, '/login') },
             { path: ':postId', element: <Page.PostDetail /> },
           ],
         },
-        { path: 'login', element: <Page.Login /> },
+        { path: 'login', element: <Page.Login />, loader: protectLoggedInPage },
       ],
     },
   ]);
