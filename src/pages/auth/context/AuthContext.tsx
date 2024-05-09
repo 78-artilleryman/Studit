@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useState, useEffect } from 'react';
 import { User, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { app } from '@config/firebaseApp';
+import { removeToken, saveToken } from '../utils/token';
 
 interface AuthProps {
   children: ReactNode;
@@ -18,8 +19,10 @@ export const AuthContextProvider = ({ children }: AuthProps) => {
     onAuthStateChanged(auth, user => {
       if (user) {
         setCurrentUser(user);
+        saveToken(user);
       } else {
         setCurrentUser(user);
+        removeToken();
       }
     });
   }, [auth]);
