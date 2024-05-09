@@ -25,13 +25,6 @@ export const ProfileUsername = styled.span`
   font-weight: 500;
 `;
 
-export const ProfileDepartment = styled.span`
-  display: block;
-  font-size: 12px;
-  font-weight: 400;
-  color: #bababa;
-`;
-
 export const ProfileCTA = styled(Link)`
   position: absolute;
   right: 20px;
