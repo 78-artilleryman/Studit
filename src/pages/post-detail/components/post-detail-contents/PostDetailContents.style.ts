@@ -14,5 +14,5 @@ export const Wrapper = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  width: 850px;
+  width: 958px;
 `;
