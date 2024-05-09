@@ -6,6 +6,7 @@ import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { db } from '@config/firebaseApp';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import uuid from 'react-uuid';
 
 function PostDetailCommentInput() {
   const { data } = useContext(PostDetailFetcherContext);
@@ -38,6 +39,7 @@ function PostDetailCommentInput() {
           minute: '2-digit',
           second: '2-digit',
         }),
+        commentId: uuid(),
       };
 
       await updateDoc(postRef, {
