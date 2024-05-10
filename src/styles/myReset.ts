@@ -74,6 +74,10 @@ const myReset = css`
     box-shadow: none !important;
   }
 
+  .md-editor .w-md-editor-preview {
+    position: static;
+  }
+
   .w-md-editor-preview {
     padding: 0;
   }

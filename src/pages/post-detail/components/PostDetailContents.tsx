@@ -12,6 +12,7 @@ export default function PostDetailContent() {
       hideToolbar={true}
       className="md-editor"
       style={{ marginTop: '30px', border: '0' }}
+      height="auto"
     />
   );
 }
