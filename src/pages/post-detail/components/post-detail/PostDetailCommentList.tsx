@@ -1,13 +1,12 @@
 import { PostDetailFetcherContext } from '@pages/post-detail/context/PostDetailFetcher';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as S from './PostDetailCommentList.style';
-import { arrayRemove, doc, updateDoc } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '@config/firebaseApp';
-import { toast } from 'react-toastify';
 import PostDetailCommentItem from './PostDetailCommentItem';
 
 interface CommentData {
-  commentId: string;
+  id: string;
   comment: string;
   createdAt: string;
   email: string;
@@ -18,26 +17,31 @@ interface CommentData {
 
 function PostDetailCommentList() {
   const { data } = useContext(PostDetailFetcherContext);
+  const [commentData, setCommentData] = useState<CommentData[]>();
 
-  const deleteComment = async (comment: CommentData) => {
-    try {
-      const postRef = doc(db, 'posts', data.id);
+  useEffect(() => {
+    const postsQuery = collection(db, 'comments', data.id, 'commentList');
+    const unsubscribe = onSnapshot(postsQuery, snapshot => {
+      const data = snapshot.docs.map(doc => ({
+        ...doc?.data(),
+        id: doc?.id,
+      }));
 
-      await updateDoc(postRef, {
-        comments: arrayRemove(comment),
-      });
+      console.log(data);
 
-      toast.success('댓글을 삭제했습니다.');
-    } catch (e: any) {
-      console.log(e);
-      toast.success('댓글을 삭제 실패');
-    }
-  };
+      setCommentData(data as any[]);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <S.CommemtList>
-      {data?.comments?.map((comment: CommentData, i: number) => (
-        <PostDetailCommentItem key={i} commentData={comment} deleteComment={deleteComment} postId={data.id} />
+      {commentData?.map((comment: CommentData, i: number) => (
+        <PostDetailCommentItem key={i} commentData={comment} postId={data.id} />
       ))}
     </S.CommemtList>
   );

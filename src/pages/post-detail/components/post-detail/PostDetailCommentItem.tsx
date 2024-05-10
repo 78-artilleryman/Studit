@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useContext, useState } from 'react';
 import * as S from './PostDetailCommentItem.style';
 import AuthContext from '@pages/auth/context/AuthContext';
-import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '@config/firebaseApp';
 import { toast } from 'react-toastify';
 
 interface CommentData {
-  commentId: string;
+  id: string;
   comment: string;
   createdAt: string;
   email: string;
@@ -18,12 +18,22 @@ interface CommentData {
 interface PostDetailCommentItemProps {
   commentData: CommentData;
   postId: string;
-  deleteComment: (comment: CommentData) => void;
 }
 
-function PostDetailCommentItem({ commentData, deleteComment, postId }: PostDetailCommentItemProps) {
+function PostDetailCommentItem({ commentData, postId }: PostDetailCommentItemProps) {
   const [isInputOpen, setIsInputOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
+
+  const deleteComment = async () => {
+    try {
+      const postsQuery = doc(db, 'comments', postId, 'commentList', commentData.id);
+      await deleteDoc(postsQuery);
+      toast.success('댓글을 삭제했습니다.');
+    } catch (e: any) {
+      console.log(e);
+      toast.success('댓글을 삭제 실패');
+    }
+  };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -37,22 +47,18 @@ function PostDetailCommentItem({ commentData, deleteComment, postId }: PostDetai
 
   const updateComment = async () => {
     try {
-      const postRef = doc(db, 'posts', postId);
+      setIsInputOpen(prev => !prev);
+      setInputValue('');
 
-      await updateDoc(postRef, {
-        comments: arrayRemove(commentData),
-      });
-
-      await updateDoc(postRef, {
-        comments: arrayUnion({
-          ...commentData,
-          createdAt: new Date()?.toLocaleDateString('ko', {
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-          }),
-          comment: inputValue,
+      const postsQuery = doc(db, 'comments', postId, 'commentList', commentData.id);
+      await updateDoc(postsQuery, {
+        ...commentData,
+        createdAt: new Date()?.toLocaleDateString('ko', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
         }),
+        comment: inputValue,
       });
 
       toast.success('댓글을 수정했습니다.');
@@ -91,7 +97,7 @@ function PostDetailCommentItem({ commentData, deleteComment, postId }: PostDetai
             {user?.uid === commentData.uid && (
               <S.Buttons>
                 <button onClick={toggleInput}>수정</button>
-                <button onClick={() => deleteComment(commentData)}>삭제</button>
+                <button onClick={deleteComment}>삭제</button>
               </S.Buttons>
             )}
           </S.Content>

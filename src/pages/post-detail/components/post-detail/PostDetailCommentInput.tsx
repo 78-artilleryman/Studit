@@ -2,11 +2,10 @@ import AuthContext from '@pages/auth/context/AuthContext';
 import React, { ChangeEvent, FormEvent, useContext, useState } from 'react';
 import * as S from './PostDetailComment.style';
 import { PostDetailFetcherContext } from '@pages/post-detail/context/PostDetailFetcher';
-import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@config/firebaseApp';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import uuid from 'react-uuid';
 
 function PostDetailCommentInput() {
   const { data } = useContext(PostDetailFetcherContext);
@@ -25,26 +24,24 @@ function PostDetailCommentInput() {
     const formData = new FormData(target);
     const inputValue = formData.get('comment');
 
+    const commentObj = {
+      comment: inputValue,
+      uid: user?.uid,
+      email: user?.email,
+      name: user?.displayName,
+      profileImg: user?.photoURL,
+      createdAt: new Date()?.toLocaleDateString('ko', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      }),
+    };
+
     if (data && user) {
-      const postRef = doc(db, 'posts', data.id);
-
-      const commentObj = {
-        comment: inputValue,
-        uid: user?.uid,
-        email: user?.email,
-        name: user?.displayName,
-        profileImg: user?.photoURL,
-        createdAt: new Date()?.toLocaleDateString('ko', {
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-        }),
-        commentId: uuid(),
-      };
-
-      await updateDoc(postRef, {
-        comments: arrayUnion(commentObj),
+      await addDoc(collection(db, 'comments', data.id, 'commentList'), {
+        ...commentObj,
       });
+
       setInputValue('');
       toast.success('댓글이 생성되었습니다.');
     } else {
