@@ -5,6 +5,9 @@ import AuthContext from '@pages/auth/context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { formatDate } from '@pages/home/service/FormatDate';
 import { technologiesColor } from '@styles/colors';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { db } from '@config/firebaseApp';
+import { toast } from 'react-toastify';
 
 export default function PostDetailHeader() {
   const { data } = useContext(PostDetailFetcherContext);
@@ -12,13 +15,33 @@ export default function PostDetailHeader() {
   const navigate = useNavigate();
   const handleGoBack = () => navigate(-1);
 
+  const postDelete = async () => {
+    try {
+      const postRef = doc(db, 'posts', data.id);
+      await deleteDoc(postRef);
+
+      toast.success('게시물이 삭제되었습니다.');
+      navigate('/');
+    } catch (e: any) {
+      console.log(e);
+      toast.error('게시물 삭제 실패');
+    }
+  };
+
   return (
     <React.Fragment>
       <S.Back onClick={handleGoBack}>
         <img src="/images/icons/back.svg" alt="뒤로가기" />
       </S.Back>
-      <S.PostDetailTitle>{data.postTitle}</S.PostDetailTitle>
-
+      <S.PostDetailTitleLayout>
+        <S.PostDetailTitle>{data.postTitle}</S.PostDetailTitle>
+        {user?.uid === data.uid && (
+          <S.PostOptionButtons>
+            <button>수정</button>
+            <button onClick={postDelete}>삭제</button>
+          </S.PostOptionButtons>
+        )}
+      </S.PostDetailTitleLayout>
       <S.StudyList>
         <S.StudyListItem>
           <S.StudyType>🗂 스터디 종류</S.StudyType>
