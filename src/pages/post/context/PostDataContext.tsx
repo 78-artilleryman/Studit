@@ -45,6 +45,7 @@ const PostDataContext = createContext<PostDataContextValue>({
 
 const PostDataContextProvider = ({ children }: Props) => {
   const [postData, setPostData] = useState<PostType>(initialPostData);
+  console.log(postData);
   return <PostDataContext.Provider value={{ postData, setPostData }}>{children}</PostDataContext.Provider>;
 };
 

@@ -23,6 +23,7 @@ function App() {
           children: [
             { index: true, element: <Page.Post />, loader: checkAuthToken.bind(null, '/login') },
             { path: ':postId', element: <Page.PostDetail /> },
+            { path: ':postId/edit', element: <Page.Post /> },
           ],
         },
         { path: 'login', element: <Page.Login />, loader: protectLoggedInPage },

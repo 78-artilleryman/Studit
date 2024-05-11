@@ -3,15 +3,17 @@ import * as S from './PostDetailHeader.style';
 import { PostDetailFetcherContext } from '@pages/post-detail/context/PostDetailFetcher';
 import AuthContext from '@pages/auth/context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { formatDate } from '@pages/home/service/FormatDate';
+import { convertTimestampToDayjs, formatDate } from '@pages/home/service/FormatDate';
 import { technologiesColor } from '@styles/colors';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from '@config/firebaseApp';
 import { toast } from 'react-toastify';
+import { usePostData } from '@pages/post/context/PostDataContext';
 
 export default function PostDetailHeader() {
   const { data } = useContext(PostDetailFetcherContext);
   const { user } = useContext(AuthContext);
+  const { setPostData } = usePostData();
   const navigate = useNavigate();
   const handleGoBack = () => navigate(-1);
 
@@ -28,6 +30,16 @@ export default function PostDetailHeader() {
     }
   };
 
+  const postEdit = () => {
+    setPostData(prevData => ({
+      ...data,
+      projectEndDate: convertTimestampToDayjs(data.projectEndDate),
+      projectStartDate: convertTimestampToDayjs(data.projectStartDate),
+      postDeadline: convertTimestampToDayjs(data.postDeadline),
+    }));
+    navigate(`/post/${data.id}/edit`);
+  };
+
   return (
     <React.Fragment>
       <S.Back onClick={handleGoBack}>
@@ -37,7 +49,7 @@ export default function PostDetailHeader() {
         <S.PostDetailTitle>{data.postTitle}</S.PostDetailTitle>
         {user?.uid === data.uid && (
           <S.PostOptionButtons>
-            <button>수정</button>
+            <button onClick={postEdit}>수정</button>
             <button onClick={postDelete}>삭제</button>
           </S.PostOptionButtons>
         )}
