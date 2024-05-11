@@ -49,9 +49,6 @@ function Home() {
         ...doc?.data(),
         id: doc?.id,
       }));
-
-      console.log(data);
-
       setPostData(data as Postdata[]);
     });
 

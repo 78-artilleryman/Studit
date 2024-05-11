@@ -1,9 +1,12 @@
+import { usePostData } from '@pages/post/context/PostDataContext';
 import { useState, MouseEvent, useRef, useEffect, useCallback } from 'react';
 
 function useSelect() {
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const [selected, setSelected] = useState('');
   const ref = useRef<HTMLDivElement>(null);
+
+  const { onChange } = usePostData();
 
   const selectToggleHandler = () => setIsSelectOpen(prevSelect => !prevSelect);
 
@@ -12,6 +15,14 @@ function useSelect() {
     const target = event.target as HTMLLIElement | HTMLUListElement;
     if (target.nodeName === 'UL') return;
 
+    setSelected(target.textContent!);
+  };
+
+  const selectedBoxHandler = (event: MouseEvent, id: string) => {
+    event.preventDefault();
+    const target = event.target as HTMLLIElement | HTMLUListElement;
+    if (target.nodeName === 'UL') return;
+    onChange(id, target.textContent!);
     setSelected(target.textContent!);
   };
 
@@ -38,6 +49,7 @@ function useSelect() {
     selected,
     selectToggleHandler,
     selectedHandler,
+    selectedBoxHandler,
   };
 }
 

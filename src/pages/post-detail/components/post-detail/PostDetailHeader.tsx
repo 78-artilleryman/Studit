@@ -19,6 +19,9 @@ export default function PostDetailHeader() {
 
   const postDelete = async () => {
     try {
+      // const postCommentRef = doc(db, 'comments', data.id);
+      // await deleteDoc(postCommentRef);
+
       const postRef = doc(db, 'posts', data.id);
       await deleteDoc(postRef);
 

@@ -3,7 +3,6 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
 import * as S from './CommonSelectBox.style';
 import FormLabel from '../formLabel/FormLabel';
-import { usePostData } from '../../context/PostDataContext';
 
 interface ListItem {
   key: number;
@@ -22,12 +21,7 @@ interface SelectBoxProps {
 }
 
 function SelectBox({ title, id, position, icon, list, value }: SelectBoxProps) {
-  const { ref, isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
-  const { onChange } = usePostData();
-
-  const onChangeSelectBox = () => {
-    onChange(id, selected);
-  };
+  const { ref, isSelectOpen, selected, selectToggleHandler, selectedBoxHandler } = useSelect();
 
   return (
     <div>
@@ -37,11 +31,9 @@ function SelectBox({ title, id, position, icon, list, value }: SelectBoxProps) {
         {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
 
         {isSelectOpen && (
-          <S.Dropdown onClick={selectedHandler}>
+          <S.Dropdown onClick={event => selectedBoxHandler(event, id)}>
             {list.map(data => (
-              <S.DropdownItem key={data.key} onClick={onChangeSelectBox}>
-                {data.name}
-              </S.DropdownItem>
+              <S.DropdownItem key={data.key}>{data.name}</S.DropdownItem>
             ))}
           </S.Dropdown>
         )}

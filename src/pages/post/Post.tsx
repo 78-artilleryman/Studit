@@ -59,6 +59,7 @@ function Post() {
           postViews: [],
           likeCount: 0,
           likes: [],
+          comments: [],
         });
 
         toast.success('게시물을 생성했습니다.');
