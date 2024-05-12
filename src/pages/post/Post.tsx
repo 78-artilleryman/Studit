@@ -1,9 +1,9 @@
 import SelectBoxList from './components/selectBoxList/SelectBoxList';
 import PostForm from './components/postForm/PostForm';
 import ActionButtons from './components/actionButtons/ActionButtons';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
-import { FormEvent, useContext } from 'react';
+import { FormEvent, useContext, useEffect } from 'react';
 import { db } from '@config/firebaseApp';
 import { initialPostData, usePostData } from '../post/context/PostDataContext';
 import { toast } from 'react-toastify';
@@ -14,6 +14,18 @@ function Post() {
   const { postData, setPostData } = usePostData();
   const navigator = useNavigate();
   const { user } = useContext(AuthContext);
+  const location = useLocation();
+
+  console.log(location.pathname); // 현재 경로
+
+  useEffect(() => {
+    if (!postData.id) {
+      setPostData(initialPostData);
+    }
+    if (location.pathname === '/post') {
+      setPostData(initialPostData);
+    }
+  }, [location.pathname]);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
