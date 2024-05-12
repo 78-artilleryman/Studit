@@ -17,13 +17,12 @@ const SelectBoxLaout = styled.div`
 
 function SelectBoxList() {
   const { postData, onChange } = usePostData();
-
   return (
     <SelectBoxLaout>
-      <SelectBox {...ClassificationData} position="bottom"></SelectBox>
-      <SelectBox {...membersData} position="bottom"></SelectBox>
-      <SelectBox {...systemData} position="bottom"></SelectBox>
-      <SelectBox {...studyCountData} position="bottom"></SelectBox>
+      <SelectBox {...ClassificationData} position="bottom" value={postData.studyType}></SelectBox>
+      <SelectBox {...membersData} position="bottom" value={postData.studyMember}></SelectBox>
+      <SelectBox {...systemData} position="bottom" value={postData.studySystem}></SelectBox>
+      <SelectBox {...studyCountData} position="bottom" value={postData.period}></SelectBox>
       <TechnologySelectBox {...technologyData} position="bottom"></TechnologySelectBox>
       <DemoItem label={<FormLabel componentName="모집 마감일" />}>
         <DatePicker value={postData.postDeadline} onChange={newValue => onChange('postDeadline', newValue)} />

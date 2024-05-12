@@ -8,14 +8,15 @@ interface setPostDataType {
 }
 
 const usePagination = (
-  postData: Postdata[],
+  postDoc: any,
+  setPostDoc: any,
   setPostData: setPostDataType,
   elementRef: RefObject<Element> | null,
   { threshold = 0.1, root = null, rootMargin = '0%' },
 ) => {
   const [loading, setLoading] = useState(false); // 로딩 상태
   const [loadingMore, setLoadingMore] = useState(false); // 추가 요청시 로딩 상태
-  const [key, setKey] = useState<any>(); // 마지막으로 불러온 스냅샷 상태
+  // const [key, setKey] = useState<any>(); // 마지막으로 불러온 스냅샷 상태
   const [noMore, setNoMore] = useState(false); // 추가로 요청할 데이터 없다는 flag
 
   const postsRef = collection(db, 'posts');
@@ -31,7 +32,7 @@ const usePagination = (
         id: doc?.id,
       }));
       setPostData(data as Postdata[]);
-      setKey(docSnap.docs[docSnap.docs.length - 1]);
+      setPostDoc(docSnap.docs[docSnap.docs.length - 1]);
 
       return data;
     } catch (err) {
@@ -47,7 +48,7 @@ const usePagination = (
     async (loadCount: number) => {
       try {
         setLoading(true);
-        const postsQuery = query(postsRef, orderBy('createdAt', 'desc'), limit(loadCount), startAfter(key));
+        const postsQuery = query(postsRef, orderBy('createdAt', 'desc'), limit(loadCount), startAfter(postDoc));
         const docSnap = await getDocs(postsQuery);
         const docsArray = docSnap.docs.map(doc => ({
           id: doc.id,
@@ -55,7 +56,7 @@ const usePagination = (
         }));
         console.log(docsArray);
         setPostData(prev => [...prev, ...docsArray] as Postdata[]);
-        docsArray.length === 0 ? setNoMore(true) : setKey(docSnap.docs[docSnap.docs.length - 1]);
+        docsArray.length === 0 ? setNoMore(true) : setPostDoc(docSnap.docs[docSnap.docs.length - 1]);
       } catch (err) {
         console.log(err);
       }
@@ -63,14 +64,14 @@ const usePagination = (
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [key],
+    [postDoc],
   );
 
   const onIntersect = useCallback(
     async ([entry]: IntersectionObserverEntry[]) => {
       // 만약에 지정한 요소가 화면에 보이거나 현재 데이터를 더 불러오는 상황이 아닐경우,
       // 기존 요소의 주시를 해체하고 추가로 3개의 문서를 더 불러오도록 설정
-      if (entry.isIntersecting && !loadingMore && key) {
+      if (entry.isIntersecting && !loadingMore && postDoc) {
         setLoadingMore(true);
         loadMore(8);
         setLoadingMore(false);
@@ -105,9 +106,9 @@ const usePagination = (
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [elementRef?.current, key]);
+  }, [elementRef?.current, postDoc]);
 
-  return { loading, loadingMore, noMore };
+  return { loading, loadingMore, noMore, setNoMore };
 };
 
 export default usePagination;

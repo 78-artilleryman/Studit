@@ -2,7 +2,7 @@ import AuthContext from '@pages/auth/context/AuthContext';
 import React, { ChangeEvent, FormEvent, useContext, useState } from 'react';
 import * as S from './PostDetailComment.style';
 import { PostDetailFetcherContext } from '@pages/post-detail/context/PostDetailFetcher';
-import { addDoc, collection } from 'firebase/firestore';
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { db } from '@config/firebaseApp';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
@@ -38,8 +38,9 @@ function PostDetailCommentInput() {
     };
 
     if (data && user) {
-      await addDoc(collection(db, 'comments', data.id, 'commentList'), {
-        ...commentObj,
+      const postRef = doc(db, 'posts', data.id);
+      await updateDoc(postRef, {
+        comments: arrayUnion(commentObj),
       });
 
       setInputValue('');
