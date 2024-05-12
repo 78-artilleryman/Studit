@@ -5,7 +5,7 @@ export const FixedSearchBar = styled.div`
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 10%;
+  bottom: 5%;
   width: 60vw;
   padding: 20px;
   background-color: ${colors.black};

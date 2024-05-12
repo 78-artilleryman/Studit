@@ -11,7 +11,6 @@ export default function Profile(props: ProfileProps) {
       <S.ProfileInformation>
         <S.ProfileUsername>{props.username}</S.ProfileUsername>
       </S.ProfileInformation>
-      <S.ProfileCTA to="/">프로필</S.ProfileCTA>
     </S.Profile>
   );
 }
