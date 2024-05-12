@@ -34,13 +34,14 @@ const PostLayout = styled.div`
 
 function Home() {
   const [postData, setPostData] = useState<Postdata[]>([]);
+  const [postDoc, setPostDoc] = useState<any>();
 
   const ref = useRef<HTMLDivElement | null>(null);
 
   const { filterState } = useFilter();
   const { studyType, period, technologys } = filterState;
 
-  const { noMore } = usePagination(postData, setPostData, ref, {});
+  const { noMore, setNoMore } = usePagination(postDoc, setPostDoc, setPostData, ref, {});
 
   useEffect(() => {
     const postsQuery = buildFirestoreQuery(db, studyType, period, technologys);
@@ -50,7 +51,9 @@ function Home() {
         id: doc?.id,
       }));
       setPostData(data as Postdata[]);
+      setPostDoc(snapshot.docs[snapshot.docs.length - 1]);
     });
+    setNoMore(false);
 
     return () => {
       unsubscribe();
@@ -61,7 +64,7 @@ function Home() {
     <>
       <Layout>
         <FilterList />
-        <SearchBar setPostData={setPostData}></SearchBar>
+        <SearchBar setPostData={setPostData} setNoMore={setNoMore} setPostDoc={setPostDoc}></SearchBar>
       </Layout>
       <PostLayout>
         <PostList postData={postData} />

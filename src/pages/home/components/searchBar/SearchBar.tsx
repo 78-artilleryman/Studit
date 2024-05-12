@@ -8,9 +8,11 @@ import { performSearch } from '@pages/home/service/Search';
 
 interface SearchBarProps {
   setPostData: any;
+  setPostDoc: any;
+  setNoMore: any;
 }
 
-function SearchBar({ setPostData }: SearchBarProps) {
+function SearchBar({ setPostData, setPostDoc, setNoMore }: SearchBarProps) {
   const [searchValue, setSearchValue] = useState<string>('');
 
   const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +29,9 @@ function SearchBar({ setPostData }: SearchBarProps) {
         id: doc.id,
       }));
       setPostData(data as Postdata[]);
+      setPostDoc(snapshot.docs[snapshot.docs.length - 1]);
     });
+    setNoMore(false);
 
     return () => unsubscribe();
   };
