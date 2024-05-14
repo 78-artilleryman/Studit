@@ -1,7 +1,7 @@
 import * as S from '@pages/auth/Auth.style';
 import Button from '@components/UI/Button';
-import { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FormEvent, useContext, useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Form from '@components/form-compound/Form';
 import useInput from './hooks/useInput';
 

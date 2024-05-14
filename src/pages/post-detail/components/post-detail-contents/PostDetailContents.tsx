@@ -1,4 +1,3 @@
-
 import PopularPosts from '../popular-post/PopularPosts';
 import { useContext, useEffect } from 'react';
 import PostDetailHeader from '../post-detail/PostDetailHeader';
@@ -7,6 +6,9 @@ import * as S from './PostDetailContents.style';
 import { PostDetailFetcherContext } from '@pages/post-detail/context/PostDetailFetcher';
 import { updatePostItemViews } from '@pages/post-detail/service/post-detail-service';
 import AuthContext from '@pages/auth/context/AuthContext';
+import PostDetailCommentInput from '../post-detail/PostDetailCommentInput';
+import PostDetailCommentList from '../post-detail/PostDetailCommentList';
+import StarPost from '../star-post/StarPost';
 
 export default function PostDetailContents() {
   const { data } = useContext(PostDetailFetcherContext);
@@ -24,8 +26,13 @@ export default function PostDetailContents() {
         <S.ContentWrapper>
           <PostDetailHeader />
           <PostDetailContent />
+          <PostDetailCommentInput />
+          <PostDetailCommentList />
         </S.ContentWrapper>
-        <PopularPosts />
+        <S.SideWrapper>
+          <PopularPosts />
+          <StarPost />
+        </S.SideWrapper>
       </S.Wrapper>
     </S.Section>
   );

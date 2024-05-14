@@ -34,6 +34,8 @@ export async function login({ emailValue, passwordValue }: EmailWithPassword) {
   try {
     const authService = getAuth(app);
     await signInWithEmailAndPassword(authService, emailValue, passwordValue);
+    await saveFirebaseEmail(emailValue);
+
     return {
       result: true,
       message: '로그인이 성공적으로 이루어졌어요.',

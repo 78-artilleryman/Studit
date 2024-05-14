@@ -3,7 +3,9 @@ import styled from 'styled-components';
 
 export const Tag = styled.div`
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  gap: 10px;
 `;
 
 export const StudyTypeTag = styled.div`
@@ -20,4 +22,13 @@ export const StudyTypeTag = styled.div`
 export const DeadLineTag = styled(StudyTypeTag)`
   color: ${colors.deadTag};
   background: #ffbdbd;
+`;
+
+export const LikeButton = styled.button`
+  display: block;
+  position: absolute;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  z-index: 99;
 `;

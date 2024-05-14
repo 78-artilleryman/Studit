@@ -3,8 +3,6 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
 import * as S from './CommonSelectBox.style';
 import FormLabel from '../formLabel/FormLabel';
-import { usePostData } from '../../context/PostDataContext';
-import { useEffect } from 'react';
 
 interface ListItem {
   key: number;
@@ -18,26 +16,22 @@ interface SelectBoxProps {
   position?: 'bottom' | 'top';
   icon?: string;
   list: ListItem[];
+  value: string;
   // setPostData: Dispatch<SetStateAction<PostType>>;
 }
 
-function SelectBox({ title, id, position, icon, list }: SelectBoxProps) {
-  const { ref, isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
-  const { onChange } = usePostData();
-
-  useEffect(() => {
-    onChange(id, selected);
-  }, [id, onChange, selected]);
+function SelectBox({ title, id, position, icon, list, value }: SelectBoxProps) {
+  const { ref, isSelectOpen, selected, selectToggleHandler, selectedBoxHandler } = useSelect();
 
   return (
     <div>
       <FormLabel componentName={title}></FormLabel>
       <S.Selectbox onClick={selectToggleHandler} ref={ref}>
-        <S.Placeholder> {selected ? icon + selected : icon + title}</S.Placeholder>
+        <S.Placeholder> {value ? icon + value : selected ? icon + selected : icon + title}</S.Placeholder>
         {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
 
         {isSelectOpen && (
-          <S.Dropdown onClick={selectedHandler}>
+          <S.Dropdown onClick={event => selectedBoxHandler(event, id)}>
             {list.map(data => (
               <S.DropdownItem key={data.key}>{data.name}</S.DropdownItem>
             ))}

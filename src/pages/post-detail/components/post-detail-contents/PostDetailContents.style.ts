@@ -13,6 +13,16 @@ export const Wrapper = styled.div`
   overflow: initial;
 `;
 
+export const SideWrapper = styled.div`
+  width: 280px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 150px;
+`;
+
 export const ContentWrapper = styled.div`
-  width: 850px;
+  width: 958px;
 `;
