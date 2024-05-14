@@ -11,6 +11,7 @@ export interface PostType {
   technologys: string[]; // 기술 스택
   closed: boolean;
   // 게시물 내용
+  id?: string;
   postTitle: string;
   postSubTitle: string;
   postContent: string | undefined;

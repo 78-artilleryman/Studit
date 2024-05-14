@@ -1,10 +1,9 @@
 import SelectBoxList from './components/selectBoxList/SelectBoxList';
 import PostForm from './components/postForm/PostForm';
 import ActionButtons from './components/actionButtons/ActionButtons';
-
-import { useNavigate } from 'react-router-dom';
-import { collection, addDoc } from 'firebase/firestore';
-import { FormEvent, useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
+import { FormEvent, useContext, useEffect } from 'react';
 import { db } from '@config/firebaseApp';
 import { initialPostData, usePostData } from '../post/context/PostDataContext';
 import { toast } from 'react-toastify';
@@ -15,11 +14,42 @@ function Post() {
   const { postData, setPostData } = usePostData();
   const navigator = useNavigate();
   const { user } = useContext(AuthContext);
+  const location = useLocation();
+
+  console.log(location.pathname); // 현재 경로
+
+  useEffect(() => {
+    if (!postData.id) {
+      setPostData(initialPostData);
+    }
+    if (location.pathname === '/post') {
+      setPostData(initialPostData);
+    }
+  }, [location.pathname]);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const { projectStartDate, projectEndDate, postDeadline, technologys, closed, ...data } = postData;
+
+    // 업데이트
+    if (postData.id) {
+      try {
+        await updateDoc(doc(db, 'posts', postData.id), {
+          ...postData,
+          technologys: technologys,
+          projectStartDate: projectStartDate.toDate(),
+          projectEndDate: projectEndDate.toDate(),
+          postDeadline: postDeadline.toDate(),
+        });
+        toast.success('게시물이 수정되었습니다.');
+        navigator(`/post/${postData.id}`);
+        setPostData(initialPostData);
+        return 0;
+      } catch (e) {
+        toast.error('게시물 수정 실패');
+        console.log(e);
+      }
+    }
 
     const hasEmpty: boolean = emptyStrings({ ...data });
 
@@ -41,6 +71,7 @@ function Post() {
           postViews: [],
           likeCount: 0,
           likes: [],
+          comments: [],
         });
 
         toast.success('게시물을 생성했습니다.');

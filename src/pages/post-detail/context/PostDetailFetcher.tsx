@@ -20,7 +20,5 @@ export default function PostDetailFetcher(props: PropsWithChildren) {
     return <p>에러 페이지</p>;
   }
 
-  console.log(fetcherState);
-
   return <PostDetailFetcherContext.Provider value={fetcherState}>{props.children}</PostDetailFetcherContext.Provider>;
 }

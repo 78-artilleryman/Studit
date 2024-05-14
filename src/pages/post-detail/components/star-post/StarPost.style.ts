@@ -1,25 +1,24 @@
-import { colors } from '@styles/colors';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-export const PopularPosts = styled.div`
+export const StarPosts = styled.div`
   width: 280px;
   padding: 20px 10px;
-  background-color: ${colors['red-10']};
+  background-color: #feffcb;
   border-radius: 10px;
   height: 280px;
 `;
 
-export const PopularPostTitle = styled.h2`
+export const StarPostTitle = styled.h2`
   font-size: 20px;
   font-weight: 700;
 `;
 
-export const PopularPostList = styled.ul`
+export const StarPostList = styled.ul`
   margin: 20px 0;
 `;
 
-export const PopularPostItem = styled.li`
+export const StarPostItem = styled.li`
   font-weight: 500;
   font-size: 14px;
   & + & {

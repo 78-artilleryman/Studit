@@ -1,10 +1,30 @@
-import { colors, technologiesColor } from '@styles/colors';
+import { colors } from '@styles/colors';
 import styled from 'styled-components';
+
+export const PostDetailTitleLayout = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 export const PostDetailTitle = styled.h2`
   margin: 10px 0 20px 0;
   font-size: 32px;
   font-weight: 700;
+`;
+
+export const PostOptionButtons = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: ${colors.placeholder};
+  & > button {
+    padding: 5px;
+    border-bottom: 1px solid ${colors.border};
+  }
+  & > button:last-child {
+    color: ${colors.error};
+  }
 `;
 
 export const Back = styled.button`
