@@ -12,24 +12,41 @@ interface ClassificationItem {
 interface CommonFilterProps {
   title: string;
   name: string;
-  position?: 'bottom' | 'top';
+  $position?: 'bottom' | 'top';
   icon?: string;
   list: ClassificationItem[];
+  $colorMode?: 'black' | 'white';
+  selectedItem: string;
+  onSelectedItem: (studyType: string) => void;
 }
 
-function CommonFilter({ title, name, position, icon, list }: CommonFilterProps) {
-  const { ref, isSelectOpen, selected, selectToggleHandler, selectedHandler } = useSelect();
+function CommonFilter({
+  title,
+  name,
+  $position = 'bottom',
+  $colorMode = 'black',
+  icon,
+  list,
+  selectedItem,
+  onSelectedItem,
+}: CommonFilterProps) {
+  const { ref, isSelectOpen, selectToggleHandler, selectedHandler } = useSelect();
   const { onChangeFilter } = useFilter();
 
+  const handleSelect = (event: any, studyName: string) => {
+    onSelectedItem(studyName);
+    onChangeFilter(name, studyName);
+  };
+
   return (
-    <S.Filter onClick={selectToggleHandler} ref={ref}>
-      <S.Title> {selected ? icon + selected : icon + title}</S.Title>
+    <S.Filter onClick={selectToggleHandler} ref={ref} $colorMode={$colorMode}>
+      <S.Title> {selectedItem ? icon + selectedItem : icon + title}</S.Title>
       {isSelectOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
 
       {isSelectOpen && (
-        <S.Dropdown onClick={selectedHandler}>
+        <S.Dropdown onClick={selectedHandler} $colorMode={$colorMode} $position={$position}>
           {list.map(data => (
-            <S.DropdownItem key={data.key} onClick={() => onChangeFilter(name, data.name)}>
+            <S.DropdownItem key={data.key} onClick={event => handleSelect(event, data.name)}>
               {data.name}
             </S.DropdownItem>
           ))}

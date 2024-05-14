@@ -1,4 +1,3 @@
-import FilterList from '@pages/home/components/filterList/FilterList';
 import SearchBar from '@pages/home/components/searchBar/SearchBar';
 import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
@@ -9,12 +8,26 @@ import { onSnapshot } from 'firebase/firestore';
 import { Postdata } from '@pages/home/interface/Types';
 import usePagination from './hooks/usePagination';
 import PostList from '@pages/home/components/postLIst/PostList';
+import FixedSearchBar from '@components/fixed-search-bar/FixedSearchBar';
 
-const Layout = styled.section`
+import FilterStudy from './components/filter/FilterStudy';
+import FilterPeriod from './components/filter/FilterPeriod';
+import useSelect from './hooks/useSelect';
+import TechnologyFilter from './components/technologyFilter/TechnologyFilter';
+import useSearch from './hooks/useSearch';
+import SearchBarToggle from './components/searchBar/SearchBar-Toggle';
+
+const FilterLayout = styled.section`
   width: 1280px;
   margin: 20px auto;
   display: flex;
   justify-content: space-between;
+`;
+
+const FilterControl = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;
 
 const InlineMessage = styled.p`
@@ -55,21 +68,77 @@ function Home() {
     });
     setNoMore(false);
 
-    return () => {
-      unsubscribe();
-    };
-  }, [studyType, period, technologys]);
+    return () => unsubscribe();
+  }, [studyType, period, technologys, setNoMore]);
+
+  const { selectedItem: selectedStudyType, handleSelectChange: selectedStudyHandler } = useSelect();
+  const { selectedItem: selectedPeriod, handleSelectChange: selectedPeriodHandler } = useSelect();
+  const { searchValue, handleSearchChange, handleSubmit, handleSearchReset } = useSearch(setPostData);
+
+  const [isOn, setIsOn] = useState(true);
+  const toggle = () => setIsOn(prev => !prev);
+  const value = { isOn, toggle };
 
   return (
     <>
-      <Layout>
-        <FilterList />
-        <SearchBar setPostData={setPostData} setNoMore={setNoMore} setPostDoc={setPostDoc}></SearchBar>
-      </Layout>
+      <FilterLayout>
+        <FilterControl>
+          <FilterStudy selectedItem={selectedStudyType} onSelectedItem={selectedStudyHandler} />
+          <FilterPeriod selectedItem={selectedPeriod} onSelectedItem={selectedPeriodHandler} />
+          <TechnologyFilter />
+        </FilterControl>
+
+        <SearchBar
+          setPostData={setPostData}
+          onSearchChange={handleSearchChange}
+          searchValue={searchValue}
+          onSubmit={handleSubmit}
+          onSearchReset={handleSearchReset}
+        />
+      </FilterLayout>
       <PostLayout>
         <PostList postData={postData} />
       </PostLayout>
       {noMore && <InlineMessage>더이상 불러올 피드가 없어요</InlineMessage>}
+      {isOn && (
+        <FixedSearchBar
+          renderFilterList={() => (
+            <>
+              <FilterStudy
+                $position="top"
+                $colorMode="white"
+                selectedItem={selectedStudyType}
+                onSelectedItem={selectedStudyHandler}
+              />
+
+              <FilterPeriod
+                $position="top"
+                $colorMode="white"
+                selectedItem={selectedPeriod}
+                onSelectedItem={selectedPeriodHandler}
+              />
+
+              <TechnologyFilter $position="top" $colorMode="white" />
+            </>
+          )}
+          renderSearchBar={() => (
+            <SearchBar
+              setPostData={setPostData}
+              $colorMode="white"
+              onSearchChange={handleSearchChange}
+              searchValue={searchValue}
+              onSubmit={handleSubmit}
+              onSearchReset={handleSearchReset}
+            />
+          )}
+        />
+      )}
+
+      <SearchBarToggle value={value}>
+        <SearchBarToggle.Description />
+        <SearchBarToggle.Button />
+      </SearchBarToggle>
+
       <div ref={ref}></div>
     </>
   );
