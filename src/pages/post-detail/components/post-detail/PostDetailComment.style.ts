@@ -2,7 +2,10 @@ import styled from 'styled-components';
 import { colors } from '@styles/colors';
 
 export const CommentInput = styled.div`
-  margin-bottom: 100px;
+  padding-top: 40px;
+  border-top: 1px solid ${colors.border};
+  margin-top: 80px;
+  margin-bottom: 60px;
 `;
 
 export const commentTitle = styled.h3`

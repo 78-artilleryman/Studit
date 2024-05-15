@@ -53,7 +53,9 @@ function PostDetailCommentInput() {
 
   return (
     <S.CommentInput>
-      <S.commentTitle>댓글</S.commentTitle>
+      <S.commentTitle>
+        댓글 <span>{`( ${data.comments.length} )`}</span>
+      </S.commentTitle>
       <S.Form onSubmit={onSubmit}>
         <S.Profile>
           {user?.photoURL ? (
