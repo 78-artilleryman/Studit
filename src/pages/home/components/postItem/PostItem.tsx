@@ -4,6 +4,8 @@ import PostTag from './PostTag';
 import Profile from '../profile/Profile';
 import { Link } from 'react-router-dom';
 import { formatDate, isWithin3Days, deadLine } from '@pages/home/service/FormatDate';
+import { RiEye2Line } from 'react-icons/ri';
+import { FaRegStar } from 'react-icons/fa';
 
 interface Timestamp {
   seconds: number;
@@ -31,6 +33,7 @@ interface PostItemProps {
     userName?: string;
     likeCount: number;
     likes: string[];
+    postViews: string[];
   };
 }
 
@@ -59,7 +62,15 @@ function PostItem({ postdata }: PostItemProps) {
             ))}
           </S.TechnologyImageList>
         </S.PostContent>
-        <Profile username={postdata.userName!} />
+        <S.PostItemBottom>
+          <Profile username={postdata.userName!} />
+          <S.PostItemIcons>
+            <RiEye2Line color="#6d6d6d" />
+            <S.numver>{postdata.postViews.length}</S.numver>
+            <FaRegStar color="#6d6d6d" />
+            <S.numver>{postdata.likeCount}</S.numver>
+          </S.PostItemIcons>
+        </S.PostItemBottom>
       </S.Post>
     </Link>
   );

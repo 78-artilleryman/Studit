@@ -87,3 +87,22 @@ export const Bookmark = styled.button`
   right: 20px;
   top: 20px;
 `;
+
+export const PostItemBottom = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const PostItemIcons = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  gap: 8px;
+`;
+
+export const numver = styled.p`
+  font-size: 14px;
+  font-weight: 500;
+  color: ${colors.placeholder};
+`;
