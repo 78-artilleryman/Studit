@@ -73,7 +73,11 @@ function Home() {
 
   const { selectedItem: selectedStudyType, handleSelectChange: selectedStudyHandler } = useSelect();
   const { selectedItem: selectedPeriod, handleSelectChange: selectedPeriodHandler } = useSelect();
-  const { searchValue, handleSearchChange, handleSubmit, handleSearchReset } = useSearch(setPostData);
+  const { searchValue, handleSearchChange, handleSubmit, handleSearchReset } = useSearch(
+    setPostData,
+    setNoMore,
+    setPostDoc,
+  );
 
   const [isOn, setIsOn] = useState(true);
   const toggle = () => setIsOn(prev => !prev);

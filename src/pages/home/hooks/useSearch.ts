@@ -3,7 +3,7 @@ import { performSearch } from '../service/Search';
 import { onSnapshot } from 'firebase/firestore';
 import { Postdata } from '../interface/Types';
 
-export default function useSearch(setPostData: Dispatch<SetStateAction<Postdata[]>>) {
+export default function useSearch(setPostData: Dispatch<SetStateAction<Postdata[]>>, setNoMore: any, setPostDoc: any) {
   const [searchValue, setSearchValue] = useState('');
   const handleSearchChange: ChangeEventHandler<HTMLInputElement> = event => setSearchValue(event.target.value);
   const handleSearchReset = () => setSearchValue('');
@@ -18,7 +18,9 @@ export default function useSearch(setPostData: Dispatch<SetStateAction<Postdata[
         id: doc.id,
       }));
       setPostData(data as Postdata[]);
+      setPostDoc(snapshot.docs[snapshot.docs.length - 1]);
     });
+    setNoMore(false);
 
     return () => {
       handleSearchReset();
