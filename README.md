@@ -1,46 +1,44 @@
-# Getting Started with Create React App
+# <div align="center">✏️ Studit</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+</br>
 
-## Available Scripts
+## ✏️ 프로젝트 소개
+코드잇 스프린트들이 기수에 상관 없이 스터디를 구할 수 있는 서비스
 
-In the project directory, you can run:
+</br>
 
-### `npm start`
+## 🗓️ 개발 기간
+2024.03.13 ~ 2024.05.16
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+</br>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 👥 팀원
 
-### `npm test`
+| <img src="https://avatars.githubusercontent.com/u/86054169?v=4" title="윤병현"> | <img src="https://avatars.githubusercontent.com/u/121039744?v=4" title="이동현"> |
+| :--------: | :-------: |
+|[윤병현](https://github.com/78-artilleryman)|[이동현](https://github.com/D5ng)|
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+</br>
 
-### `npm run build`
+## 🔍 기능
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. 유저 기능 (로그인, 회원가입, 소셜로그인)
+![로그인 움짤](https://github.com/78-artilleryman/Studit/assets/86054169/83419d2c-aa8c-4899-989a-2e09ded29fc7)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+</br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 2. 스터디 모집 글 작성 및 수정 기능
+![게시글 작성 움짤](https://github.com/78-artilleryman/Studit/assets/86054169/231d5181-3067-4d11-b897-eac6f0d27a20)
+![수정 움짤](https://github.com/78-artilleryman/Studit/assets/86054169/410ddad9-474f-46a2-99b5-b8439414c8c4)
 
-### `npm run eject`
+</br>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 3. 댓글 기능
+![댓글 시연](https://github.com/78-artilleryman/Studit/assets/86054169/d6e4ebb3-f721-4fe4-bbd1-ca0a2b740c80)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+</br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 4. 필터 & 검색 기능
+![필터 검색 움짤](https://github.com/78-artilleryman/Studit/assets/86054169/ec9c96b0-9b83-4c80-b65c-96e8ec856ac7)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+</br>
